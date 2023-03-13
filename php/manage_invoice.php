@@ -22,7 +22,8 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      $query = "SELECT * FROM invoices INNER JOIN customers ON invoices.CUSTOMER_ID = customers.ID";
+      // $query = "SELECT * FROM invoices INNER JOIN customers ON invoices.CUSTOMER_ID = customers.ID";
+      $query = "SELECT * FROM sys_ql";
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
@@ -35,17 +36,23 @@
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['INVOICE_ID']; ?></td>
-      <td><?php echo $row['NAME']; ?></td>
-      <td><?php echo $row['INVOICE_DATE']; ?></td>
-      <td><?php echo $row['TOTAL_AMOUNT']; ?></td>
-      <td><?php echo $row['TOTAL_DISCOUNT']; ?></td>
-      <td><?php echo $row['NET_TOTAL']; ?></td>
+      <td><?php echo $row['id_sys']; ?></td>
+      <td><?php echo $row['name_team_sys']; ?></td>
+      <td><?php echo $row['name_sys']; ?></td>
+      <td><?php echo $row['first_number']; ?></td>
+      <td><?php echo $row['name_unit_manager']; ?></td>
+      <td><?php echo $row['name_user_manager']; ?></td>
+      <td><?php echo $row['describe_sys']; ?></td>
+      <td><?php echo $row['document_sys']; ?></td>
+      <td><?php echo $row['ip_sys']; ?></td>
+      <td><?php echo $row['server_sys']; ?></td>
+      <td><?php echo $row['config_sys']; ?></td>
+      <td><?php echo $row['created_at']; ?></td>
       <td>
-        <button class="btn btn-warning btn-sm" onclick="printInvoice(<?php echo $row['INVOICE_ID']; ?>);">
+        <button class="btn btn-warning btn-sm" onclick="printInvoice(<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-fax"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteInvoice(<?php echo $row['INVOICE_ID']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteInvoice(<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -57,8 +64,9 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      if($column == 'INVOICE_ID')
-        $query = "SELECT * FROM invoices INNER JOIN customers ON invoices.CUSTOMER_ID = customers.ID WHERE CAST(invoices.$column AS VARCHAR(9)) LIKE '%$text%'";
+      if($column == 'id_sys')
+        // $query = "SELECT * FROM invoices INNER JOIN customers ON invoices.CUSTOMER_ID = customers.ID WHERE CAST(invoices.$column AS VARCHAR(9)) LIKE '%$text%'";
+        $query = "SELECT id_sys, name_team_sys, name_sys, first_number, name_unit_manager, name_user_manager, describe_sys, document_sys, ip_sys, server_sys, config_sys, created_at  * FROM sys_ql WHERE  id_sys LIKE '%$text%'";
       else if($column == "INVOICE_DATE")
         $query = "SELECT * FROM invoices INNER JOIN customers ON invoices.CUSTOMER_ID = customers.ID WHERE invoices.$column = '$text'";
       else
