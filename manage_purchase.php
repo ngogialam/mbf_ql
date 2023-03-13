@@ -27,7 +27,7 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('bar-chart', 'Manage Purchase', 'Manage Existing Purchase');
+          createHeader('bar-chart', 'Quản lý người dùng', 'Danh sách quản lý người dùng');
         ?>
         <!-- header section end -->
 

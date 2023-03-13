@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Pharmacy Management - Login</title>
+    <title>Mobifone - Login</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/index.css">
     <script src="js/index.js"></script>
   </head>
-  <body>
+  <body style = "background-color:red">
     <div class="container">
       <div class="card m-auto p-2">
         <div class="card-body">

@@ -25,7 +25,7 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('group', 'Manage Supplier', 'Manage Existing Supplier');
+          createHeader('group', 'Danh sách nhóm hệ thống', 'Danh sách nhóm');
         ?>
         <!-- header section end -->
 

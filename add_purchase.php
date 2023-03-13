@@ -42,7 +42,7 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('bar-chart', 'Add Purchase', 'Add New Purchase');
+          createHeader('bar-chart', 'Thêm mới người dùng', 'Thêm người sử dụng');
         ?>
         <!-- header section end -->
 
