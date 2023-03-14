@@ -33,13 +33,10 @@
         <div class="row">
 
           <div class="col-md-12 form-group form-inline">
-            <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="text" class="form-control" id="by_name" placeholder="By Medicine Name" onkeyup="searchMedicineStock(this.value, 'NAME');">
-            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="By Generic Name" onkeyup="searchMedicineStock(this.value, 'GENERIC_NAME');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchMedicineStock(this.value, 'SUPPLIER_NAME');">
-            &emsp;<button class="btn btn-danger font-weight-bold" onclick="searchMedicineStock('0', 'QUANTITY');">Out of Stock</button>
-            &emsp;<button class="btn btn-warning font-weight-bold" onclick="searchMedicineStock('', 'EXPIRY_DATE');">Expired</button>
-            &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
+            <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
+            <input type="text" class="form-control" id="by_name" placeholder="Theo tên" onkeyup="searchMedicineStock(this.value, 'NAME');">
+            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="Theo phòng" onkeyup="searchMedicineStock(this.value, 'GENERIC_NAME');">
+            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Theo ngày tạo" onkeyup="searchMedicineStock(this.value, 'SUPPLIER_NAME');">
           </div>
 
 
@@ -52,17 +49,11 @@
             	<table class="table table-bordered table-striped table-hover">
             		<thead>
             			<tr>
-            				<th style="width: 1%;">SL.</th>
-            				<th style="width: 14%;">Medicine Name</th>
-                    <th style="width: 5%;">Packing</th>
-                    <th style="width: 14%;">Generic Name</th>
-                    <th style="width: 10%;">Batch ID</th>
-                    <th style="width: 8%;">Ex. Date (mm/yy)</th>
-            				<th style="width: 15%;">Supplier</th>
-                    <th style="width: 7%;">Qty.</th>
-                    <th style="width: 8%;">M.R.P.</th>
-                    <th style="width: 8%;">Rate</th>
-                    <th style="width: 10%;">Action</th>
+            				<th style="width: 1%;">STT</th>
+            				<th style="width: 14%;">Tên đơn vị sử dụng</th>
+                    <th style="width: 5%;">Phòng </th>
+                    <th style="width: 14%;">Ngày tạo</th>
+                    <th style="width: 10%;">Hành dộng</th>
             			</tr>
             		</thead>
                 <tbody id="medicines_stock_div">

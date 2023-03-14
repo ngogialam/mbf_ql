@@ -36,11 +36,11 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      $query = "SELECT * FROM customers";
+      $query = "SELECT * FROM user_manager";
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
-        if($row['ID'] == $id)
+        if($row['id_user_manager'] == $id)
           showEditOptionsRow($seq_no, $row);
         else
           showCustomerRow($seq_no, $row);
@@ -52,17 +52,17 @@
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['ID'] ?></td>
-      <td><?php echo $row['NAME']; ?></td>
-      <td><?php echo $row['CONTACT_NUMBER']; ?></td>
-      <td><?php echo $row['ADDRESS']; ?></td>
-      <td><?php echo $row['DOCTOR_NAME']; ?></td>
-      <td><?php echo $row['DOCTOR_ADDRESS']; ?></td>
+      <td><?php echo $row['id_user_manager'] ?></td>
+      <td><?php echo $row['name_user_manager']; ?></td>
+      <td><?php echo $row['sdt']; ?></td>
+      <td><?php echo $row['gmail']; ?></td>
+      <td><?php echo $row['room']; ?></td>
+      <td><?php echo $row['created_at']; ?></td>
       <td>
-        <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['ID']; ?>);">
+        <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['id_user_manager']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteCustomer(<?php echo $row['ID']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteCustomer(<?php echo $row['id_user_manager']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       </td>

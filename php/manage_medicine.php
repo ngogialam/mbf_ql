@@ -35,11 +35,11 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      $query = "SELECT * FROM medicines";
+      $query = "SELECT * FROM unit_sys";
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
-        if($row['ID'] == $id)
+        if($row['id_unit_sys'] == $id)
           showEditOptionsRow($seq_no, $row);
         else
           showMedicineRow($seq_no, $row);
@@ -51,14 +51,14 @@
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['NAME']; ?></td>
-      <td><?php echo $row['PACKING']; ?></td>
-      <td><?php echo $row['GENERIC_NAME']; ?></td>
+      <td><?php echo $row['name_unit_sys']; ?></td>
+      <td><?php echo $row['name_room']; ?></td>
+      <td><?php echo $row['created_at']; ?></td>
       <td>
-        <button href="" class="btn btn-info btn-sm" onclick="editMedicine(<?php echo $row['ID']; ?>);">
+        <button href="" class="btn btn-info btn-sm" onclick="editMedicine(<?php echo $row['id_unit_sys']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteMedicine(<?php echo $row['ID']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteMedicine(<?php echo $row['id_unit_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       </td>

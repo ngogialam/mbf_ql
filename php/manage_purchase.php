@@ -35,11 +35,11 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      $query = "SELECT * FROM purchases";
+      $query = "SELECT * FROM user_sys";
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
-        if($row['VOUCHER_NUMBER'] == $id)
+        if($row['id_unit_sys'] == $id)
           showEditOptionsRow($seq_no, $row);
         else
           showPurchaseRow($seq_no, $row);
@@ -51,22 +51,20 @@
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['VOUCHER_NUMBER']; ?></td>
-      <td><?php echo $row['SUPPLIER_NAME'] ?></td>
-      <td><?php echo $row['INVOICE_NUMBER']; ?></td>
-      <td><?php echo $row['PURCHASE_DATE']; ?></td>
-      <td><?php echo $row['TOTAL_AMOUNT']; ?></td>
-      <td><?php echo $row['PAYMENT_STATUS']; ?></td>
+      <td><?php echo $row['id_unit_sys']; ?></td>
+      <td><?php echo $row['name_unit_sys'] ?></td>
+      <td><?php echo $row['name_room']; ?></td>
+      <td><?php echo $row['created_at']; ?></td>
       <td>
         <!--
         <button class="btn btn-warning btn-sm" onclick="printPurchase(<?php echo $row['VOUCHER_NUMBER']; ?>);">
           <i class="fa fa-fax"></i>
         </button>
       -->
-        <button href="" class="btn btn-info btn-sm" onclick="editPurchase(<?php echo $row['VOUCHER_NUMBER']; ?>);">
+        <button href="" class="btn btn-info btn-sm" onclick="editPurchase(<?php echo $row['id_unit_sys']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deletePurchase(<?php echo $row['VOUCHER_NUMBER']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deletePurchase(<?php echo $row['id_unit_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       </td>

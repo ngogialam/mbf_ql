@@ -36,11 +36,11 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      $query = "SELECT * FROM medicines INNER JOIN medicines_stock ON medicines.NAME = medicines_stock.NAME";
+      $query = "SELECT * FROM unit_user";
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
-        if($row['BATCH_ID'] == $id)
+        if($row['id_unit_user'] == $id)
           showEditOptionsRow($seq_no, $row);
         else
           showMedicineStockRow($seq_no, $row);
@@ -52,21 +52,15 @@
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['NAME']; ?></td>
-      <td><?php echo $row['PACKING']; ?></td>
-      <td><?php echo $row['GENERIC_NAME']; ?></td>
-      <td><?php echo $row['BATCH_ID']; ?></td>
-      <td><?php echo $row['EXPIRY_DATE']; ?></td>
-      <td><?php echo $row['SUPPLIER_NAME']; ?></td>
-      <td><?php echo $row['QUANTITY']; ?></td>
-      <td><?php echo $row['MRP']; ?></td>
-      <td><?php echo $row['RATE']; ?></td>
+      <td><?php echo $row['name_unit_user']; ?></td>
+      <td><?php echo $row['name_room_unit']; ?></td>
+      <td><?php echo $row['created_at']; ?></td>
       <td>
-        <button href="" class="btn btn-info btn-sm" onclick="editMedicineStock('<?php echo $row['BATCH_ID']; ?>');">
+        <button href="" class="btn btn-info btn-sm" onclick="editMedicineStock('<?php echo $row['id_unit_user']; ?>');">
           <i class="fa fa-pencil"></i>
         </button>
         <!--
-        <button class="btn btn-danger btn-sm" onclick="deleteMedicineStock(<?php echo $row['ID']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteMedicineStock(<?php echo $row['id_unit_user']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       -->
@@ -80,29 +74,17 @@ function showEditOptionsRow($seq_no, $row) {
   <!--<tr><td colspan="11"><?php //echo $row[5]; ?></tr>-->
   <tr>
     <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['NAME']; ?></td>
-    <td><?php echo $row['PACKING']; ?></td>
-    <td><?php echo $row['GENERIC_NAME']; ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['BATCH_ID']; ?>" placeholder="Batch ID" id="batch_id" onblur="notNull(this.value, 'batch_id_error');">
+      <input type="text" class="form-control" value="<?php echo $row['name_unit_user']; ?>" placeholder="Batch ID" id="batch_id" onblur="notNull(this.value, 'batch_id_error');">
       <code class="text-danger small font-weight-bold float-right" id="batch_id_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['EXPIRY_DATE']; ?>" placeholder="Expiry" id="expiry_date" onblur="checkExpiry(this.value, 'expiry_date_error');">
+      <input type="text" class="form-control" value="<?php echo $row['name_room_unit']; ?>" placeholder="Expiry" id="expiry_date" onblur="checkExpiry(this.value, 'expiry_date_error');">
       <code class="text-danger small font-weight-bold float-right" id="expiry_date_error" style="display: none;"></code>
     </td>
-    <td><?php echo $row['SUPPLIER_NAME']; ?></td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['QUANTITY']; ?>" placeholder="Quantity" id="quantity" onkeyup="checkQuantity(this.value, 'quantity_error');">
+      <input type="number" class="form-control" value="<?php echo $row['created_at']; ?>" placeholder="Quantity" id="quantity" onkeyup="checkQuantity(this.value, 'quantity_error');">
       <code class="text-danger small font-weight-bold float-right" id="quantity_error" style="display: none;"></code>
-    </td>
-    <td>
-      <input type="number" class="form-control" value="<?php echo $row['MRP']; ?>" placeholder="MRP" id="mrp" onkeyup="checkValue(this.value, 'mrp_error');">
-      <code class="text-danger small font-weight-bold float-right" id="mrp_error" style="display: none;"></code>
-    </td>
-    <td>
-      <input type="number" class="form-control" value="<?php echo $row['RATE']; ?>" placeholder="Rate" id="rate" onkeyup="checkValue(this.value, 'rate_error');">
-      <code class="text-danger small font-weight-bold float-right" id="rate_error" style="display: none;"></code>
     </td>
     <td>
       <button href="" class="btn btn-success btn-sm" onclick="updateMedicineStock(<?php echo $row[5]; ?>);">

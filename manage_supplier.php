@@ -47,12 +47,12 @@
             		<thead>
             			<tr>
                     <th style="width: 5%;">STT</th>
-            				<th style="width: 10%;">Tên nhóm hệ thống0</th>
-            				<th style="width: 20%;">Name</th>
-                    <th style="width: 15%;">Email</th>
-                    <th style="width: 15%;">Contact Number</th>
-                    <th style="width: 20%;">Address</th>
-                    <th style="width: 15%;">Action</th>
+            				<th style="width: 10%;">ID</th>
+            				<th style="width: 20%;">Tên nhóm hệ thống</th>
+                    <th style="width: 15%;">Loại</th>
+                    <th style="width: 15%;">Mô tả</th>
+                    <th style="width: 20%;">Ngày tạo</th>
+                    <th style="width: 15%;">Hành động</th>
             			</tr>
             		</thead>
                 <tbody id="suppliers_div">

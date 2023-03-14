@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Invoice</title>
+    <title>Danh sách hệ thống</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -36,8 +36,11 @@
             <input type="number" class="form-control" id="by_invoice_number" placeholder="tên hệ thống" onkeyup="searchInvoice(this.value, 'INVOICE_ID');">
             &emsp;<input type="text" class="form-control" id="by_customer_name" placeholder="Người quản trị" onkeyup="searchInvoice(this.value, 'NAME');">
             &emsp;<label class="font-weight-bold" for="">Ngày tạo :&emsp;</label>
+            <!-- <input type="text" class="form-control" id="by_customer_name" placeholder="By Customer Name" onkeyup="searchInvoice(this.value, 'NAME');">
+            &emsp;<label class="font-weight-bold" for="">By Invoice Date :&emsp;</label>
             <input type="date" class="form-control" id="by_date" onchange="searchInvoice(this.value, 'INVOICE_DATE');">
-            &emsp;<button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
+            &emsp; -->
+            <button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
           </div>
 
           <div class="col col-md-12">
@@ -50,12 +53,19 @@
             	<table class="table table-bordered table-striped table-hover">
             		<thead>
             			<tr>
-            				<th>Stt</th>
-            				<th>Tên nhóm hệ thống</th>
-            				<th>Loại</th>
-            				<th>Mô tả</th>
-                    <th>Người tạo</th>
-                    <th>Ngày tạo</th>
+            				<th>SL.</th>
+                    <th>ID hệ thống</th>
+            				<th>Tên nhóm hệ thống </th>
+            				<th>Tên hệ thống </th>
+            				<th>Đầug số</th>
+                    <th>Tên đơn vị quản lý</th>
+                    <th>Tên người quản lý</th>
+                    <th>Mô tả hệ thống</th>
+                    <th>Tài liệu hệ thống</th>
+                    <th>IP hệ thống</th>
+                    <th>Server hệ thống</th>
+                    <th>Cấu hình hệ thống</th>
+                    <th>Thời gian tạo</th>
                     <th>Action</th>
             			</tr>
             		</thead>
