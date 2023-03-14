@@ -33,12 +33,22 @@
   <div class="container-fluid" style="margin-right: 0px;">
     <div class="container">
 
-          <div class="col-md-12 form-group form-inline">
-            <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-            <input type="number" class="form-control" id="by_invoice_number" placeholder="tên hệ thống" onkeyup="searchInvoice(this.value, 'INVOICE_ID');">
-            &emsp;<input type="text" class="form-control" id="by_customer_name" placeholder="Người quản trị" onkeyup="searchInvoice(this.value, 'NAME');">
-            &emsp;<label class="font-weight-bold" for="">Ngày tạo :&emsp;</label>
-            <!-- <input type="text" class="form-control" id="by_customer_name" placeholder="By Customer Name" onkeyup="searchInvoice(this.value, 'NAME');">
+      <!-- header section -->
+      <?php
+      require "php/header.php";
+      createHeader('address-book', 'Quản lý hệ thống', 'Danh sách hệ thống');
+      ?>
+      <!-- header section end -->
+
+      <!-- form content -->
+      <div class="row">
+
+        <div class="col-md-12 form-group form-inline">
+          <label class="font-weight-bold" for="">Search :&emsp;</label>
+          <input type="text" class="form-control" id="by_invoice_number" placeholder="Nhập tìm kiếm "
+            onkeyup="searchInvoice(this.value);">
+          &emsp;
+          <!-- <input type="text" class="form-control" id="by_customer_name" placeholder="By Customer Name" onkeyup="searchInvoice(this.value, 'NAME');">
             &emsp;<label class="font-weight-bold" for="">By Invoice Date :&emsp;</label>
             <input type="date" class="form-control" id="by_date" onchange="searchInvoice(this.value, 'INVOICE_DATE');">
             &emsp; -->
@@ -80,63 +90,44 @@
             </table>
           </div>
         </div>
-        <!-- Modal -->
+        <!-- Modal xem chi tiết hệ thống -->
         <div class="modal modalCloseReload" id="modalAddMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-lg" style="witdh: 100%;">
             <div class="modal-content">
+              <h3>Chi tiết hệ thống </h3>
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               </div>
-              <div class="form-group row">
-                <label for="email_address" class="col-md-4 col-form-label text-md-right">Đối tác</label>
-                <div class="col-md-6">
-                  <select class="form-control pdm chosen-select" id="namePartner" name="namePartner">
-                    <!-- <option>Chọn đối tác </option> -->
-                    <?php foreach ($listPartner as $key => $partner) { ?>
-                      <option value="<?= $partner->id ?>"> <?= $partner->name ?> </option>
-                    <?php } ?>
-                  </select>
-                  <span class="error_text errNamePartner"></span>
-                </div>
-              </div>
+              <?php             
+              require "php/db_connection.php";
+              if ($con) {
+                $query = "SELECT * FROM sys_ql";
+                $result = mysqli_query($con, $query);
+                $row = mysqli_fetch_array($result);                
+                $id_sys = $row['id_sys'];
+                $name_team_sys = $row['name-team_sys'];
+                $name_sys = $row['name_sys'];
+                $first_number = $row['first_number'];
+                $name_unit_manager = $row['name_unit_manager'];
+                $name_user_manager = $row['name_user_manager'];
+                $describe_sys = $row['describe_sys'];
+                $document_sys = $row['document_sys'];
+                $create_by = $row['create_by'];
+                $server_sys = $row['server_sys'];
+                $ip_sys = $row['ip_sys'];
+                $config_sys = $row['config_sys'];
+              }
 
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Tài khoản </label>
-                <div class="col-md-6">
-
-                  <input id="selectedUserId" type="hidden">
-                  <input id="editMapperId" type="hidden">
-                  <input id="isShowDropdown" type="hidden">
-                  <input id="isShowClick" type="hidden">
-
-                  <input type="text" name="phoneUser" id="phoneUser" class="form-control" autocomplete="off">
-                  <span style="font-weight: bold; font-size: 15px;" class="error_text errCheck"></span>
-
-                  <span class="error_text errPhoneName"></span>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Tên tài khoản </label>
-                <div class="col-md-6">
-                  <div id="result" style="margin-top:15px;">
-
-                  </div>
-                </div>
-              </div>
+              ?>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <button type="button" style="background:#FFC0CB;" class="btn btn-default d-none" id="test"
-                  data-toggle="modal" data-target="#modalAdd" onclick="editAccount()">Cập nhật đối tác cho tài
-                  khoản</button>
-                <button id="hide_div" type="button" style="background:#FF9900;"
-                  class="btn btn-success btn-ok saveMenus btnAddMenu" onclick="addAccount()">Thêm mới tài khoản</button>
+                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Thoát</button>
               </div>
             </div>
           </div>
         </div>
-      <!-- edit cho ng dùng -->
-      <div class="modal modalCloseReload" id="editfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <!-- edit cho ng dùng -->
+        <div class="modal modalCloseReload" id="editfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-lg" style="witdh: 100%;">
             <div class="modal-content">
