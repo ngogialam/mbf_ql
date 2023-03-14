@@ -52,12 +52,17 @@
       <td><?php echo $row['config_sys']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
       <td>
-        <button class="btn btn-warning btn-sm" onclick="printInvoice(<?php echo $row['id_sys']; ?>);">
-          <i class="fa fa-fax"></i>
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalAddMenu">       
+        <i class="fa fa-eye"></i>
+        </button>
+        <button href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editfile">
+          <i class="fa fa-pencil"></i>
         </button>
         <button class="btn btn-danger btn-sm" onclick="deleteInvoice(<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
+        
+        <!-- <button class="btn btn-danger btn-sm" > <i class="bi bi-align-middle"></i></button> -->
       </td>
     </tr>
     <?php
