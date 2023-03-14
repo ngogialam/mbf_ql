@@ -60,6 +60,7 @@
         <button href="" class="btn btn-info btn-sm" onclick="editSupplier(<?php echo $row['ID']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
+        
         <button class="btn btn-danger btn-sm" onclick="deleteSupplier(<?php echo $row['ID']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
