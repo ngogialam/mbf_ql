@@ -24,7 +24,7 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('address-book', 'Quản lý hệ thống', 'Danhy sách hệ thống');
+          createHeader('address-book', 'Quản lý hệ thống', 'Danh sách hệ thống');
         ?>
         <!-- header section end -->
 
@@ -32,10 +32,10 @@
         <div class="row">
 
           <div class="col-md-12 form-group form-inline">
-            <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="number" class="form-control" id="by_invoice_number" placeholder="By Invoice Nuber" onkeyup="searchInvoice(this.value, 'INVOICE_ID');">
-            &emsp;<input type="text" class="form-control" id="by_customer_name" placeholder="By Customer Name" onkeyup="searchInvoice(this.value, 'NAME');">
-            &emsp;<label class="font-weight-bold" for="">By Invoice Date :&emsp;</label>
+            <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
+            <input type="number" class="form-control" id="by_invoice_number" placeholder="tên hệ thống" onkeyup="searchInvoice(this.value, 'INVOICE_ID');">
+            &emsp;<input type="text" class="form-control" id="by_customer_name" placeholder="Người quản trị" onkeyup="searchInvoice(this.value, 'NAME');">
+            &emsp;<label class="font-weight-bold" for="">Ngày tạo :&emsp;</label>
             <input type="date" class="form-control" id="by_date" onchange="searchInvoice(this.value, 'INVOICE_DATE');">
             &emsp;<button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
           </div>
@@ -50,13 +50,12 @@
             	<table class="table table-bordered table-striped table-hover">
             		<thead>
             			<tr>
-            				<th>SL.</th>
-            				<th>Invoice No</th>
-            				<th>Customer Name</th>
-            				<th>Date</th>
-                    <th>Total Amount</th>
-                    <th>Total Discount</th>
-                    <th>Net Total</th>
+            				<th>Stt</th>
+            				<th>Tên nhóm hệ thống</th>
+            				<th>Loại</th>
+            				<th>Mô tả</th>
+                    <th>Người tạo</th>
+                    <th>Ngày tạo</th>
                     <th>Action</th>
             			</tr>
             		</thead>

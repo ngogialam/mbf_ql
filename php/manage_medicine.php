@@ -54,7 +54,6 @@
       <td><?php echo $row['NAME']; ?></td>
       <td><?php echo $row['PACKING']; ?></td>
       <td><?php echo $row['GENERIC_NAME']; ?></td>
-      <td><?php echo $row['SUPPLIER_NAME']; ?></td>
       <td>
         <button href="" class="btn btn-info btn-sm" onclick="editMedicine(<?php echo $row['ID']; ?>);">
           <i class="fa fa-pencil"></i>

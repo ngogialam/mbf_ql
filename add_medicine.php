@@ -49,7 +49,7 @@
           <div class="row col col-md-6">
             <?php
               // form content
-              require "sections/add_new_medicine.html";
+              require "sections/add_new_agency_unit.html";
             ?>
           </div>
         </div>

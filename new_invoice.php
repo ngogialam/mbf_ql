@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>New Invoice</title>
+    <title>Khai báo hệ thống mới</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -51,29 +51,28 @@
           <!-- customer details content -->
           <div class="row col col-md-12">
             <div class="col col-md-3 form-group">
-              <label class="font-weight-bold" for="customers_name">Customer Name :</label>
+              <label class="font-weight-bold" for="customers_name">Tên nhóm hệ thống:</label>
               <input id="customers_name" type="text" class="form-control" placeholder="Customer Name" name="customers_name" onkeyup="showSuggestions(this.value, 'customer');">
               <code class="text-danger small font-weight-bold float-right" id="customer_name_error" style="display: none;"></code>
               <div id="customer_suggestions" class="list-group position-fixed" style="z-index: 1; width: 18.30%; overflow: auto; max-height: 200px;"></div>
             </div>
-            <div class="col col-md-3 form-group">
-              <label class="font-weight-bold" for="customers_address">Address :</label>
-              <input id="customers_address" type="text" class="form-control" name="customers_address" placeholder="Address" disabled>
+            <div class="col col-md-2 form-group">
+              <label class="font-weight-bold" for="invoice_number">Người tạo :</label>
+              <input id="invoice_number" type="text" class="form-control" name="created" placeholder="Invoice Number" >
             </div>
             <div class="col col-md-2 form-group">
-              <label class="font-weight-bold" for="invoice_number">Invoice Number :</label>
-              <input id="invoice_number" type="text" class="form-control" name="invoice_number" placeholder="Invoice Number" disabled>
-            </div>
-            <div class="col col-md-2 form-group">
-              <label class="font-weight-bold" for="">Payment Type :</label>
+              <label class="font-weight-bold" for="">Loại :</label>
               <select id="payment_type" class="form-control">
-              	<option value="1">Cash Payment</option>
-              	<option value="2">Card Payment</option>
-                <option value="3">Net Banking</option>
+              	<option value="1">Đầu tư</option>
+              	<option value="2">Hợp tác</option>
               </select>
             </div>
             <div class="col col-md-2 form-group">
-               <label class="font-weight-bold" for="">Date :</label>
+              <label class="font-weight-bold" for="">Mô tả  :</label>
+              <input id="invoice_number" type="text" class="form-control" name="descriptionsư" placeholder="Invoice Number" >
+            </div>
+            <div class="col col-md-2 form-group">
+              <label class="font-weight-bold" for="">Ngày tạo  :</label>
               <input type="date" class="datepicker form-control hasDatepicker" id="invoice_date" value='<?php echo date('Y-m-d'); ?>' onblur="checkDate(this.value, 'date_error');">
               <code class="text-danger small font-weight-bold float-right" id="date_error" style="display: none;"></code>
             </div>
@@ -81,16 +80,12 @@
           <!-- customer details content end -->
 
           <!-- new user button -->
-          <div class="row col col-md-12">
+          <!-- <div class="row col col-md-12">
             <div class="col col-md-2 form-group">
-              <button class="btn btn-primary form-control" onclick="document.getElementById('add_new_customer_model').style.display = 'block';">New Customer</button>
+              <button class="btn btn-primary form-control" onclick="document.getElementById('add_new_customer_model').style.display = 'block';">Thêm nhóm hệ thống</button>
             </div>
             <div class="col col-md-1 form-group"></div>
-            <div class="col col-md-2 form-group">
-              <label class="font-weight-bold" for="customers_contact_number">Contact Number :</label>
-              <input id="customers_contact_number" type="number" class="form-control" name="customers_contact_number" placeholder="Contact Number" disabled>
-            </div>
-          </div>
+          </div> -->
           <!-- closing new user button -->
 
           <div class="col col-md-12">
@@ -100,15 +95,16 @@
           <!-- add medicines -->
           <div class="row col col-md-12">
             <div class="row col col-md-12 font-weight-bold">
-              <div class="col col-md-2">Medicine Name</div>
-              <div class="col col-md-2">Batch ID</div>
-              <div class="col col-md-1">Ava.Qty.</div>
-              <div class="col col-md-1">Expiry</div>
-              <div class="col col-md-1">Quantity</div>
-              <div class="col col-md-1">MRP</div>
-              <div class="col col-md-1">Discount(%)</div>
-              <div class="col col-md-1">Total</div>
-              <div class="col col-md-2">Action</div>
+              <div class="col col-md-2">Tên hệ thống</div>
+              <div class="col col-md-1">Đơn vị sử dụng</div>
+              <div class="col col-md-1">Đơn vị quản lý </div>
+              <div class="col col-md-1">Người quản lý</div>
+              <div class="col col-md-1">Đầu số</div>
+              <div class="col col-md-2">Mô tả hệ thống</div>
+              <div class="col col-md-1">Tài liệu sử dụng</div>
+              <div class="col col-md-1">Người tạo</div>
+              <div class="col col-md-1">Ngày tạo</div>
+              <div class="col col-md-1">Hành động </div>
             </div>
           </div>
           <div class="col col-md-12">
@@ -119,23 +115,6 @@
             <script> addRow(); getInvoiceNumber(); </script>
           </div>
           <!-- end medicines -->
-
-          <div class="row col col-md-12">
-            <div class="col col-md-6 form-group"></div>
-            <div class="col col-md-2 form-group float-right">
-              <label class="font-weight-bold" for="">Total Amount:</label>
-              <input type="text" class="form-control" value="0" id="total_amount" disabled>
-            </div>
-            <div class="col col-md-2 form-group float-right">
-              <label class="font-weight-bold" for="">Total Discount :</label>
-              <input type="text" class="form-control" value="0" id="total_discount" disabled>
-            </div>
-            <div class="col col-md-2 form-group float-right">
-              <label class="font-weight-bold" for="">Net Total :</label>
-              <input type="text" class="form-control" value="0" id="net_total" disabled>
-            </div>
-          </div>
-
           <div class="col col-md-12">
             <hr class="col-md-12" style="padding: 0px;">
           </div>
@@ -147,24 +126,15 @@
             </div>
             <div id="new_invoice_button" class="col col-md-2 form-group float-right"  style="display: none;">
               <label class="font-weight-bold" for=""></label>
-              <button class="btn btn-primary form-control font-weight-bold" onclick="location.reload();;">New Invoice</button>
+              <button class="btn btn-primary form-control font-weight-bold" onclick="location.reload();">New Invoice</button>
             </div>
             <div id="print_button" class="col col-md-2 form-group float-right" style="display: none;">
               <label class="font-weight-bold" for=""></label>
               <button class="btn btn-warning form-control font-weight-bold" onclick="printInvoice(document.getElementById('invoice_number').value);">Print</button>
             </div>
-            <div class="col col-md-4 form-group"></div>
-            <div class="col col-md-2 form-group float-right">
-              <label class="font-weight-bold" for="">Paid Amount :</label>
-              <input type="text" class="form-control" name="total_discount" onkeyup="getChange(this.value);">
-            </div>
-            <div class="col col-md-2 form-group float-right">
-              <label class="font-weight-bold" for="">Change :</label>
-              <input type="text" class="form-control" id="change_amt" disabled>
-            </div>
           </div>
 
-          <div id="invoice_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;"</div>
+          <div id="invoice_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;"></div>
 
         </div>
         <!-- form content end -->

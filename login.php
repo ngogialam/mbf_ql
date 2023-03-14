@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Pharmacy Management - Login</title>
+    <title> - Login</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -22,9 +22,9 @@
 
       //alert(xhttp.responseText);
       if(xhttp.responseText == "")
-        window.location.href = "http://localhost/Pharmacy-Management/index.html";
+        window.location.href = "http://localhost/mbf/index.html";
       if(xhttp.responseText == "true")
-        window.location.href = "http://localhost/Pharmacy-Management/home.php";
+        window.location.href = "http://localhost/mbf/home.php";
 
     </script>
   </head>

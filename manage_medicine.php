@@ -34,9 +34,9 @@
 
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="text" class="form-control" id="by_name" placeholder="By Medicine Name" onkeyup="searchMedicine(this.value, 'name');">
-            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="By Generic Name" onkeyup="searchMedicine(this.value, 'generic_name');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchMedicine(this.value, 'suppliers_name');">
+            <input type="text" class="form-control" id="by_name" placeholder="Tên đơn vị" onkeyup="searchMedicine(this.value, 'name');">
+            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="Tên phòng ban" onkeyup="searchMedicine(this.value, 'generic_name');">
+            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Ngày tạo" onkeyup="searchMedicine(this.value, 'suppliers_name');">
           </div>
 
           <div class="col col-md-12">
@@ -48,12 +48,11 @@
             	<table class="table table-bordered table-striped table-hover">
             		<thead>
             			<tr>
-            				<th style="width: 5%;">SL.</th>
-            				<th style="width: 20%;">Medicine Name</th>
-                    <th style="width: 10%;">Packing</th>
-                    <th style="width: 30%;">Generic Name</th>
-            				<th style="width: 20%;">Supplier</th>
-                    <th style="width: 15%;">Action</th>
+                    <th style="width:5%">STT</th>
+            				<th style="width: 20%;">Tên đơn vị</th>
+            				<th style="width: 20%;">Tên phòng ban</th>
+                    <th style="width: 20%;">Ngày tạo</th>
+                    <th style="width: 15%;">Hành động</th>
             			</tr>
             		</thead>
             		<tbody id="medicines_div">

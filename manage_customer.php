@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Customer</title>
+    <title>Quản lý người quản trị</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -33,8 +33,8 @@
         <div class="row">
 
           <div class="col-md-12 form-group form-inline">
-            <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="text" class="form-control" id="" placeholder="Search Customer" onkeyup="searchCustomer(this.value);">
+            <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
+            <input type="text" class="form-control" id="" placeholder="Tìm kiếm người quản trị" onkeyup="searchCustomer(this.value);">
           </div>
 
           <div class="col col-md-12">
@@ -46,13 +46,13 @@
             	<table class="table table-bordered table-striped table-hover">
             		<thead>
             			<tr>
-            				<th style="width: 2%;">SL.</th>
-                    <th style="width: 10%;">Customer ID</th>
-            				<th style="width: 13%;">Customer Name</th>
-                    <th style="width: 13%;">Contact Number</th>
-                    <th style="width: 17%;">Address</th>
-                    <th style="width: 13%;">Doctor's Name</th>
-                    <th style="width: 17%;">Doctor's Address</th>
+            				<th style="width: 2%;">STT</th>
+                    <th style="width: 10%;">Tên người quản trị</th>
+            				<th style="width: 13%;">Số điện thoại</th>
+                    <th style="width: 13%;">Gmail</th>
+                    <th style="width: 17%;">Phòng ban</th>
+                    <th style="width: 13%;">Chức vụ</th>
+                    <th style="width: 17%;">Ngày tạo</th>
                     <th style="width: 15%;">Action</th>
             			</tr>
             		</thead>

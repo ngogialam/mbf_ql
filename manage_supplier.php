@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Supplier</title>
+    <title>Danh sách nhóm hệ thống</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -33,7 +33,7 @@
         <div class="row">
 
           <div class="col-md-12 form-group form-inline">
-            <label class="font-weight-bold" for="">Search :&emsp;</label>
+            <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
             <input type="text" class="form-control" id="" placeholder="Search Supplier" onkeyup="searchSupplier(this.value);">
           </div>
 
@@ -46,8 +46,8 @@
             	<table class="table table-bordered table-striped table-hover">
             		<thead>
             			<tr>
-                    <th style="width: 5%;">SL</th>
-            				<th style="width: 10%;">ID</th>
+                    <th style="width: 5%;">STT</th>
+            				<th style="width: 10%;">Tên nhóm hệ thống0</th>
             				<th style="width: 20%;">Name</th>
                     <th style="width: 15%;">Email</th>
                     <th style="width: 15%;">Contact Number</th>
