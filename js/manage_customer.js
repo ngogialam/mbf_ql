@@ -22,11 +22,11 @@ function editCustomer(id) {
 }
 
 function updateCustomer(id) {
-  var customer_name = document.getElementById("customer_name");
-  var contact_number = document.getElementById("customer_contact_number");
-  var customer_address = document.getElementById("customer_address");
-  var doctor_name = document.getElementById("customer_doctors_name");
-  var doctor_address = document.getElementById("customer_doctors_address");
+  var customer_name = document.getElementById("name_user_manager");
+  var contact_number = document.getElementById("sdt");
+  var customer_address = document.getElementById("gmail");
+  var doctor_name = document.getElementById("room");
+  var doctor_address = document.getElementById("position_manager");
   if(!validateName(customer_name.value, "name_error"))
     customer_name.focus();
   else if(!validateContactNumber(contact_number.value, "contact_number_error"))

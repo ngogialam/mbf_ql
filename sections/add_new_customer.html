@@ -3,7 +3,7 @@
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
     <label class="font-weight-bold" for="customer_name">Tên người quản trị :</label>
-    <input type="text" class="form-control" placeholder="Tên người quản trị" id="customer_name" onkeyup="validateName(this.value, 'Error: Tên người quản trị');">
+    <input type="text" class="form-control" placeholder="Tên người quản trị" id="name_user_manager" >
     <!-- <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code> -->
   </div>
 </div>
@@ -11,8 +11,8 @@
 <!-- customer address control -->
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="phone_number">Số điện thoại :</label>
-    <input type="text" class="form-control" placeholder="Số điện thoại" id="phone_number" onkeyup="validateName(this.value, 'Error: Số điện thoại');">
+    <label class="font-weight-bold" for="sdt">Số điện thoại :</label>
+    <input type="text" class="form-control" placeholder="Số điện thoại" id="sdt" >
     <!-- <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code> -->
   </div>
 </div>
@@ -21,7 +21,7 @@
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
     <label class="font-weight-bold" for="email">Email :</label>
-    <input type="text" class="form-control" placeholder="Email" id="email" onkeyup="validateName(this.value, '');">
+    <input type="text" class="form-control" placeholder="Email" id="gmail">
     <!-- <code class="text-danger small font-weight-bold float-right" id="doctor_name_error" style="display: none;"></code> -->
   </div>
 </div>
@@ -30,7 +30,7 @@
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
     <label class="font-weight-bold" for="room">Phòng ban :</label>
-    <textarea class="form-control" placeholder="Phòng ban" id="customer_doctors_address" onblur="validateName(this.value, 'Error: Phòng ban');"></textarea>
+    <textarea class="form-control" placeholder="Phòng ban" id="room"></textarea>
     <!-- <code class="text-danger small font-weight-bold float-right" id="doctor_address_error" style="display: none;"></code> -->
   </div>
 </div>
@@ -38,7 +38,7 @@
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
     <label class="font-weight-bold" for="position">Chức vụ :</label>
-    <textarea class="form-control" placeholder="Chức vụ" id="customer_doctors_address" onblur="validateAddress(this.value, 'doctor_address_error');"></textarea>
+    <textarea class="form-control" placeholder="Chức vụ" id="position_manager" ></textarea>
     <!-- <code class="text-danger small font-weight-bold float-right" id="doctor_address_error" style="display: none;"></code> -->
   </div>
 </div>
