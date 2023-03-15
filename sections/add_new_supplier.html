@@ -2,17 +2,16 @@
 <!-- supplier name control -->
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="supplier_name">Tên nhóm hệ thống :</label>
-    <input type="text" class="form-control" placeholder="Name" id="supplier_name" onkeyup="validateName(this.value, 'name_error');">
-    <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
+    <label class="font-weight-bold" for="name_team_sys">Tên nhóm hệ thống :</label>
+    <input type="text" class="form-control" name="name_team_sys" placeholder="Tên nhóm hệ thống" id="name_team_sys" >
   </div>
 </div>
 
 <!-- supplier email control -->
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="supplier_email">Loại</label>
-    <input type="email" autocomplete="off" class="form-control" placeholder="Email" id="supplier_email" onblur="validateEmail(this.value, 'email_error');">
+    <label class="font-weight-bold" for="type">Loại</label>
+    <input type="text" autocomplete="off" class="form-control" name='type' placeholder="Loại" id="type" >
     <code class="text-danger small font-weight-bold float-right" id="email_error" style="display: none;"></code>
   </div>
 </div>
@@ -20,18 +19,16 @@
 <!-- supplier contact number control -->
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="supplier_contact_number">Mô tả hệ thống :</label>
-    <input type="number" class="form-control" placeholder="Contact Number" id="supplier_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
-    <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code>
+    <label class="font-weight-bold" for="describe">Mô tả hệ thống :</label>
+    <input type="text" class="form-control" name='describe' placeholder="Mô tả" id="describe" >
   </div>
 </div>
 
 <!-- supplier address control -->
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="supplier_address">Ngày tạo :</label>
-    <textarea class="form-control" placeholder="Address" id="supplier_address" onblur="validateAddress(this.value, 'address_error');"></textarea>
-    <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
+    <label class="font-weight-bold" for="create_by">Người tạo :</label>
+    <textarea class="form-control" placeholder="Ngày tạo" name="create_by" id="create_by"></textarea>
   </div>
 </div>
 <!-- supplier details content end -->

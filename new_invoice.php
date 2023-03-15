@@ -52,7 +52,7 @@
           <div class="row col col-md-12">
             <div class="col col-md-3 form-group">
               <label class="font-weight-bold" for="customers_name">Tên nhóm hệ thống:</label>
-              <input id="customers_name" type="text" class="form-control" placeholder="Customer Name" name="customers_name" onkeyup="showSuggestions(this.value, 'customer');">
+              <input id="customers_name" type="text" class="form-control" placeholder="Tên nhóm hệ thống" name="customers_name" onkeyup="showSuggestions(this.value, 'customer');">
               <code class="text-danger small font-weight-bold float-right" id="customer_name_error" style="display: none;"></code>
               <div id="customer_suggestions" class="list-group position-fixed" style="z-index: 1; width: 18.30%; overflow: auto; max-height: 200px;"></div>
             </div>
@@ -69,7 +69,7 @@
             </div>
             <div class="col col-md-2 form-group">
               <label class="font-weight-bold" for="">Mô tả  :</label>
-              <input id="invoice_number" type="text" class="form-control" name="descriptionsư" placeholder="Invoice Number" >
+              <input id="invoice_number" type="text" class="form-control" name="descriptionsư" placeholder="Mô tả" >
             </div>
             <div class="col col-md-2 form-group">
               <label class="font-weight-bold" for="">Ngày tạo  :</label>

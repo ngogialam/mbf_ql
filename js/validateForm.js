@@ -110,54 +110,42 @@ function checkDate(date, error) {
 
 function addCustomer() {
   document.getElementById("customer_acknowledgement").innerHTML = "";
-  var customer_name = document.getElementById("customer_name");
-  var contact_number = document.getElementById("customer_contact_number");
-  var customer_address = document.getElementById("customer_address");
-  var doctor_name = document.getElementById("customer_doctors_name");
-  var doctor_address = document.getElementById("customer_doctors_address");
-  if(!validateName(customer_name.value, "name_error"))
-    customer_name.focus();
-  else if(!validateContactNumber(contact_number.value, "contact_number_error"))
-    contact_number.focus();
-  else if(!validateAddress(customer_address.value, "address_error"))
-    customer_address.focus();
-  else if(!validateName(doctor_name.value, 'doctor_name_error'))
-    doctor_name.focus();
-  else if(!validateAddress(doctor_address.value, 'doctor_address_error'))
-    doctor_address.focus();
-  else {
-    var xhttp = new XMLHttpRequest();
-  	xhttp.onreadystatechange = function() {
-  		if(xhttp.readyState = 4 && xhttp.status == 200)
-  			document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
-  	};
-  	xhttp.open("GET", "php/add_new_customer.php?name=" + customer_name.value + "&contact_number=" + contact_number.value + "&address=" + customer_address.value + "&doctor_name=" + doctor_name.value + "&doctor_address=" + doctor_address.value, true);
-  	xhttp.send();
-  }
+  var customer_name = document.getElementById("name_user_manager");
+  var contact_number = document.getElementById("sdt");
+  var customer_address = document.getElementById("gmail");
+  var doctor_name = document.getElementById("room");
+  var doctor_address = document.getElementById("position_manager");
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if(xhttp.readyState = 4 && xhttp.status == 200)
+      document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
+  };
+  xhttp.open("GET", "php/add_new_customer.php?name=" + customer_name.value + "&contact_number=" + contact_number.value + "&address=" + customer_address.value + "&doctor_name=" + doctor_name.value + "&doctor_address=" + doctor_address.value, true);
+  xhttp.send();
   return false;
 }
 
 function addSupplier() {
   document.getElementById("supplier_acknowledgement").innerHTML = "";
-  var supplier_name = document.getElementById("supplier_name");
-  var supplier_email = document.getElementById("supplier_email");
-  var contact_number = document.getElementById("supplier_contact_number");
-  var supplier_address = document.getElementById("supplier_address");
-  if(!validateName(supplier_name.value, "name_error"))
-    supplier_name.focus();
-  else if(!validateContactNumber(contact_number.value, "contact_number_error"))
-    contact_number.focus();
-  else if(!validateAddress(supplier_address.value, "address_error"))
-    supplier_address.focus();
-  else {
-    var xhttp = new XMLHttpRequest();
-  	xhttp.onreadystatechange = function() {
-  		if(xhttp.readyState = 4 && xhttp.status == 200)
-  			document.getElementById("supplier_acknowledgement").innerHTML = xhttp.responseText;
-  	};
-  	xhttp.open("GET", "php/add_new_supplier.php?name=" + supplier_name.value + "&email=" + supplier_email.value + "&contact_number=" + contact_number.value + "&address=" + supplier_address.value, true);
-  	xhttp.send();
-  }
+  var supplier_name = document.getElementById("name_team_sys");
+  var supplier_email = document.getElementById("type");
+  var contact_number = document.getElementById("describe");
+  var supplier_address = document.getElementById("create_by");
+  // if(!validateName(supplier_name.value, "name_error"))
+  //   supplier_name.focus();
+  // else if(!validateContactNumber(contact_number.value, "contact_number_error"))
+  //   contact_number.focus();
+  // else if(!validateAddress(supplier_address.value, "address_error"))
+  //   supplier_address.focus();
+  // else {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if(xhttp.readyState = 4 && xhttp.status == 200)
+      document.getElementById("supplier_acknowledgement").innHTML = xhttp.responseText;
+  };
+  xhttp.open("GET", "php/add_new_supplier.php?name=" + supplier_name.value + "&email=" + supplier_email.value + "&contact_number=" + contact_number.value + "&address=" + supplier_address.value, true);
+  xhttp.send();
+  // }
 }
 
 function addMedicine() {
