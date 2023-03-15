@@ -1,60 +1,66 @@
 <!-- customer details content -->
 <!-- customer name control -->
 <div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="customer_name">Tên người quản trị :</label>
-    <input type="text" class="form-control" placeholder="Tên người quản trị" id="customer_name" onkeyup="validateName(this.value, 'Error: Tên người quản trị');">
-    <!-- <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code> -->
-  </div>
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="name_user_manager">Tên người quản trị :</label>
+        <input type="text" class="form-control" placeholder="Tên người quản trị" id="name_user_manager" onkeyup="validateName(this.value, 'name_err');">
+        <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
+    </div>
 </div>
 
 <!-- customer address control -->
 <div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="phone_number">Số điện thoại :</label>
-    <input type="text" class="form-control" placeholder="Số điện thoại" id="phone_number" onkeyup="validateName(this.value, 'Error: Số điện thoại');">
-    <!-- <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code> -->
-  </div>
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="phone_number">Số điện thoại :</label>
+        <input type="number" class="form-control" placeholder="Số điện thoại" id="sdt" onblur="validateContactNumber(this.value, 'Error: Số điện thoại');">
+        <code class="text-danger small font-weight-bold float-right" id="sdt_err" style="display: none;"></code>
+    </div>
 </div>
 
 <!-- customes's doctor name -->
 <div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="email">Email :</label>
-    <input type="text" class="form-control" placeholder="Email" id="email" onkeyup="validateName(this.value, '');">
-    <!-- <code class="text-danger small font-weight-bold float-right" id="doctor_name_error" style="display: none;"></code> -->
-  </div>
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="email">Email :</label>
+        <input type="text" class="form-control" placeholder="Email" id="gmail" onkeyup="validateAddress(this.value, 'gmail_err');">
+        <code class="text-danger small font-weight-bold float-right" id="gmail_err" style="display: none;"></code>
+    </div>
 </div>
 
 <!-- customes's doctor name -->
 <div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="room">Phòng ban :</label>
-    <textarea class="form-control" placeholder="Phòng ban" id="customer_doctors_address" onblur="validateName(this.value, 'Error: Phòng ban');"></textarea>
-    <!-- <code class="text-danger small font-weight-bold float-right" id="doctor_address_error" style="display: none;"></code> -->
-  </div>
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="room">Phòng ban :</label>
+        <textarea class="form-control" placeholder="Phòng ban" id="room" onblur="validateName(this.value, 'Error: Phòng ban');"></textarea>
+        <code class="text-danger small font-weight-bold float-right" id="room_err" style="display: none;"></code>
+    </div>
 </div>
 <!-- customer details content end -->
 <div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="position">Chức vụ :</label>
-    <textarea class="form-control" placeholder="Chức vụ" id="customer_doctors_address" onblur="validateAddress(this.value, 'doctor_address_error');"></textarea>
-    <!-- <code class="text-danger small font-weight-bold float-right" id="doctor_address_error" style="display: none;"></code> -->
-  </div>
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="position">Chức vụ :</label>
+        <textarea class="form-control" placeholder="Chức vụ" id="position_manager" onblur="validateName(this.value, 'Nhập lỗi chức vụ');"></textarea>
+        <code class="text-danger small font-weight-bold float-right" id="position_manager_err" style="display: none;"></code>
+    </div>
 </div>
-
+<div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="position">Người tạo :</label>
+        <input type="number" class="form-control" placeholder="Người tạo" id="create_by" onkeyup="validateName(this.value, 'Chưa thêm người tạo');">
+        <code class="text-danger small font-weight-bold float-right" id="create_by_err" style="display: none;"></code>
+    </div>
+</div>
 <!-- horizontal line -->
 <div class="col col-md-12">
-  <hr class="col-md-12 float-left" style="padding: 0px; width: 95%; border-top: 2px solid  #02b6ff;">
+    <hr class="col-md-12 float-left" style="padding: 0px; width: 95%; border-top: 2px solid  #02b6ff;">
 </div>
 
 <!-- form submit button -->
 <div class="row col col-md-12">
-  &emsp;
-  <div class="form-group m-auto">
-    <button class="btn btn-primary" onclick="addCustomer();">Thêm mới người sử dụng</button>
-  </div>
-  <!--
+    &emsp;
+    <div class="form-group m-auto">
+        <button class="btn btn-primary" onclick="addCustomer();">Thêm mới người sử dụng</button>
+    </div>
+    <!--
   &emsp;
   <div class="form-group">
     <button class="btn btn-success form-control">Save and Add Another</button>

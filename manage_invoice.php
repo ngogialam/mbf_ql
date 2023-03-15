@@ -99,27 +99,118 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               </div>
-              <?php             
+              <?php
               require "php/db_connection.php";
               if ($con) {
                 $query = "SELECT * FROM sys_ql";
                 $result = mysqli_query($con, $query);
-                $row = mysqli_fetch_array($result);                
+                $row = mysqli_fetch_array($result);
                 $id_sys = $row['id_sys'];
-                $name_team_sys = $row['name-team_sys'];
+                $name_team_sys = $row['name_team_sys'];
                 $name_sys = $row['name_sys'];
                 $first_number = $row['first_number'];
                 $name_unit_manager = $row['name_unit_manager'];
                 $name_user_manager = $row['name_user_manager'];
                 $describe_sys = $row['describe_sys'];
                 $document_sys = $row['document_sys'];
-                $create_by = $row['create_by'];
+                $created_at = $row['created_at'];
                 $server_sys = $row['server_sys'];
                 $ip_sys = $row['ip_sys'];
                 $config_sys = $row['config_sys'];
               }
-
               ?>
+              <div class="row">
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="id_sys">Id hệ thống :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $id_sys; ?>
+                    </a>
+                    <code class="text-danger small font-weight-bold float-right mb-2" id="username_error"
+                      style="display: none;"></code>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Tên nhóm hệ thống :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $name_team_sys; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Tên đầu số :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $first_number; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Tên đơn vị quản lý :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $name_unit_manager; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Tên người quả trị :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $name_user_manager; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Mô tả hệ thống :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $describe_sys; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Tài liệu hệ thống :</label>
+                    <a class="font-weight-bold">
+                      <?php echo  $document_sys; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Server hệ thống :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $server_sys; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Ip hệ thống :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $ip_sys; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Cấu hình hệ thống :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $config_sys; ?>
+                    </a>
+                  </div>
+                </div>
+                <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                    <label for="name_team_sys">Thời gian tạo :</label>
+                    <a class="font-weight-bold">
+                      <?php echo $created_at; ?>
+                    </a>
+                  </div>
+                </div>
+              </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Thoát</button>
               </div>
