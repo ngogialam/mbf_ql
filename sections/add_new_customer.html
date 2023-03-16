@@ -4,7 +4,7 @@
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="name_user_manager">Tên người quản trị :</label>
         <input type="text" class="form-control" placeholder="Tên người quản trị" id="name_user_manager" onkeyup="validateName(this.value, 'name_err');">
-        <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
+        <code class="text-danger small font-weight-bold float-right" id="name_err" style="display: none;"></code>
     </div>
 </div>
 
@@ -12,7 +12,7 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="phone_number">Số điện thoại :</label>
-        <input type="number" class="form-control" placeholder="Số điện thoại" id="sdt" onblur="validateContactNumber(this.value, 'Error: Số điện thoại');">
+        <input type="number" class="form-control" placeholder="Số điện thoại" id="sdt" onblur="validateContactNumber(this.value, 'sdt_err');">
         <code class="text-danger small font-weight-bold float-right" id="sdt_err" style="display: none;"></code>
     </div>
 </div>
@@ -30,7 +30,7 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="room">Phòng ban :</label>
-        <textarea class="form-control" placeholder="Phòng ban" id="room" onblur="validateName(this.value, 'Error: Phòng ban');"></textarea>
+        <textarea class="form-control" placeholder="Phòng ban" id="room" onblur="validateName(this.value, 'room_err');"></textarea>
         <code class="text-danger small font-weight-bold float-right" id="room_err" style="display: none;"></code>
     </div>
 </div>
@@ -38,14 +38,14 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="position">Chức vụ :</label>
-        <textarea class="form-control" placeholder="Chức vụ" id="position_manager" onblur="validateName(this.value, 'Nhập lỗi chức vụ');"></textarea>
+        <textarea class="form-control" placeholder="Chức vụ" id="position_manager" onblur="validateName(this.value, 'position_manager_err');"></textarea>
         <code class="text-danger small font-weight-bold float-right" id="position_manager_err" style="display: none;"></code>
     </div>
 </div>
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="position">Người tạo :</label>
-        <input type="number" class="form-control" placeholder="Người tạo" id="create_by" onkeyup="validateName(this.value, 'Chưa thêm người tạo');">
+        <input type="text" class="form-control" placeholder="Người tạo" id="create_by" onblur="validateName(this.value, 'create_by_err');">
         <code class="text-danger small font-weight-bold float-right" id="create_by_err" style="display: none;"></code>
     </div>
 </div>
