@@ -6,7 +6,7 @@
     $gmail = ucwords($_GET["gmail"]);
     $room = ucwords($_GET["room"]);
     $position_manager = ucwords($_GET["position_manager"]);
-    $create_by = $_GET["create_by"];
+    $create_by = ucwords($_GET["create_by"]);
 
     $query = "SELECT * FROM user_manager WHERE sdt = '$sdt'";
     $result = mysqli_query($con, $query);
@@ -19,7 +19,7 @@
       if(!empty($result))
   			echo "$name_user_manager added...";
   		else
-  			echo "Failed to add $$name_user_manager!";
+  			echo "Failed to add $name_user_manager!";
     }
   }
 ?>
