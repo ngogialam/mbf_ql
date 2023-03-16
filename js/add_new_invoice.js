@@ -189,7 +189,7 @@ function addInvoice() {
   // save invoice
   var customers_name = document.getElementById('customers_name');
   var customers_contact_number = document.getElementById('customers_contact_number');
-  var invoice_number = document.getElementById('invoice_number');
+  var invoice_number = documentgetElementById('invoice_number');
   var payment_type = document.getElementById('payment_type');
   var invoice_date = document.getElementById('invoice_date');
   //alert(invoice_number.value);
