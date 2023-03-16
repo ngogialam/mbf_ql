@@ -52,7 +52,7 @@
       <td><?php echo $row['config_sys']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
       <td>
-        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalAddMenu">       
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalAddMenu" onclick="ShowCustomer(<?php echo $row['id_sys']; ?>);">       
         <i class="fa fa-eye"></i>
         </button>
         <button href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editfile">
