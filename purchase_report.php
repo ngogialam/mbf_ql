@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Purchase Report</title>
+    <title>Manage Purchase</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sidenav.css">
     <link rel="stylesheet" href="css/home.css">
-    <script src="js/report.js"></script>
+    <script src="js/suggestions.js"></script>
+    <script src="js/add_new_purchase.js"></script>
+    <script src="js/manage_purchase.js"></script>
+    <script src="js/validateForm.js"></script>
     <script src="js/restrict.js"></script>
   </head>
   <body>
@@ -24,21 +27,21 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('book', 'Purchase Report', 'Showing Purchase Report');
+          createHeader('bar-chart', 'Quản lý người dùng', 'Danh sách quản lý người dùng');
         ?>
         <!-- header section end -->
 
         <!-- form content -->
         <div class="row">
-
           <div class="col-md-12 form-group form-inline">
-            <label class="font-weight-bold" for="">Start Date :&emsp;</label>
-            <input type="date" class="form-control" id="start_date" onchange="showReport('purchase');">
+            <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
+            <input type="text" class="form-control" id="by_voucher_number" placeholder="Theo tên người sử dụng" onkeyup="searchPurchase(this.value, 'name_user_manager');">
+            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Gmail" onkeyup="searchPurchase(this.value, 'gmail');">
+            &emsp;<input type="number" class="form-control" id="by_invoice_number" placeholder="Số điện thoại" onkeyup="searchPurchase(this.value, 'sdt');">
+            &emsp;<label class="font-weight-bold" for="">Theo ngày :&emsp;</label>
+            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'created_at');">
             &emsp;
-            <label class="font-weight-bold" for="">End Date :&emsp;</label>
-            <input type="date" class="form-control" id="end_date" onchange="showReport('purchase');">
-            &emsp;
-            <button class="btn btn-success" onclick="location.reload();"><i class="fa fa-refresh"></i></button>
+            &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
           </div>
 
           <div class="col col-md-12">
@@ -46,18 +49,29 @@
           </div>
 
           <div class="col col-md-12 table-responsive">
-            <div id="print_content" class="table-responsive">
-            	<table class="table table-bordered table-striped table-hover" id="purchase_report_div">
-                <?php
-                require "php/report.php";
-                showPurchases("", "");
-                ?>
+            <div class="table-responsive">
+            	<table class="table table-bordered table-striped table-hover">
+            		<thead>
+            			<tr>
+            				<th style="width: 1%;">STT</th>
+                    <th style="width: 12%;">Nhóm người sử dụng</th>
+                    <th style="width: 18%;">Tên người dùng</th>
+            				<th style="width: 12%;">Số điện thoại</th>
+                    <th style="width: 15%;">Gmail</th>
+                    <th style="width: 10%;">Phòng</th>
+                    <th style="width: 12%;">Vị trí</th>
+                    <th style="width: 12%;">Người tạo</th>
+                    <th style="width: 12%;">Hành động</th>
+            			</tr>
+            		</thead>
+                <tbody id="purchases_div">
+                  <?php
+                    require 'php/report.php';
+                    showPurchases(0);
+                  ?>
+            		</tbody>
             	</table>
             </div>
-          </div>
-
-          <div class="col-md-12 text-center">
-            <button class="btn btn-primary" onclick="printReport('Purchase');">Print</button>
           </div>
 
         </div>
