@@ -40,8 +40,8 @@
     <tr>
       <td><?php echo $seq_no; ?></td>
       <td><?php echo $row['id_sys']; ?></td>
-      <td><?php echo $row['name_team_sys']; ?></td>
       <td><?php echo $row['name_sys']; ?></td>
+      <td><?php echo $row['name_team_sys']; ?></td>      
       <td><?php echo $row['first_number']; ?></td>
       <td><?php echo $row['name_unit_manager']; ?></td>
       <td><?php echo $row['name_user_manager']; ?></td>
@@ -58,10 +58,13 @@
         <button href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editfile">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteInvoice(<?php echo $row['id_sys']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="
+        (<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
-        
+        <button class="btn btn-danger btn-sm" >
+          <i class="fa fa-barcode"><a href="sections/detail_sys_ql.php"></a></i>
+        </button>
         <!-- <button class="btn btn-danger btn-sm" > <i class="bi bi-align-middle"></i></button> -->
       </td>
     </tr>
