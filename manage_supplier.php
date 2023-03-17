@@ -34,7 +34,7 @@
 
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-            <input type="text" class="form-control" id="" placeholder="Search Supplier" onkeyup="searchSupplier(this.value);">
+            <input type="text" class="form-control" id="" placeholder="Tên nhóm hệ thống" onkeyup="searchSupplier(this.value);">
           </div>
 
           <div class="col col-md-12">
