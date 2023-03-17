@@ -34,17 +34,13 @@
         <!-- form content -->
         <div class="row">
           <div class="col-md-12 form-group form-inline">
-            <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="number" class="form-control" id="by_voucher_number" placeholder="By Voucher Number" onkeyup="searchPurchase(this.value, 'VOUCHER_NUMBER');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchPurchase(this.value, 'SUPPLIER_NAME');">
-            &emsp;<input type="number" class="form-control" id="by_invoice_number" placeholder="By Invoice" onkeyup="searchPurchase(this.value, 'INVOICE_NUMBER');">
-            &emsp;<label class="font-weight-bold" for="">By Purchase Date :&emsp;</label>
-            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'PURCHASE_DATE');">
+            <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
+            <input type="text" class="form-control" id="by_voucher_number" placeholder="Theo tên người sử dụng" onkeyup="searchPurchase(this.value, 'name_user_manager');">
+            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Gmail" onkeyup="searchPurchase(this.value, 'gmail');">
+            &emsp;<input type="number" class="form-control" id="by_invoice_number" placeholder="Số điện thoại" onkeyup="searchPurchase(this.value, 'sdt');">
+            &emsp;<label class="font-weight-bold" for="">Theo ngày :&emsp;</label>
+            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'created_at');">
             &emsp;
-            <select class="form-control" onchange="searchPurchase(this.value, 'PAYMENT_STATUS');">
-              <option value="DUE">DUE</option>
-              <option value="PAID">PAID</option>
-            </select>
             &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
           </div>
 
@@ -57,14 +53,12 @@
             	<table class="table table-bordered table-striped table-hover">
             		<thead>
             			<tr>
-            				<th style="width: 1%;">SL.</th>
-                    <th style="width: 12%;">Voucher Number</th>
-                    <th style="width: 18%;">Supplier Name</th>
-            				<th style="width: 12%;">Invoice Number</th>
-                    <th style="width: 15%;">Purchase Date</th>
-                    <th style="width: 10%;">Total Amount</th>
-                    <th style="width: 12%;">Payment Status</th>
-                    <th style="width: 12%;">Action</th>
+            				<th style="width: 1%;">STT</th>
+                    <th style="width: 12%;">Tên nhóm người sử dụng</th>
+                    <th style="width: 12%;">Người sử dụng</th>
+                    <th style="width: 12%;">Người tạo</th>
+                    <th style="width: 12%;">Ngày tạo</th>
+                    <th style="width: 12%;">Hành động</th>
             			</tr>
             		</thead>
                 <tbody id="purchases_div">

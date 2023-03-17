@@ -35,11 +35,11 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      $query = "SELECT * FROM user_sys";
+      $query = "SELECT * FROM manager_team_user";
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
-        if($row['id_unit_sys'] == $id)
+        if($row['id_team_user'] == $id)
           showEditOptionsRow($seq_no, $row);
         else
           showPurchaseRow($seq_no, $row);
@@ -51,20 +51,15 @@
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['id_unit_sys']; ?></td>
-      <td><?php echo $row['name_unit_sys'] ?></td>
-      <td><?php echo $row['name_room']; ?></td>
+      <td><?php echo $row['name_team_user'] ?></td>
+      <td><?php echo $row['user_status']; ?></td>
+      <td><?php echo $row['create_by']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
       <td>
-        <!--
-        <button class="btn btn-warning btn-sm" onclick="printPurchase(<?php echo $row['VOUCHER_NUMBER']; ?>);">
-          <i class="fa fa-fax"></i>
-        </button>
-      -->
-        <button href="" class="btn btn-info btn-sm" onclick="editPurchase(<?php echo $row['id_unit_sys']; ?>);">
+        <button href="" class="btn btn-info btn-sm" onclick="editPurchase(<?php echo $row['id_team_user']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deletePurchase(<?php echo $row['id_unit_sys']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deletePurchase(<?php echo $row['id_team_user']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -121,7 +116,7 @@ function searchPurchase($text, $column) {
   require "db_connection.php";
   if($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM purchases WHERE $column LIKE '%$text%'";
+    $query = "SELECT * FROM manager_user WHERE $column LIKE '%$text%'";
     $result = mysqli_query($con, $query);
     while($row = mysqli_fetch_array($result)) {
       $seq_no++;
