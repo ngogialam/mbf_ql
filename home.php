@@ -4,9 +4,20 @@
 <head>
   <meta charset="utf-8">
   <title>Manager System - Home</title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <script src="bootstrap/js/jquery.min.js"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,7 +40,7 @@
 
       <!-- form content -->
       <div class="row">
-        <div class="row col col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <div class="row col col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
           <?php
           function createSection1($location, $title, $table)
@@ -70,119 +81,55 @@
                   </div>
                 ';
           }
-          createSection1('manage_customer.php', 'Total Customer', 'customers');
-          createSection1('manage_supplier.php', 'Total Supplier', 'suppliers');
-          createSection1('manage_medicine.php', 'Total Medicine', 'medicines');
-          createSection1('manage_medicine_stock.php?out_of_stock', 'Out of Stock', 'medicines_stock');
-          createSection1('manage_medicine_stock.php?expired', 'Expired', 'medicines_stock');
-          createSection1('manage_invoice.php', 'Total Invoice', 'invoices');
+          createSection1('manage_invoice.php', 'Tổng số hệ thống ', 'sys_ql');
+          createSection1('manage_supplier.php', 'Tổng số nhóm hệ thống', 'team_sys_manager');
+          createSection1('manage_customer.php', 'Tổng số người quản trị', 'user_manager');
+          createSection1('manage_medicine.php', 'Tổng số đơn vị quản lý', 'unit_sys');
+          createSection1('manage_medicine_stock.php', 'Tổng số đơn vị sử dụng', 'unit_user');
+          createSection1('purchase_report.php', 'Tổng số người dùng', 'manager_user');
+          createSection1('manage_purchase.php', 'Tổng số nhóm người dùng', 'manager_team_user');
           ?>
 
         </div>
+        <hr style="border-top: 2px solid #ff5252;">
+        <div class="row">
 
-        <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 7px 0; margin-left: 15px;">
-          <div class="todays-report">
-            <div class="h5">Todays Report</div>
-            <table class="table table-bordered table-striped table-hover">
-              <tbody>
-                <?php
-                require 'php/db_connection.php';
-                if ($con) {
-                  $date = date('Y-m-d');
-                  ?>
-                  <tr>
-                    <?php
-                    $total = 0;
-                    $query = "SELECT NET_TOTAL FROM invoices WHERE INVOICE_DATE = '$date'";
-                    $result = mysqli_query($con, $query);
-
-                    while ($row = mysqli_fetch_array($result))
-                      $total = $total + $row['NET_TOTAL'];
-                    ?>
-                    <th>Total Sales</th>
-                    <th class="text-success">Rs.
-                      <?php echo $total; ?>
-                    </th>
-                  </tr>
-                  <tr>
-                    <?php
-                    //echo $date;
-                    $total = 0;
-                    $query = "SELECT TOTAL_AMOUNT FROM purchases WHERE PURCHASE_DATE = '$date'";
-                    $result = mysqli_query($con, $query);
-                    while ($row = mysqli_fetch_array($result))
-                      $total = $total + $row['TOTAL_AMOUNT'];
-                }
-                ?>
-                  <th>Total Purchase</th>
-                  <th class="text-danger">Rs.
-                    <?php echo $total; ?>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
+          <?php
+          function createSection2($icon, $location, $title)
+          {
+            echo '
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="padding: 10px;">
+          <div class="dashboard-stats" style="padding: 30px 15px;" onclick="location.href=\'' . $location . '\'">
+            <div class="text-center">
+              <span class="h1"><i class="fa fa-' . $icon . ' p-2"></i></span>
+              <div class="h5">' . $title . '</div>
+            </div>
           </div>
+        </div>
+      ';
+          }
+          createSection2('clipboard', 'new_invoice.php', 'Khai báo hệ thống mới');
+          createSection2('handshake', 'add_customer.php', 'Thêm mới người quản trị');
+          createSection2('shopping-bag', 'add_medicine.php', 'Thêm mới đơn vị quản lý');
+          createSection2('group', 'add_supplier.php', 'Thêm mới nhóm hệ thống');
+          createSection2('bar-chart', 'add_new_user_unit.php', 'Thêm mới đơn vị sử dụng');
+          createSection2('address-card', 'add_purchase.php', 'Thêm mới nhóm người sử dụng');
+          createSection2('book', 'add_new_user.php', 'Thêm mới người sử dụng');
+          ?>
+
         </div>
 
       </div>
 
       <hr style="border-top: 2px solid #ff5252;">
 
-      <div class="row">
 
-        <?php
-        function createSection2($icon, $location, $title)
-        {
-          echo '
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="padding: 10px;">
-              		<div class="dashboard-stats" style="padding: 30px 15px;" onclick="location.href=\'' . $location . '\'">
-              			<div class="text-center">
-                      <span class="h1"><i class="fa fa-' . $icon . ' p-2"></i></span>
-              				<div class="h5">' . $title . '</div>
-              			</div>
-              		</div>
-                </div>
-              ';
-        }
-        createSection2('address-card', 'new_invoice.php', 'Create New Invoice');
-        createSection2('handshake', 'add_customer.php', 'Add New Customer');
-        createSection2('shopping-bag', 'add_medicine.php', 'Add New Medicine');
-        createSection2('group', 'add_supplier.php', 'Add New Supplier');
-        createSection2('bar-chart', 'add_purchase.php', 'Add New Purchase');
-        createSection2('book', 'sales_report.php', 'Sales Report');
-        createSection2('book', 'purchase_report.php', 'Purchase Report');
-        ?>
-
-      </div>
       <!-- form content end -->
 
       <hr style="border-top: 2px solid #ff5252;">
 
     </div>
   </div>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        <i class="fa fa-eye"></i>
-        </button>
-        <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
   <?php
   require "php/footer.php";
   ?>
