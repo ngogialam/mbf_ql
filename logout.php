@@ -7,7 +7,7 @@
   //   $result = mysqli_query($con, $query);
   // }
   
-  header("Location: http://localhost/Pharmacy-Management/"); 
+  header("Location: http://localhost/mbf-ql/"); 
   die(); 
 ?>
 

@@ -40,8 +40,8 @@
     <tr>
       <td><?php echo $seq_no; ?></td>
       <td><?php echo $row['id_sys']; ?></td>
-      <td><?php echo $row['name_team_sys']; ?></td>
       <td><?php echo $row['name_sys']; ?></td>
+      <td><?php echo $row['name_team_sys']; ?></td>      
       <td><?php echo $row['first_number']; ?></td>
       <td><?php echo $row['name_unit_manager']; ?></td>
       <td><?php echo $row['name_user_manager']; ?></td>
@@ -51,14 +51,15 @@
       <td><?php echo $row['server_sys']; ?></td>
       <td><?php echo $row['config_sys']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
-      <td>
-        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalAddMenu" onclick="ShowCustomer(<?php echo $row['id_sys']; ?>);">       
+      <td>      
+      <button class="btn btn-warning btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
         <i class="fa fa-eye"></i>
         </button>
         <button href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editfile">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteInvoice(<?php echo $row['id_sys']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="
+        (<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
         
