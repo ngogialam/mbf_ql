@@ -62,8 +62,8 @@
         (<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
-        <button class="btn btn-danger btn-sm" >
-          <i class="fa fa-barcode"><a href="sections/detail_sys_ql.php"></a></i>
+        <button class="btn btn-danger btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
+          <i class="fa fa-barcode"></i>
         </button>
         <!-- <button class="btn btn-danger btn-sm" > <i class="bi bi-align-middle"></i></button> -->
       </td>
