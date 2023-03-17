@@ -51,8 +51,8 @@
       <td><?php echo $row['server_sys']; ?></td>
       <td><?php echo $row['config_sys']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
-      <td>
-        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalAddMenu" onclick="ShowCustomer(<?php echo $row['id_sys']; ?>);">       
+      <td>      
+      <button class="btn btn-warning btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
         <i class="fa fa-eye"></i>
         </button>
         <button href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editfile">
@@ -62,9 +62,7 @@
         (<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
-          <i class="fa fa-barcode"></i>
-        </button>
+        
         <!-- <button class="btn btn-danger btn-sm" > <i class="bi bi-align-middle"></i></button> -->
       </td>
     </tr>
