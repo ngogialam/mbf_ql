@@ -15,6 +15,10 @@ function viewItem(id_sys) {
     window.location.href = 'detail_sys_ql.php?id_sys=' + id_sys;
 }
 
+function viewEdit(id_sys) {
+    window.location.href = 'edit_sys_ql.php?id_sys=' + id_sys;
+}
+
 function goBack() {
     window.location.href = 'manage_invoice.php';
 }
@@ -67,4 +71,39 @@ function printInvoice(invoice_number) {
         print_window.close();
     }
     return true;
+}
+
+function edit(action) {
+    document.getElementById('id_sys').disabled = action;
+    document.getElementById('name_team_sys').disabled = action;
+    document.getElementById('first_number').disabled = action;
+    document.getElementById('name_unit_manager').disabled = action;
+    document.getElementById('name_user_manager').disabled = action;
+    document.getElementById('describe_sys').disabled = action;
+    document.getElementById('document_sys').disabled = action;
+    document.getElementById('server_sys').disabled = action;
+    document.getElementById('ip_sys').disabled = action;
+    document.getElementById('config_sys').disabled = action;
+    document.getElementById('hidden').style.display = "none";
+    if (action) {
+        document.getElementById('edit').style.display = "block";
+        document.getElementById('update_cancel').style.display = "none";
+    } else {
+        document.getElementById('edit').style.display = "none";
+        document.getElementById('update_cancel').style.display = "block";
+    }
+
+    document.getElementById('id_sys_error').style.display = "none";
+    document.getElementById('name_team_sys_error').style.display = "none";
+    document.getElementById('first_number_error').style.display = "none";
+    document.getElementById('name_unit_manager_error').style.display = "none";
+    document.getElementById('name_user_manager_error').style.display = "none";
+    document.getElementById('describe_sys_error').style.display = "none";
+    document.getElementById('document_sys_error').style.display = "none";
+    document.getElementById('server_sys_error').style.display = "none";
+    document.getElementById('ip_sys_error').style.display = "none";
+    document.getElementById('config_sys_error').style.display = "none";
+
+    if (!action)
+        document.getElementById('admin_acknowledgement').innerHTML = "";
 }
