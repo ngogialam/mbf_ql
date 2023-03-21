@@ -10,6 +10,13 @@ function deleteSupplier(id) {
     xhttp.send();
   }
 }
+function viewItem(id_team_sys) {
+  window.location.href = 'detail_team_sys.php?id_team_sys=' + id_team_sys;
+}
+
+function goBack() {
+  window.location.href = 'manage_supplier.php';
+}
 
 function editSupplier(id) {
   var xhttp = new XMLHttpRequest();

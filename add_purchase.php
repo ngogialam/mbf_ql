@@ -53,18 +53,18 @@
 
             <div class="col col-md-4 form-group">
               <label class="font-weight-bold" for="suppliers_name">Tên nhóm người sử dụng :</label>
-              <input id="suppliers_name" type="text" class="form-control" placeholder="Tên người sử dụng" name="name_team_user" onkeyup="showSuggestions(this.value, 'supplier');">
+              <input id="suppliers_name" type="text" class="form-control" placeholder="Tên nhóm người sử dụng" name="name_team_user" onkeyup="showSuggestions(this.value, 'supplier');">
               <div id="supplier_suggestions" class="list-group position-fixed" style="z-index: 1; width: 25.10%; overflow: auto; max-height: 200px;"></div>
             </div>
 
             <div class="col col-md-3 form-group">
               <label class="font-weight-bold" for=""> Trạng thái người sử dụng:</label>
-              <input type="number" class="form-control" placeholder="Số điện thoại" id="invoice_number" name="user_status" onblur="notNull(this.value, 'invoice_number_error'); checkInvoice(this.value, 'invoice_number_error');">
+              <input type="number" class="form-control" placeholder="Trạng thái người sử dụng" id="invoice_number" name="user_status" onblur="notNull(this.value, 'invoice_number_error'); checkInvoice(this.value, 'invoice_number_error');">
               <code class="text-danger small font-weight-bold float-right" id="invoice_number_error" style="display: none;"></code>
             </div>
             <div class="col col-md-3 form-group">
               <label class="font-weight-bold" for=""> Người tạo:</label>
-              <input type="number" class="form-control" placeholder="Gmail" id="invoice_number" name="create_by" onblur="notNull(this.value, 'invoice_number_error'); checkInvoice(this.value, 'invoice_number_error');">
+              <input type="number" class="form-control" placeholder="Người t" id="invoice_number" name="create_by" onblur="notNull(this.value, 'invoice_number_error'); checkInvoice(this.value, 'invoice_number_error');">
               <code class="text-danger small font-weight-bold float-right" id="invoice_number_error" style="display: none;"></code>
             </div>
           </div>
