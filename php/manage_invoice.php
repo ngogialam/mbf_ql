@@ -34,7 +34,21 @@
       }
     }
   }
-
+function showNameUnit(){
+  require "php/db_connection.php";
+                                if ($con) {
+                                    $query = "SELECT * FROM unit_user ";
+                                    $result = mysqli_query($con, $query);
+                                    $row = mysqli_fetch_array($result);
+                                    echo '<select name="select_name" class="col col-md-12" >';
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $id_unit_user = $row['id_unit_user'];
+                                        $name_unit_user = $row['name_unit_user'];
+                                        echo "<option value='$id_unit_user'>$name_unit_user</option>";
+                                    }
+                                    echo '</select>';
+                                }
+}
   function showInvoiceRow($seq_no, $row) {
     ?>
     <tr>
@@ -52,14 +66,13 @@
       <td><?php echo $row['config_sys']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
       <td>      
-      <button class="btn btn-warning btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
+        <button class="btn btn-warning btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
         <i class="fa fa-eye"></i>
         </button>
-        <button href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editfile">
+        <button  class="btn btn-info btn-sm" onclick="viewEdit(<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="
-        (<?php echo $row['id_sys']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteInvoice(<?php echo $row['id_sys']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
         
