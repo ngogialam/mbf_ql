@@ -57,6 +57,9 @@
       <td><?php echo $row['describe_sys']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
       <td>
+      <button class="btn btn-warning btn-sm" onclick="viewItem(<?php echo $row['id_team_sys']; ?>);">
+        <i class="fa fa-eye"></i>
+        </button>
         <button href="" class="btn btn-info btn-sm" onclick="editSupplier(<?php echo $row['id_team_sys']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
@@ -72,24 +75,25 @@ function showEditOptionsRow($seq_no, $row) {
   ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['ID'] ?></td>
+    <td><?php echo $row['id_team_sys'] ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['NAME']; ?>" placeholder="Name" id="supplier_name" onkeyup="validateName(this.value, 'name_error');">
-      <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
+      <input type="text" class="form-control" value="<?php echo $row['name_team_sys']; ?>" placeholder="Name" id="name_team_sys" onkeyup="validateName(this.value, 'name_error');">
+      <!-- <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code> -->
     </td>
     <td>
-      <input type="email" class="form-control" value="<?php echo $row['EMAIL']; ?>" placeholder="Email" id="supplier_email" onblur="validateContactNumber(this.value, 'email_error');">
+      <input type="text" class="form-control" value="<?php echo $row['type_sys']; ?>" placeholder="type sys" id="type_sys" onblur="validateContactNumber(this.value, 'email_error');">
     </td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['CONTACT_NUMBER']; ?>" placeholder="Contact Number" id="supplier_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
-      <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code>
+      <input type="text" class="form-control" value="<?php echo $row['describe_sys']; ?>" placeholder="describe sys" id="describe_sys" onblur="validateContactNumber(this.value, 'contact_number_error');">
+      <!-- <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code> -->
     </td>
     <td>
-      <textarea class="form-control" placeholder="Address" id="supplier_address" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['ADDRESS']; ?></textarea>
-      <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
+      <textarea class="form-control" placeholder="tạo bởi" id="created_at" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['created_at']; ?></textarea>
+      <!-- <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code> -->
     </td>
     <td>
-      <button href="" class="btn btn-success btn-sm" onclick="updateSupplier(<?php echo $row['ID']; ?>);">
+      
+      <button href="" class="btn btn-success btn-sm" onclick="updateSupplier(<?php echo $row['id_team_sys']; ?>);">
         <i class="fa fa-edit"></i>
       </button>
       <button class="btn btn-danger btn-sm" onclick="cancel();">
@@ -102,7 +106,7 @@ function showEditOptionsRow($seq_no, $row) {
 
 function updateSupplier($id, $name, $email, $contact_number, $address) {
   require "db_connection.php";
-  $query = "UPDATE suppliers SET NAME = '$name', EMAIL = '$email', CONTACT_NUMBER = '$contact_number', ADDRESS = '$address' WHERE ID = $id";
+  $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', created_at = '$created_at' WHERE name_team_sys = $name_team_sys";
   $result = mysqli_query($con, $query);
   if(!empty($result))
     showSuppliers(0);
@@ -112,7 +116,7 @@ function searchSupplier($text) {
   require "db_connection.php";
   if($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM suppliers WHERE UPPER(NAME) LIKE '%$text%'";
+    $query = "SELECT * FROM team_sys_manager WHERE UPPER(name_team_sys) LIKE '%$text%'";
     $result = mysqli_query($con, $query);
     while($row = mysqli_fetch_array($result)) {
       $seq_no++;
