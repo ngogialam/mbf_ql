@@ -4,7 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>Danh sách hệ thống</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -14,7 +17,7 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="shortcut icon" href="images/icon.svg" type="image/x-icon">
@@ -65,10 +68,10 @@
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
-                  <th>SL.</th>
+                  <th>STT</th>
                   <th>ID hệ thống</th>
-                  <th><a >Tên hệ thống </a></th>
-                  <th>Tên nhóm hệ thống </th>                  
+                  <th><a>Tên hệ thống </a></th>
+                  <th>Tên nhóm hệ thống </th>
                   <th>Đầug số</th>
                   <th>Tên đơn vị quản lý</th>
                   <th>Tên người quản lý</th>
@@ -91,90 +94,7 @@
           </div>
         </div>
         <!-- Modal xem chi tiết hệ thống -->
-        <div class="modal modalCloseReload" id="modalAddMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg" style="witdh: 100%;">
-            <div class="modal-content">
-              <h3>Chi tiết hệ thống </h3>
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              </div>
-              <?php
-              require "php/db_connection.php";
-              if ($con) {
-                $query = "SELECT * FROM sys_ql";
-                $result = mysqli_query($con, $query);
-                $row = mysqli_fetch_array($result);
-                $id_sys = $row['id_sys'];
-                $name_team_sys = $row['name_team_sys'];
-                $name_sys = $row['name_sys'];
-                $first_number = $row['first_number'];
-                $name_unit_manager = $row['name_unit_manager'];
-                $name_user_manager = $row['name_user_manager'];
-                $describe_sys = $row['describe_sys'];
-                $document_sys = $row['document_sys'];
-                $created_at = $row['created_at'];
-                $server_sys = $row['server_sys'];
-                $ip_sys = $row['ip_sys'];
-                $config_sys = $row['config_sys'];
-              }
-              ?>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Thoát</button>
-              </div>
-            </div>
-          </div>
-        </div>
         <!-- edit cho ng dùng -->
-        <div class="modal modalCloseReload" id="editfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg" style="witdh: 100%;">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              </div>
-              <div class="form-group row">
-                <label for="email_address" class="col-md-4 col-form-label text-md-right">test tính năng</label>
-                <div class="col-md-6">
-                  <select class="form-control pdm chosen-select" id="namePartner" name="namePartner">
-                    <!-- <option>Chọn đối tác </option> -->
-                    <?php foreach ($listPartner as $key => $partner) { ?>
-                      <option value="<?= $partner->id ?>"> <?= $partner->name ?> </option>
-                    <?php } ?>
-                  </select>
-                  <span class="error_text errNamePartner"></span>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Tài khoản </label>
-                <div class="col-md-6">
-                  <input type="text" name="phoneUser" id="phoneUser" class="form-control" autocomplete="off">
-                  <span style="font-weight: bold; font-size: 15px;" class="error_text errCheck"></span>
-
-                  <span class="error_text errPhoneName"></span>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Tên tài khoản </label>
-                <div class="col-md-6">
-                  <div id="result" style="margin-top:15px;">
-
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <button type="button" style="background:#FFC0CB;" class="btn btn-default d-none" id="test"
-                  data-toggle="modal" data-target="#modalAdd" onclick="editAccount()">Cập nhật đối tác cho tài
-                  khoản</button>
-                <button id="hide_div" type="button" style="background:#FF9900;"
-                  class="btn btn-success btn-ok saveMenus btnAddMenu" onclick="addAccount()">Thêm mới tài khoản</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <!-- form content end -->
       <hr style="border-top: 2px solid #ff5252;">
