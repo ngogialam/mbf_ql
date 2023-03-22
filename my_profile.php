@@ -30,10 +30,6 @@
             $query = "SELECT * FROM admin_credentials";
             $result = mysqli_query($con, $query);
             $row = mysqli_fetch_array($result);
-            // $pharmacy_name = $row['PHARMACY_NAME'];
-            // $address = $row['ADDRESS'];
-            // $email = $row['EMAIL'];
-            // $contact_number = $row['CONTACT_NUMBER'];
             $username = $row['USERNAME'];
           }
           

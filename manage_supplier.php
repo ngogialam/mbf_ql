@@ -36,7 +36,6 @@
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
             <input type="text" class="form-control" id="" placeholder="Tên nhóm hệ thống" onkeyup="searchSupplier(this.value);">
           </div>
-
           <div class="col col-md-12">
             <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">
           </div>

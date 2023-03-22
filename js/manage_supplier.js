@@ -29,23 +29,15 @@ function editSupplier(id) {
 }
 
 function updateSupplier(id) {
-  var supplier_name = document.getElementById("name_team_sys");
-  var supplier_email = document.getElementById("type");
-  var contact_number = document.getElementById("describe");
-  var supplier_address = document.getElementById("create_by");
-  // if(!validateName(supplier_name.value, "name_error"))
-  //   supplier_name.focus();
-  // else if(!validateContactNumber(contact_number.value, "contact_number_error"))
-  //   contact_number.focus();
-  // else if(!validateAddress(supplier_address.value, "address_error"))
-  //   supplier_address.focus();
-  // else {
+  var name_team_sys = document.getElementById("name_team_sys");
+  var type = document.getElementById("type_sys");
+  var describe = document.getElementById("describe_sys");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
       document.getElementById('suppliers_div').innerHTML = xhttp.responseText;
   };
-  xhttp.open("GET", "php/manage_supplier.php?action=update&id=" + id + "&name=" + supplier_name.value + "&email=" + supplier_email.value +"&contact_number=" + contact_number.value + "&address=" + supplier_address.value, true);
+  xhttp.open("GET", "php/manage_supplier.php?action=update&id_team_sys=" + id + "&name_team_sys=" + name_team_sys.value + "&type_sys=" + type.value +"&describe_sys=" + describe.value , true);
   xhttp.send();
   // }
 }
