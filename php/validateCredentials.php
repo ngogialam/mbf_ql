@@ -93,7 +93,7 @@
   function validatePassword() {
     require "db_connection.php";
     if($con) {
-      $password = $_GET["password"];
+      $password = $_GET["pswd"];
 
       $query = "SELECT * FROM admin_credentials WHERE PASSWORD = '$password'";
       $result = mysqli_query($con, $query);
@@ -126,7 +126,7 @@
   function changePassword() {
     require "db_connection.php";
     if($con) {
-      $password = $_GET["password"];
+      $password = $_GET["pswd"];
 
       $query = "UPDATE admin_credentials SET PASSWORD = '$password'";
       $result = mysqli_query($con, $query);

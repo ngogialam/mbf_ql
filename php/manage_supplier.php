@@ -16,12 +16,11 @@
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "update") {
-      $id = $_GET["id"];
-      $name = ucwords($_GET["name"]);
-      $email = $_GET["email"];
-      $contact_number = $_GET["contact_number"];
-      $address = ucwords($_GET["address"]);
-      updateSupplier($id, $name, $email, $contact_number, $address);
+      $id_team_sys = $_GET["id_team_sys"];
+      $name_team_sys = ucwords($_GET["name_team_sys"]);
+      $type_sys = $_GET["type_sys"];
+      $describe_sys = $_GET["describe_sys"];
+      updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys);
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -46,6 +45,7 @@
       }
     }
   }
+
 
   function showSupplierRow($seq_no, $row) {
     ?>
@@ -78,18 +78,15 @@ function showEditOptionsRow($seq_no, $row) {
     <td><?php echo $row['id_team_sys'] ?></td>
     <td>
       <input type="text" class="form-control" value="<?php echo $row['name_team_sys']; ?>" placeholder="Name" id="name_team_sys" onkeyup="validateName(this.value, 'name_error');">
-      <!-- <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code> -->
     </td>
     <td>
       <input type="text" class="form-control" value="<?php echo $row['type_sys']; ?>" placeholder="type sys" id="type_sys" onblur="validateContactNumber(this.value, 'email_error');">
     </td>
     <td>
       <input type="text" class="form-control" value="<?php echo $row['describe_sys']; ?>" placeholder="describe sys" id="describe_sys" onblur="validateContactNumber(this.value, 'contact_number_error');">
-      <!-- <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code> -->
     </td>
     <td>
-      <textarea class="form-control" placeholder="tạo bởi" id="created_at" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['created_at']; ?></textarea>
-      <!-- <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code> -->
+      <textarea class="form-control" placeholder="tạo bởi" id="created_at" onblur="validateAddress(this.value, 'address_error');" readonly><?php echo $row['created_at']; ?></textarea>
     </td>
     <td>
       
@@ -104,9 +101,9 @@ function showEditOptionsRow($seq_no, $row) {
   <?php
 }
 
-function updateSupplier($id, $name, $email, $contact_number, $address) {
+function updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys) {
   require "db_connection.php";
-  $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', created_at = '$created_at' WHERE name_team_sys = $name_team_sys";
+  $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys' WHERE id_team_sys = $id_team_sys";
   $result = mysqli_query($con, $query);
   if(!empty($result))
     showSuppliers(0);
