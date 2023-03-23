@@ -63,10 +63,9 @@
                         $describe_sys = $row['describe_sys'];
                         $create_by = $row['create_by'];
                         $created_at = $row['created_at'];
-
                     }
                 }
-                var_dump('ggggggg');
+
                 ?>
                 <div class="row">
                     <div class="row col col-md-12">
