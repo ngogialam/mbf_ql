@@ -35,6 +35,7 @@
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
             <input type="text" class="form-control" id="" placeholder="Search Supplier" onkeyup="searchSupplier(this.value);">
+            &emsp; <a class="btn btn-success" href="php/export.php">Xuất Excel</a>
           </div>
 
           <div class="col col-md-12">
