@@ -8,6 +8,7 @@ function validate() {
 		if(xhttp.readyState = 4 && xhttp.status == 200)
 			isAdmin = xhttp.responseText;
 	};
+
 	xhttp.open("GET", "php/validateCredentials.php?action=is_admin&uname=" + uname + "&pswd=" + pswd, true);
 	xhttp.send();
 }
