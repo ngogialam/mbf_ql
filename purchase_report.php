@@ -42,6 +42,7 @@
             <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'created_at');">
             &emsp;
             &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
+            &emsp; <a class="btn btn-success" href="php/exportUser.php">Xuất Excel</a>
           </div>
 
           <div class="col col-md-12">
