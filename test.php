@@ -24,12 +24,33 @@
     <link rel="stylesheet" href="css/home.css">
     <script src="js/manage_invoice.js"></script>
     <script src="js/restrict.js"></script>
+<<<<<<< HEAD
 </head>
 
 <body>
     <h3>hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h3>
     <!-- Button trigger modal -->
     <a class="btn btn-success" href="php/export.php">Xuất file Excel</a>    
+=======
+  </head>
+  <body>
+   <h3>hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h3>
+   <!-- Button trigger modal -->
+   <a class="btn btn-success" href="export.php">Xuất file Excel</a>
+
+   <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
+
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+    <a class="btn btn-success" href="export.php">Tải Excel</a>
+    <h3>hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h3>
+    <p>ủuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</p>
+    
+    </div>
+  </div>
+</div>
+>>>>>>> 9fe9ba16637e014d89199a23a816bb3797e2ae46
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large
         modal</button>
