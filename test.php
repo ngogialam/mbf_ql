@@ -24,17 +24,8 @@
     <link rel="stylesheet" href="css/home.css">
     <script src="js/manage_invoice.js"></script>
     <script src="js/restrict.js"></script>
-<<<<<<< HEAD
-</head>
-
-<body>
-    <h3>hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h3>
-    <!-- Button trigger modal -->
-    <a class="btn btn-success" href="php/export.php">Xuất file Excel</a>    
-=======
   </head>
   <body>
-   <h3>hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h3>
    <!-- Button trigger modal -->
    <a class="btn btn-success" href="export.php">Xuất file Excel</a>
 
@@ -50,7 +41,6 @@
     </div>
   </div>
 </div>
->>>>>>> 9fe9ba16637e014d89199a23a816bb3797e2ae46
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large
         modal</button>
@@ -63,4 +53,100 @@
     </div>    
 </body>
 
+                    <input id="selectedUserId" type="hidden">
+                    <input id="editMapperId" type="hidden">
+                    <input id="isShowDropdown" type="hidden">
+                    <input id="isShowClick" type="hidden">
+
+                    <input type="text" name="phoneUser" id="phoneUser" class="form-control" autocomplete="off">
+                    <span style="font-weight: bold; font-size: 15px;" class="error_text errCheck"></span>
+
+                    <span class="error_text errPhoneName"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Tên tài khoản </label>
+                <div class="col-md-6">
+                    <div id="result" style="margin-top:15px;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                <button type="button" style="background:#FFC0CB;" class="btn btn-default d-none" id="test" data-toggle="modal" data-target="#modalAdd" onclick="editAccount()">Cập nhật đối tác cho tài khoản</button>
+                <button id="hide_div" type="button" style="background:#FF9900;" class="btn btn-success btn-ok saveMenus btnAddMenu" onclick="addAccount()">Thêm mới tài khoản</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadfile">Upload file</button>
+
+    <?php
+    function getDirContents($dir, $filter = '', &$results = array()) {
+        $files = scandir($dir);
+
+        foreach($files as $key => $value){
+            $path = realpath($dir.DIRECTORY_SEPARATOR.$value); 
+
+            if(!is_dir($path)) {
+                if(empty($filter) || preg_match($filter, $path)) $results[] = $path;
+            } elseif($value != "." && $value != "..") {
+                getDirContents($path, $filter, $results);
+            }
+        }
+
+        return $results;
+
+    function read($file){
+        header("Content-type: application/pdf");
+        
+        header("Content-Length: " . filesize($file));
+        
+        // Send the file to the browser.
+        readfile($file);
+    }
+    }
+
+    // Simple Call: List all files
+    $files = getDirContents('uploads/')
+    ?>
+    <table>
+        <?php foreach($files as $key=>$value): ?>
+        <tr>
+            <td><?php 
+            $info = pathinfo($value);          
+            ?>
+            <td><?= $key; ?> <a href="php/read.php?filename=<?php echo $value; ?>" formtarget="_blank"><?= $info['basename']; ?></a></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+<div class="modal fade bd-example-modal-xl"  id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="uploadfile" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+    <form action="php/upload.php" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+    </div>
+  </div>
+</div>
+  </body>
 </html>
+<?php
+  
+// // The location of the PDF file
+// // on the server
+// $filename = "/path/to/the/file.pdf";
+  
+// // Header content type
+// header("Content-type: application/pdf");
+  
+// header("Content-Length: " . filesize($filename));
+  
+// // Send the file to the browser.
+// readfile($filename);
+// ?> 
+
