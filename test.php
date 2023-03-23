@@ -17,7 +17,6 @@
     <script src="js/restrict.js"></script>
   </head>
   <body>
-   <h3>hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h3>
    <!-- Button trigger modal -->
 
    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
@@ -86,5 +85,72 @@
         </div>
     </div>
 </div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadfile">Upload file</button>
+
+    <?php
+    function getDirContents($dir, $filter = '', &$results = array()) {
+        $files = scandir($dir);
+
+        foreach($files as $key => $value){
+            $path = realpath($dir.DIRECTORY_SEPARATOR.$value); 
+
+            if(!is_dir($path)) {
+                if(empty($filter) || preg_match($filter, $path)) $results[] = $path;
+            } elseif($value != "." && $value != "..") {
+                getDirContents($path, $filter, $results);
+            }
+        }
+
+        return $results;
+
+    function read($file){
+        header("Content-type: application/pdf");
+        
+        header("Content-Length: " . filesize($file));
+        
+        // Send the file to the browser.
+        readfile($file);
+    }
+    }
+
+    // Simple Call: List all files
+    $files = getDirContents('uploads/')
+    ?>
+    <table>
+        <?php foreach($files as $key=>$value): ?>
+        <tr>
+            <td><?php 
+            $info = pathinfo($value);          
+            ?>
+            <td><?= $key; ?> <a href="php/read.php?filename=<?php echo $value; ?>" formtarget="_blank"><?= $info['basename']; ?></a></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+<div class="modal fade bd-example-modal-xl"  id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="uploadfile" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+    <form action="php/upload.php" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+    </div>
+  </div>
+</div>
   </body>
 </html>
+<?php
+  
+// // The location of the PDF file
+// // on the server
+// $filename = "/path/to/the/file.pdf";
+  
+// // Header content type
+// header("Content-type: application/pdf");
+  
+// header("Content-Length: " . filesize($filename));
+  
+// // Send the file to the browser.
+// readfile($filename);
+// ?> 
