@@ -79,7 +79,7 @@
                                 $query = "SELECT * FROM unit_user ";
                                 $result = mysqli_query($con, $query);
                                 $row = mysqli_fetch_array($result);
-                                echo '<select name="select_name" class="col col-md-12" >';
+                                echo '<select name="select_name" class=" form-control pdm chosen-select col col-md-12" >';
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $id_unit_user = $row['id_unit_user'];
                                     $name_unit_user = $row['name_unit_user'];
@@ -133,9 +133,9 @@
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Tài liệu hệ thống :</label>
-                            <input id="document_sys" type="text" class="form-control"
-                                value="<?php echo $document_sys; ?>" placeholder="document_sys"
-                                onkeyup="validateName(this.value, 'document_sys_error');" disabled>
+                            <input type="text" id="document_sys" class="form-control" value="<?php echo $document_sys; ?>"
+                                placeholder="document_sys" onkeyup="validateName(this.value, 'document_sys_error');"
+                                disabled>
                             <code class="text-danger small font-weight-bold float-right mb-2" id="document_sys_error"
                                 style="display: none;"></code>
                         </div>
@@ -143,7 +143,7 @@
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Server hệ thống :</label>
-                            <input id="server_sys" type="number" class="form-control" value="<?php echo $server_sys; ?>"
+                            <input id="server_sys" type="text" class="form-control" value="<?php echo $server_sys; ?>"
                                 placeholder="server_sys" onkeyup="validateName(this.value, 'server_sys_error');"
                                 disabled>
                             <code class="text-danger small font-weight-bold float-right mb-2" id="server_sys_error"
