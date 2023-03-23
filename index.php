@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/index.css">
     <script src="js/index.js"></script>
   </head>
-  <body style = "background-color:red">
+  <body style = "background-color:white">
     <div class="container">
       <div class="card m-auto p-2">
         <div class="card-body">
