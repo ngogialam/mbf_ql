@@ -159,6 +159,7 @@ $files = getDirContents('uploads/')
                 <?= $key; ?> <a href="php/read.php?filename=<?php echo $value; ?>" formtarget="_blank"><?= $info['basename']; ?></a>
             </td>
         </tr>
+
     <?php endforeach; ?>
 </table>
 <div class="modal fade bd-example-modal-xl" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="uploadfile"
@@ -171,22 +172,7 @@ $files = getDirContents('uploads/')
                 <input type="submit" value="Upload Image" name="submit">
             </form>
         </div>
-    </div>
-</div>
-</body>
 
 </html>
-<?php
 
-// // The location of the PDF file
-// // on the server
-// $filename = "/path/to/the/file.pdf";
 
-// // Header content type
-// header("Content-type: application/pdf");
-
-// header("Content-Length: " . filesize($filename));
-
-// // Send the file to the browser.
-// readfile($filename);
-// ?>
