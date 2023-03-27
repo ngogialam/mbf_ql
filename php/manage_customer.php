@@ -1,99 +1,164 @@
 <?php
-  require "db_connection.php";
+require "db_connection.php";
 
-  if($con) {
-    if(isset($_GET["action"]) && $_GET["action"] == "delete") {
-      $id = $_GET["id"];
-      $query = "DELETE FROM customers WHERE ID = $id";
-      $result = mysqli_query($con, $query);
-      if(!empty($result))
-    		showCustomers(0);
-    }
-
-    if(isset($_GET["action"]) && $_GET["action"] == "edit") {
-      $id = $_GET["id"];
-      showCustomers($id);
-    }
-
-    if(isset($_GET["action"]) && $_GET["action"] == "update") {
-      $id = $_GET["id"];
-      $name = ucwords($_GET["name"]);
-      $contact_number = $_GET["contact_number"];
-      $address = ucwords($_GET["address"]);
-      $doctor_name = ucwords($_GET["doctor_name"]);
-      $doctor_address = ucwords($_GET["doctor_address"]);
-      updateCustomer($id, $name, $contact_number, $address, $doctor_name, $doctor_address);
-    }
-
-    if(isset($_GET["action"]) && $_GET["action"] == "cancel")
+if ($con) {
+  if (isset($_GET["action"]) && $_GET["action"] == "delete") {
+    $id = $_GET["id"];
+    $query = "DELETE FROM customers WHERE ID = $id";
+    $result = mysqli_query($con, $query);
+    if (!empty($result))
       showCustomers(0);
-
-    if(isset($_GET["action"]) && $_GET["action"] == "search")
-      searchCustomer(strtoupper($_GET["text"]));
   }
 
-  function showCustomers($id) {
-    require "db_connection.php";
-    if($con) {
-      $seq_no = 0;
-      $query = "SELECT * FROM user_manager";
-      $result = mysqli_query($con, $query);
-      while($row = mysqli_fetch_array($result)) {
-        $seq_no++;
-        if($row['id_user_manager'] == $id)
-          showEditOptionsRow($seq_no, $row);
-        else
-          showCustomerRow($seq_no, $row);
-      }
+  if (isset($_GET["action"]) && $_GET["action"] == "edit") {
+    $id = $_GET["id"];
+    showCustomers($id);
+  }
+
+  if (isset($_GET["action"]) && $_GET["action"] == "update") {
+    $id = $_GET["id"];
+    $name = ucwords($_GET["name"]);
+    $contact_number = $_GET["contact_number"];
+    $address = ucwords($_GET["address"]);
+    $doctor_name = ucwords($_GET["doctor_name"]);
+    $doctor_address = ucwords($_GET["doctor_address"]);
+    updateCustomer($id, $name, $contact_number, $address, $doctor_name, $doctor_address);
+  }
+
+  if (isset($_GET["action"]) && $_GET["action"] == "cancel")
+    showCustomers(0);
+
+  if (isset($_GET["action"]) && $_GET["action"] == "search")
+    searchCustomer(strtoupper($_GET["text"]));
+}
+
+// function showCustomers($id) {
+//   require "db_connection.php";
+//   if($con) {
+//     $seq_no = 0;
+//     $query = "SELECT * FROM user_manager";
+//     $result = mysqli_query($con, $query);
+//     while($row = mysqli_fetch_array($result)) {
+//       $seq_no++;
+//       if($row['id_user_manager'] == $id)
+//         showEditOptionsRow($seq_no, $row);
+//       else
+//         showCustomerRow($seq_no, $row);
+//     }
+//   }
+// }
+function showCustomers($id)
+{
+  require "db_connection.php";
+  if ($con) {
+    $seq_no = 0;
+    $results_per_page = 20;
+    $query = "SELECT COUNT(*) FROM user_manager";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_row($result);
+    $total_results = $row[0];
+    $total_pages = ceil($total_results / $results_per_page);
+
+    // Xác định trang hiện tại và bản ghi bắt đầu và kết thúc trong truy vấn
+    if (!isset($_GET['page'])) {
+      $page = 1;
+    } else {
+      $page = $_GET['page'];
+    }
+    $start_limit = ($page - 1) * $results_per_page;
+    $end_limit = $results_per_page;
+
+    // Thực hiện truy vấn để lấy dữ liệu trong khoảng thời gian được chỉ định
+    $query = "SELECT * FROM user_manager LIMIT $start_limit, $end_limit";
+
+    for ($page = 1; $page <= $total_pages; $page++) {
+      echo '<a href="manage_customer.php?page=' . $page . '">' . $page . '</a> ';
+    }
+    while ($row = mysqli_fetch_array($result)) {
+      $seq_no++;
+      if ($row['id_user_manager'] == $id)
+        showEditOptionsRow($seq_no, $row);
+      else
+        showCustomerRow($seq_no, $row);
     }
   }
-
-  function showCustomerRow($seq_no, $row) {
-    ?>
-    <tr>
-      <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['id_user_manager'] ?></td>
-      <td><?php echo $row['name_user_manager']; ?></td>
-      <td><?php echo $row['sdt']; ?></td>
-      <td><?php echo $row['gmail']; ?></td>
-      <td><?php echo $row['room']; ?></td>
-      <td><?php echo $row['created_at']; ?></td>
-      <td>
-        <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['id_user_manager']; ?>);">
-          <i class="fa fa-pencil"></i>
-        </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteCustomer(<?php echo $row['id_user_manager']; ?>);">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-    </tr>
-    <?php
-  }
-
-function showEditOptionsRow($seq_no, $row) {
+}
+function showCustomerRow($seq_no, $row)
+{
   ?>
   <tr>
-    <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['ID'] ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['NAME']; ?>" placeholder="Name" id="customer_name" onkeyup="validateName(this.value, 'name_error');">
+      <?php echo $seq_no; ?>
+    </td>
+    <td>
+      <?php echo $row['id_user_manager'] ?>
+    </td>
+    <td>
+      <?php echo $row['name_user_manager']; ?>
+    </td>
+    <td>
+      <?php echo $row['sdt']; ?>
+    </td>
+    <td>
+      <?php echo $row['gmail']; ?>
+    </td>
+    <td>
+      <?php echo $row['room']; ?>
+    </td>
+    <td>
+      <?php echo $row['position_manager']; ?>
+    </td>
+    <td>
+      <?php echo $row['created_at']; ?>
+    </td>
+    <td>
+      <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['id_user_manager']; ?>);">
+        <i class="fa fa-pencil"></i>
+      </button>
+      <button class="btn btn-danger btn-sm" onclick="deleteCustomer(<?php echo $row['id_user_manager']; ?>);">
+        <i class="fa fa-trash"></i>
+      </button>
+    </td>
+  </tr>
+  <?php
+}
+
+function showEditOptionsRow($seq_no, $row)
+{
+  ?>
+  <tr>
+    <td>
+      <?php echo $seq_no; ?>
+    </td>
+    <td>
+      <?php echo $row['ID'] ?>
+    </td>
+    <td>
+      <input type="text" class="form-control" value="<?php echo $row['NAME']; ?>" placeholder="Name" id="customer_name"
+        onkeyup="validateName(this.value, 'name_error');">
       <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['CONTACT_NUMBER']; ?>" placeholder="Contact Number" id="customer_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
-      <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code>
+      <input type="number" class="form-control" value="<?php echo $row['CONTACT_NUMBER']; ?>" placeholder="Contact Number"
+        id="customer_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
+      <code class="text-danger small font-weight-bold float-right" id="contact_number_error"
+        style="display: none;"></code>
     </td>
     <td>
-      <textarea class="form-control" placeholder="Address" id="customer_address" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['ADDRESS']; ?></textarea>
+      <textarea class="form-control" placeholder="Address" id="customer_address"
+        onblur="validateAddress(this.value, 'address_error');"><?php echo $row['ADDRESS']; ?></textarea>
       <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['DOCTOR_NAME']; ?>" placeholder="Doctor's Name" id="customer_doctors_name" onkeyup="validateName(this.value, 'doctor_name_error');">
+      <input type="text" class="form-control" value="<?php echo $row['DOCTOR_NAME']; ?>" placeholder="Doctor's Name"
+        id="customer_doctors_name" onkeyup="validateName(this.value, 'doctor_name_error');">
       <code class="text-danger small font-weight-bold float-right" id="doctor_name_error" style="display: none;"></code>
     </td>
     <td>
-      <textarea class="form-control" placeholder="Doctor's Address" id="customer_doctors_address" onblur="validateAddress(this.value, 'doctor_address_error');"><?php echo $row['DOCTOR_ADDRESS']; ?></textarea>
-      <code class="text-danger small font-weight-bold float-right" id="doctor_address_error" style="display: none;"></code>
+      <textarea class="form-control" placeholder="Doctor's Address" id="customer_doctors_address"
+        onblur="validateAddress(this.value, 'doctor_address_error');"><?php echo $row['DOCTOR_ADDRESS']; ?></textarea>
+      <code class="text-danger small font-weight-bold float-right" id="doctor_address_error"
+        style="display: none;"></code>
     </td>
     <td>
       <button href="" class="btn btn-success btn-sm" onclick="updateCustomer(<?php echo $row['ID']; ?>);">
@@ -107,21 +172,23 @@ function showEditOptionsRow($seq_no, $row) {
   <?php
 }
 
-function updateCustomer($id, $name, $contact_number, $address, $doctor_name, $doctor_address) {
+function updateCustomer($id, $name, $contact_number, $address, $doctor_name, $doctor_address)
+{
   require "db_connection.php";
   $query = "UPDATE customers SET NAME = '$name', CONTACT_NUMBER = '$contact_number', ADDRESS = '$address', DOCTOR_NAME = '$doctor_name', DOCTOR_ADDRESS = '$doctor_address' WHERE ID = $id";
   $result = mysqli_query($con, $query);
-  if(!empty($result))
+  if (!empty($result))
     showCustomers(0);
 }
 
-function searchCustomer($text) {
+function searchCustomer($text)
+{
   require "db_connection.php";
-  if($con) {
+  if ($con) {
     $seq_no = 0;
     $query = "SELECT * FROM customers WHERE UPPER(NAME) LIKE '%$text%'";
     $result = mysqli_query($con, $query);
-    while($row = mysqli_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result)) {
       $seq_no++;
       showCustomerRow($seq_no, $row);
     }
