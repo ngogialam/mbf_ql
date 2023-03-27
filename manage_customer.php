@@ -53,6 +53,7 @@
               <thead>
                 <tr>
                   <th style="width: 2%;">STT</th>
+                  <th style="width: 10%;">id</th>
                   <th style="width: 10%;">Tên người quản trị</th>
                   <th style="width: 13%;">Số điện thoại</th>
                   <th style="width: 13%;">Gmail</th>
