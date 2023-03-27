@@ -131,26 +131,12 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
     <form action="php/upload.php" method="post" enctype="multipart/form-data">
-        Select image to upload:
+        Select file to upload:
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submit">
+        <input type="submit" value="Upload file" name="submit">
     </form>
     </div>
   </div>
 </div>
   </body>
 </html>
-<?php
-  
-// // The location of the PDF file
-// // on the server
-// $filename = "/path/to/the/file.pdf";
-  
-// // Header content type
-// header("Content-type: application/pdf");
-  
-// header("Content-Length: " . filesize($filename));
-  
-// // Send the file to the browser.
-// readfile($filename);
-// ?> 

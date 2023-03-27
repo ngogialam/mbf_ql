@@ -40,14 +40,30 @@ function updateSupplier(id) {
   var type = document.getElementById("type_sys");
   var describe = document.getElementById("describe_sys");
   var create_by = document.getElementById("create_by");
+
+  var file_des = document.querySelector('#file_des').files[0];
+  var file_des_sv = document.getElementById('file_des_sv');
+
+  console.log(file_des)
   var xhttp = new XMLHttpRequest();
+
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
       document.getElementById('suppliers_div').innerHTML = xhttp.responseText;
   };
-  xhttp.open("GET", "php/manage_supplier.php?action=update&id_team_sys=" + id + "&name_team_sys=" + name_team_sys.value + "&type_sys=" + type.value +"&describe_sys=" + describe.value +"&create_by=" + create_by.value , true);
-  xhttp.send();
-  // }
+  var formData = new FormData();
+  
+
+  xhttp.open('POST','php/manage_supplier.php',true);
+  var formData = new FormData();
+  formData.append("file_des", file_des);
+  formData.append('id_team_sys', id_team_sys.value);
+  formData.append('name_team_sys', name_team_sys.value);
+  formData.append('type_sys', type.value);
+  formData.append('describe_sys', describe.value);
+  formData.append('create_by', create_by.value);
+  formData.append('file_des_sv', file_des_sv.value);
+  xhttp.send(formData);
 }
 
 function cancel() {

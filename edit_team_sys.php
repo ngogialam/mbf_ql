@@ -26,6 +26,7 @@
             <!-- header section -->
             <?php
             require "php/header.php";
+            $target_dir = "../uploads/";
             createHeader('user', 'Chỉnh sửa thông tin hệ thống', 'Thay đổi thông tin');
             // header section end
             $id_team_sys = $_GET['id_team_sys'];
@@ -40,7 +41,10 @@
                 $describe_sys = $row['describe_sys'];
                 $create_by = $row['create_by'];
                 $created_at = $row['created_at'];
+                $file_des = $row['file_des'];
             }
+
+
             ?>
             <div class="row" id='suppliers_div'>
                 <div class="row col col-md-12">
@@ -99,6 +103,25 @@
                                 onkeyup="validateName(this.value, 'created_at');" disabled>
                             <code class="text-danger small font-weight-bold float-right mb-2" id="created_at"
                                 style="display: none;"></code>
+                        </div>
+                    </div>
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
+                            <label for="file">File mô tả :</label>
+                            <tr>
+                                <td><?php
+                                ?>
+                                <td><a href="php/read.php?filename=<?php echo $target_dir . $file_des; ?>" formtarget="_blank" id="file_des_sv">
+                                <input id="file_des_sv" type="text" class="form-control"
+                                value="<?php echo $file_des; ?>" disabled></a></td>
+                            </tr>
+                        </div>
+                    </div>
+
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
+                        <label for="file_des">File mô tả mới:</label>
+                        <input  id="file_des" type="file" name="file_des">
                         </div>
                     </div>
                     <!-- horizontal line -->
