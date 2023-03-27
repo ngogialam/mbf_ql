@@ -28,7 +28,7 @@ $excel->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold(true);
 
 //Tạo tiêu đề cho từng cột
 $excel->getActiveSheet()->setCellValue('A1', 'id');
-$excel->getActiveSheet()->setCellValue('B1', 'Tên nhom hệ thống');
+$excel->getActiveSheet()->setCellValue('B1', 'Tên nhóm hệ thống');
 $excel->getActiveSheet()->setCellValue('C1', 'loai');
 $excel->getActiveSheet()->setCellValue('D1', 'Tai lieu');
 $excel->getActiveSheet()->setCellValue('E1', 'Người tạo');
@@ -42,9 +42,9 @@ foreach ($data as $row) {
     $excel->getActiveSheet()->setCellValue('A' . $numRow, $row['id_team_sys']);
     $excel->getActiveSheet()->setCellValue('B' . $numRow, $row['name_team_sys']);
     $excel->getActiveSheet()->setCellValue('C' . $numRow, $row['type_sys']);
-    $excel->getActiveSheet()->setCellValue('C' . $numRow, $row['describe_sys']);
-    $excel->getActiveSheet()->setCellValue('D' . $numRow, $row['create_by']);
-    $excel->getActiveSheet()->setCellValue('E' . $numRow, $row['created_at']);
+    $excel->getActiveSheet()->setCellValue('D' . $numRow, $row['describe_sys']);
+    $excel->getActiveSheet()->setCellValue('E' . $numRow, $row['create_by']);
+    $excel->getActiveSheet()->setCellValue('F' . $numRow, $row['created_at']);
     $numRow++;
 }
 header('Content-type: application/vnd.ms-excel');
