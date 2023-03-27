@@ -34,12 +34,8 @@
 
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-<<<<<<< HEAD
             <input type="text" class="form-control" id="" placeholder="Search Supplier" onkeyup="searchSupplier(this.value);">
             &emsp; <a class="btn btn-success" href="php/export.php">Xuất Excel</a>
-=======
-            <input type="text" class="form-control" id="" placeholder="Tên nhóm hệ thống" onkeyup="searchSupplier(this.value);">
->>>>>>> 9fe9ba16637e014d89199a23a816bb3797e2ae46
           </div>
           <div class="col col-md-12">
             <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">
