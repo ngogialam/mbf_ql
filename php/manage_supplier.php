@@ -1,6 +1,6 @@
 <?php
   require "db_connection.php";
-
+  $target_dir = "../uploads/";
   if($con) {
     if(isset($_GET["action"]) && $_GET["action"] == "delete") {
       $id = $_GET["id"];
@@ -21,7 +21,9 @@
       $type_sys = $_GET["type_sys"];
       $describe_sys = $_GET["describe_sys"];
       $create_by = $_GET["create_by"];
-      updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys, $create_by);
+      $file_des = $_FILES["file_des"]["name"];
+
+      updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys, $create_by, $file_des);
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -29,9 +31,118 @@
 
     if(isset($_GET["action"]) && $_GET["action"] == "search")
       searchSupplier(strtoupper($_GET["text"]));
+
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      $id_team_sys = $_POST["id_team_sys"];
+      $name_team_sys = ucwords($_POST["name_team_sys"]);
+      $type_sys = $_POST["type_sys"];
+      $describe_sys = $_POST["describe_sys"];
+      $create_by = $_POST["create_by"];
+      $file_des_sv = $_POST["file_des_sv"];
+
+      if(!empty($_FILES["file_des"])){
+        $file_des = basename($_FILES["file_des"]["name"]);
+      
+      // collect value of input field
+        $check = False;
+
+        $target_dir = "../uploads/";
+        $target_file = $target_dir . basename($_FILES["file_des"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        
+        // Check if file already exists
+        if (file_exists($target_file)) {
+          ?>
+          <div class="row col col-md-12">
+            <div class="row col col-md-12">
+                <div class="col col-md-12 form-group">
+                <label for="id_team_sys">
+          <?php
+          echo "Sorry, file already exists";
+          ?>
+          <label>
+            </div>
+            </div>
+            </div>
+          <?php
+          $uploadOk = 0;
+        }
+        else {
+          
+        }
+        
+        // Check file file_des
+        if ($_FILES["file_des"]["size"] > 5000000) {
+          ?>
+          <div class="row col col-md-12">
+            <div class="row col col-md-12">
+                <div class="col col-md-12 form-group">
+                <label for="id_team_sys">
+          <?php
+          echo "Sorry, your file is too large.";
+          ?>
+          <label>
+            </div>
+            </div>
+            </div>
+          <?php
+          $uploadOk = 0;
+        }
+        
+        // Allow certain file formats
+        if($imageFileType != "pdf" && $imageFileType != "doc" && $imageFileType != "ppt"
+        && $imageFileType != "xlsx" && $imageFileType != "docx" ) {
+          ?>
+          <div class="row col col-md-12">
+            <div class="row col col-md-12">
+                <div class="col col-md-12 form-group">
+                <label for="id_team_sys">
+          <?php
+          echo "Sorry, only pdf, ppt, doc & xlsx files are allowed.";
+          ?>
+          <label>
+            </div>
+            </div>
+            </div>
+          <?php
+          $uploadOk = 0;
+        }
+        
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+          showDetailSuppliers($id_team_sys);
+        // if everything is ok, try to upload file
+        } else {
+          if (move_uploaded_file($_FILES["file_des"]["tmp_name"], $target_file)) {
+            ?>
+            <div class="row col col-md-12">
+              <div class="row col col-md-12">
+                  <div class="col col-md-12 form-group">
+                  <label for="id_team_sys">
+            <?php
+            echo "The file ". htmlspecialchars( basename( $_FILES["file_des"]["name"])). " has been uploaded.";
+            ?>
+            <label>
+              </div>
+              </div>
+              </div>
+            <?php
+            updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys, $create_by, $file_des);
+          } else {
+            showDetailSuppliers($id_team_sys);
+          }
+        }
+      }
+      else{
+        updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys, $create_by, $file_des_sv);
+      }
+    }
   }
 
-  function showSuppliers($id) {
+  function showSuppliers($id ) {
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
@@ -49,6 +160,7 @@
 
   function showDetailSuppliers($id) {
     require "db_connection.php";
+    $target_dir = "../uploads/";
     if($con) {
       $seq_no = 0;
       $query = "SELECT * FROM team_sys_manager WHERE id_team_sys=$id";
@@ -60,6 +172,7 @@
       $describe_sys = $row['describe_sys'];
       $create_by = $row['create_by'];
       $created_at = $row['created_at'];
+      $file_des = $row['file_des'];
 
       ?>
       <div class="container">
@@ -122,6 +235,25 @@
                       style="display: none;"></code>
               </div>
           </div>
+          <div class="row col col-md-12">
+            <div class="col col-md-12 form-group">
+                <label for="file">File mô tả :</label>
+                <tr>
+                    <td><?php
+                    ?>
+                    <td><a href="php/read.php?filename=<?php echo $target_dir . $file_des; ?>" formtarget="_blank" id="file_des_sv">
+                    <input id="file_des_sv" type="text" class="form-control"
+                    value="<?php echo $file_des; ?>" disabled></a></td>
+                </tr>
+            </div>
+          </div>
+
+          <div class="row col col-md-12">
+              <div class="col col-md-12 form-group">
+              <label for="file_des">File mô tả mới:</label>
+              <input  id="file_des" type="file" name="file_des">
+              </div>
+          </div>
           <!-- horizontal line -->
           <div class="col col-md-12">
               <hr class="col-md-12 float-left"
@@ -137,10 +269,8 @@
                 </button>
             </div>
           </div>
-          <div id="admin_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center"
-                        style="font-family: sans-serif;">Thay đổi thành công</div>
-          </div>
           <?php
+
     }
   }
 
@@ -198,12 +328,17 @@ function showEditOptionsRow($seq_no, $row) {
   <?php
 }
 
-function updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys, $create_by) {
+function updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys, $create_by, $file_des) {
   require "db_connection.php";
-  $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', create_by = '$create_by' WHERE id_team_sys = $id_team_sys";
+  if ($file_des){
+    $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', create_by = '$create_by' , file_des = '$file_des' WHERE id_team_sys = $id_team_sys";
+  }
+  else{
+    $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', create_by = '$create_by' , file_des = '$file_des' WHERE id_team_sys = $id_team_sys";
+  }
   $result = mysqli_query($con, $query);
   if(!empty($result))
-  showDetailSuppliers($id_team_sys);
+  showDetailSuppliers($id_team_sys, True);
 }
 
 function searchSupplier($text) {
