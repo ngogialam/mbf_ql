@@ -24,114 +24,155 @@
     <link rel="stylesheet" href="css/home.css">
     <script src="js/manage_invoice.js"></script>
     <script src="js/restrict.js"></script>
-  </head>
-  <body>
-   <!-- Button trigger modal -->
-   <a class="btn btn-success" href="export.php">Xuất file Excel</a>
+</head>
 
-   <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
+<body>
 
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-    <a class="btn btn-success" href="export.php">Tải Excel</a>
-    <h3>hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h3>
-    <p>ủuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</p>
-    
-    </div>
-  </div>
-</div>
+    <!-- Button trigger modal -->
+    <a class="btn btn-success" href="php/export.php">Xuất file Excel</a>
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large
         modal</button>
-</br>
-</br>
-    <div class="col-md-12">
-        <a href="#" class="btn btn-primary"> Tải mãu file về</a>
-        <a class="btn btn-success" href="import.php">Import</a>
+    </hr>
+    <h3>----------------------------------------------------------------------------------</h3>
+    </br>
 
-    </div>    
+    <div class="col-md-12">
+        <a href="uploads/demo.xlsx" class="btn btn-primary"> Tải mẫu file về</a>
+        </hr>
+        <?php
+        require "php/db_connection.php";
+        require "php/PHPExcel.php";
+
+        if (isset($_POST['submit'])) {
+            $file = $_FILES['file']['tmp_name'];
+            $objReader = PHPExcel_IOFactory::createReaderForFile($file);
+            $objReader->setLoadSheetsOnly('Danh_sach_quan_tri');
+            $objExcel = $objReader->load($file);
+            $sheetData = $objExcel->getActiveSheet()->toArray('null', true, true, true);
+            // print_r($sheetData);
+            $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow();
+            // echo $highestRow;
+            for ($row = 2; $row <= $highestRow; $row++) {
+                $name_user_manager = $sheetData[$row]['A'];
+                $sdt = $sheetData[$row]['B'];
+                $gmail = $sheetData[$row]['C'];
+                $room = $sheetData[$row]['D'];
+                $position_manager = $sheetData[$row]['E'];
+                $create_by = $sheetData[$row]['F'];
+                $query = "INSERT INTO user_manager(name_user_manager,sdt,gmail,room,position_manager,create_by) VALUES ('$name_user_manager',$sdt,'$gmail','$room','$position_manager','$create_by')";
+                $result = mysqli_query($con, $query);
+            }
+            if (!empty($result))
+                echo "Nhập dữ liệu thành công";
+            else
+                echo "Không thành công!";
+        }
+
+
+        // }
+        ?>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file"><br><br>
+            <input type="submit" value="submit" name="submit">
+        </form>
+        <!-- <form  method="POST" enctype="multipart/form-data">
+            <label for=""> Chọn file Import </label>
+            <input type="file" name="file"></input>
+            <button type="submit" class="btn btn-primary" name="btnGui">Import</button>
+        </form> -->
+    </div>
 </body>
 
-                    <input id="selectedUserId" type="hidden">
-                    <input id="editMapperId" type="hidden">
-                    <input id="isShowDropdown" type="hidden">
-                    <input id="isShowClick" type="hidden">
+<input id="selectedUserId" type="hidden">
+<input id="editMapperId" type="hidden">
+<input id="isShowDropdown" type="hidden">
+<input id="isShowClick" type="hidden">
 
-                    <input type="text" name="phoneUser" id="phoneUser" class="form-control" autocomplete="off">
-                    <span style="font-weight: bold; font-size: 15px;" class="error_text errCheck"></span>
+<input type="text" name="phoneUser" id="phoneUser" class="form-control" autocomplete="off">
+<span style="font-weight: bold; font-size: 15px;" class="error_text errCheck"></span>
 
-                    <span class="error_text errPhoneName"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Tên tài khoản </label>
-                <div class="col-md-6">
-                    <div id="result" style="margin-top:15px;">
+<span class="error_text errPhoneName"></span>
+</div>
+</div>
+<div class="form-group row">
+    <label for="password" class="col-md-4 col-form-label text-md-right">Tên tài khoản </label>
+    <div class="col-md-6">
+        <div id="result" style="margin-top:15px;">
 
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <button type="button" style="background:#FFC0CB;" class="btn btn-default d-none" id="test" data-toggle="modal" data-target="#modalAdd" onclick="editAccount()">Cập nhật đối tác cho tài khoản</button>
-                <button id="hide_div" type="button" style="background:#FF9900;" class="btn btn-success btn-ok saveMenus btnAddMenu" onclick="addAccount()">Thêm mới tài khoản</button>
-            </div>
         </div>
     </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+    <button type="button" style="background:#FFC0CB;" class="btn btn-default d-none" id="test" data-toggle="modal"
+        data-target="#modalAdd" onclick="editAccount()">Cập nhật đối tác cho tài khoản</button>
+    <button id="hide_div" type="button" style="background:#FF9900;" class="btn btn-success btn-ok saveMenus btnAddMenu"
+        onclick="addAccount()">Thêm mới tài khoản</button>
+</div>
+</div>
+</div>
 </div>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadfile">Upload file</button>
 
-    <?php
-    function getDirContents($dir, $filter = '', &$results = array()) {
-        $files = scandir($dir);
+<?php
+function getDirContents($dir, $filter = '', &$results = array())
+{
+    $files = scandir($dir);
 
-        foreach($files as $key => $value){
-            $path = realpath($dir.DIRECTORY_SEPARATOR.$value); 
+    foreach ($files as $key => $value) {
+        $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
 
-            if(!is_dir($path)) {
-                if(empty($filter) || preg_match($filter, $path)) $results[] = $path;
-            } elseif($value != "." && $value != "..") {
-                getDirContents($path, $filter, $results);
-            }
+        if (!is_dir($path)) {
+            if (empty($filter) || preg_match($filter, $path))
+                $results[] = $path;
+        } elseif ($value != "." && $value != "..") {
+            getDirContents($path, $filter, $results);
         }
+    }
 
-        return $results;
+    return $results;
 
-    function read($file){
+    function read($file)
+    {
         header("Content-type: application/pdf");
-        
+
         header("Content-Length: " . filesize($file));
-        
+
         // Send the file to the browser.
         readfile($file);
     }
-    }
+}
 
-    // Simple Call: List all files
-    $files = getDirContents('uploads/')
+// Simple Call: List all files
+$files = getDirContents('uploads/')
     ?>
-    <table>
-        <?php foreach($files as $key=>$value): ?>
+<table>
+    <?php foreach ($files as $key => $value): ?>
         <tr>
-            <td><?php 
-            $info = pathinfo($value);          
-            ?>
-            <td><?= $key; ?> <a href="php/read.php?filename=<?php echo $value; ?>" formtarget="_blank"><?= $info['basename']; ?></a></td>
+            <td>
+                <?php
+                $info = pathinfo($value);
+                ?>
+            <td>
+                <?= $key; ?> <a href="php/read.php?filename=<?php echo $value; ?>" formtarget="_blank"><?= $info['basename']; ?></a>
+            </td>
         </tr>
-        <?php endforeach; ?>
-    </table>
-<div class="modal fade bd-example-modal-xl"  id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="uploadfile" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-    <form action="php/upload.php" method="post" enctype="multipart/form-data">
-        Select file to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload file" name="submit">
-    </form>
-    </div>
-  </div>
-</div>
-  </body>
+
+    <?php endforeach; ?>
+</table>
+<div class="modal fade bd-example-modal-xl" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="uploadfile"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form action="php/upload.php" method="post" enctype="multipart/form-data">
+                Select image to upload:
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" value="Upload Image" name="submit">
+            </form>
+        </div>
+
 </html>
+
+
