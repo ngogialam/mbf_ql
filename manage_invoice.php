@@ -68,7 +68,7 @@
                 <tr>
                   <th>STT</th>
                   <th>ID hệ thống</th>
-                  <th><a>Tên hệ thống </a></th>
+                  <th>Tên hệ thống </a></th>
                   <th>Tên nhóm hệ thống </th>
                   <th>Đầug số</th>
                   <th>Tên đơn vị quản lý</th>
