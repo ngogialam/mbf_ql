@@ -34,7 +34,7 @@
             if ($con) {
                 $query = "SELECT * FROM team_sys_manager WHERE id_team_sys = $id_team_sys";
                 $result = mysqli_query($con, $query);
-                $row = mysqli_fetch_array($result);
+                $row = mysqli_fetch_array($result);               
                 $id_team_sys = $row['id_team_sys'];
                 $name_team_sys = $row['name_team_sys'];
                 $type_sys = $row['type_sys'];
