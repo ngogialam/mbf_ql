@@ -50,12 +50,10 @@
           <label class="font-weight-bold" for="">Search :&emsp;</label>
           <input type="text" class="form-control" id="by_invoice_number" placeholder="Nhập tìm kiếm "
             onkeyup="searchInvoice(this.value);">
-          &emsp;
-          <!-- <input type="text" class="form-control" id="by_customer_name" placeholder="By Customer Name" onkeyup="searchInvoice(this.value, 'NAME');">
-            &emsp;<label class="font-weight-bold" for="">By Invoice Date :&emsp;</label>
-            <input type="date" class="form-control" id="by_date" onchange="searchInvoice(this.value, 'INVOICE_DATE');">
-            &emsp; -->
+          &emsp;          
           <button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
+          &emsp;  
+          <a class="btn btn-success" href="php/exportSys.php">Xuất file</a>
         </div>
 
         <div class="col col-md-12">

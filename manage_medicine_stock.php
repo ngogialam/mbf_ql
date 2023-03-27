@@ -37,6 +37,7 @@
             <input type="text" class="form-control" id="by_name" placeholder="Theo tên" onkeyup="searchMedicineStock(this.value, 'NAME');">
             &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="Theo phòng" onkeyup="searchMedicineStock(this.value, 'GENERIC_NAME');">
             &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Theo ngày tạo" onkeyup="searchMedicineStock(this.value, 'SUPPLIER_NAME');">
+            &emsp; <a class="btn btn-success" href="php/exportUnitUser.php">Xuất Excel</a>
           </div>
 
 
