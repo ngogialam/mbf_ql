@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Purchase</title>
+    <title>Quan ly nhom nguoi dung</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -27,7 +27,7 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('bar-chart', 'Quản lý người dùng', 'Danh sách quản lý người dùng');
+          createHeader('bar-chart', 'Quản lý nhóm người dùng', 'Danh sách quản lý nhóm người dùng');
         ?>
         <!-- header section end -->
 
@@ -35,13 +35,11 @@
         <div class="row">
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-            <input type="text" class="form-control" id="by_voucher_number" placeholder="Theo tên người sử dụng" onkeyup="searchPurchase(this.value, 'name_user_manager');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Gmail" onkeyup="searchPurchase(this.value, 'gmail');">
-            &emsp;<input type="number" class="form-control" id="by_invoice_number" placeholder="Số điện thoại" onkeyup="searchPurchase(this.value, 'sdt');">
+            <input type="text" class="form-control" id="by_voucher_number" placeholder="Theo tên người sử dụng" onkeyup="searchPurchase(this.value, 'name_user_manager');">            
             &emsp;<label class="font-weight-bold" for="">Theo ngày :&emsp;</label>
-            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'created_at');">
-            &emsp;
+            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'created_at');">            
             &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
+            &emsp; <a class="btn btn-success" href="php/exportTeamUser.php">Xuất Excel</a>
           </div>
 
           <div class="col col-md-12">
