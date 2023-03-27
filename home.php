@@ -115,6 +115,7 @@
           createSection2('bar-chart', 'add_new_user_unit.php', 'Thêm mới đơn vị sử dụng');
           createSection2('address-card', 'add_purchase.php', 'Thêm mới nhóm người sử dụng');
           createSection2('book', 'add_new_user.php', 'Thêm mới người sử dụng');
+          createSection2('book', 'add_import_file.php', 'Import file dữ liệu');
           ?>
 
         </div>
