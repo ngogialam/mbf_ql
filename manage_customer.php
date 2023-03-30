@@ -12,6 +12,7 @@
   <link rel="shortcut icon" href="" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/sidenav.css">
+  <link rel="stylesheet" href="css/pagination.css">
   <link rel="stylesheet" href="css/home.css">
   <script src="js/manage_customer.js"></script>
   <script src="js/validateForm.js"></script>
@@ -59,6 +60,7 @@
                   <th style="width: 13%;">Gmail</th>
                   <th style="width: 17%;">Phòng ban</th>
                   <th style="width: 13%;">Chức vụ</th>
+                  <th style="width: 13%;">Người tạo</th>
                   <th style="width: 17%;">Ngày tạo</th>
                   <th style="width: 15%;">Action</th>
                 </tr>
