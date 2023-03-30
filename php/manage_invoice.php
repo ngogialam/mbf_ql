@@ -65,7 +65,7 @@ function showNameUnit(){
       <td><?php echo $row['server_sys']; ?></td>
       <td><?php echo $row['config_sys']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
-      <td>      
+      <td class="button-container">      
         <button class="btn btn-warning btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
         <i class="fa fa-eye"></i>
         </button>
