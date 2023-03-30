@@ -19,3 +19,8 @@
 .modal .modal-body {
     overflow-y: auto;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
