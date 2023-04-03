@@ -3,26 +3,25 @@ require "db_connection.php";
 
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-    $id = $_GET["id"];
-    $query = "DELETE FROM medicines WHERE ID = $id";
+    $id_unit_user = $_GET["id_unit_user"];
+    $query = "DELETE FROM unit_user WHERE id_unit_user = $id_unit_user";
     $result = mysqli_query($con, $query);
     if (!empty($result))
       showMedicinesStock("0");
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "edit") {
-    $id = $_GET["id"];
-    showMedicinesStock($id);
+    $id_unit_user = $_GET["id_unit_user"];
+    showMedicinesStock($id_unit_user);
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "update") {
-    $id = $_GET["id"];
-    $batch_id = $_GET["batch_id"];
-    $expiry_date = ucwords($_GET["expiry_date"]);
-    $quantity = ucwords($_GET["quantity"]);
-    $mrp = ucwords($_GET["mrp"]);
-    $rate = ucwords($_GET["rate"]);
-    updateMedicineStock($id, $batch_id, $expiry_date, $quantity, $mrp, $rate);
+    $id_unit_user = $_GET["id_unit_user"];
+    $name_unit_user =  ucwords($_GET["name_unit_user"]);
+    $name_room_unit = ucwords($_GET["name_room_unit"]);
+    $create_by = ucwords($_GET["create_by"]);
+    $created_at = $_GET["created_at"];
+    updateMedicineStock($id_unit_user, $name_unit_user, $name_room_unit, $create_by, $created_at);
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -32,32 +31,30 @@ if ($con) {
     searchMedicineStock(strtoupper($_GET["text"]), $_GET["tag"]);
 }
 
-function showMedicinesStock($id)
+function showMedicinesStock($id_unit_user)
 {
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    // $query = "SELECT * FROM unit_user";
-    // $result = mysqli_query($con, $query);
-    if (isset($_POST['results_per_page'])) {
-      $results_per_page = $_POST['results_per_page'];
+    if (isset($_POST['results_per_page_user'])) {
+      $results_per_page_user = $_POST['results_per_page_user'];
     } else {
-      $results_per_page = 10;
+      $results_per_page_user = 10;
     }
     $sql = "SELECT COUNT(*) FROM unit_user";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_row($result);
-    $total_results = $row[0];
-    $total_pages = ceil($total_results / $results_per_page);
+    $total_results_user = $row[0];
+    $total_pages_user = ceil($total_results_user / $results_per_page_user);
 
     // Xác định trang hiện tại và bản ghi bắt đầu và kết thúc trong truy vấn
-    if (!isset($_GET['page'])) {
-      $page = 1;
+    if (!isset($_GET['page_user'])) {
+      $page_user = 1;
     } else {
-      $page = $_GET['page'];
+      $page_user = $_GET['page_user'];
     }
-    $start_limit = ($page - 1) * $results_per_page;
-    $end_limit = $results_per_page;
+    $start_limit = ($page_user - 1) * $results_per_page_user;
+    $end_limit = $results_per_page_user;
 
     // Thực hiện truy vấn để lấy dữ liệu trong khoảng thời gian được chỉ định
     $sql = "SELECT * FROM unit_user LIMIT $start_limit, $end_limit";
@@ -65,16 +62,31 @@ function showMedicinesStock($id)
     // fill dữ liệu 
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;
-      if ($row['id_unit_user'] == $id)
+      if ($row['id_unit_user'] == $id_unit_user)
         showEditOptionsRow($seq_no, $row);
       else
         showMedicineStockRow($seq_no, $row);
     }
-    for ($page = 1; $page <= $total_pages; $page++) {
-      echo '<div class="pagination"><a  href="manage_customer.php?page=' . $page . '&results_per_page=' . $results_per_page . '">' . $page . '</a> </div>';
+    for ($page_user = 1; $page_user <= $total_pages_user; $page_user++) {
+      echo '<div class="pagination"><a  href="manage_medicine_stock.php?page_user=' . $page_user . '&results_per_page_user=' . $results_per_page_user . '">' . $page_user . '</a> </div>';
     }
   }
 }
+// function showMedicinesStock($id_unit_user) {
+//   require "db_connection.php";
+//   if($con) {
+//     $seq_no = 0;
+//     $query = "SELECT * FROM unit_user";
+//     $result = mysqli_query($con, $query);
+//     while($row = mysqli_fetch_array($result)) {
+//       $seq_no++;
+//       if($row['id_unit_user'] == $id_unit_user)
+//       showEditOptionsRow($seq_no, $row);
+//       else
+//       showMedicineStockRow($seq_no, $row);
+//     }
+//   }
+// }
 
 function showMedicineStockRow($seq_no, $row)
 {
@@ -100,29 +112,27 @@ function showMedicineStockRow($seq_no, $row)
 
 function showEditOptionsRow($seq_no, $row)
 {
-?>
-  <!--<tr><td colspan="11"><?php //echo $row[5]; 
-                            ?></tr>-->
+?>  
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['name_unit_user']; ?>" placeholder="Tên..." id="name_unit_user" onblur="notNull(this.value, 'batch_id_error');">
+      <input type="text" class="form-control" value="<?php echo $row['name_unit_user']; ?>" placeholder="Tên..." id="name_unit_user" onblur="notNull(this.value, 'name_unit_user_error');">
       <code class="text-danger small font-weight-bold float-right" id="name_unit_user_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['name_room_unit']; ?>" placeholder="Phòng" id="name_room_unit" onblur="checkExpiry(this.value, 'expiry_date_error');">
+      <input type="text" class="form-control" value="<?php echo $row['name_room_unit']; ?>" placeholder="Phòng" id="name_room_unit" onblur="notNull(this.value, 'name_room_unit_error');">
       <code class="text-danger small font-weight-bold float-right" id="name_room_unit_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['create_by']; ?>" placeholder="Người tạo" id="create_by" onkeyup="checkQuantity(this.value, 'quantity_error');">
+      <input type="text" class="form-control" value="<?php echo $row['create_by']; ?>" placeholder="Người tạo" id="create_by" onkeyup="notNull(this.value, 'create_by_error');">
       <code class="text-danger small font-weight-bold float-right" id="create_by_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['created_at']; ?>" placeholder="Thời gian tạo" id="created_at" onkeyup="checkQuantity(this.value, 'quantity_error');">
+      <input type="date" class="datepicker form-control hasDatepicker" value="<?php echo $row['created_at']; ?>" placeholder="Thời gian tạo" id="created_at" onblur="checkDate(this.value, 'created_at_error');">
       <code class="text-danger small font-weight-bold float-right" id="created_at_error" style="display: none;"></code>
     </td>
     <td>
-      <button href="" class="btn btn-success btn-sm" onclick="updateMedicineStock(<?php echo $row[5]; ?>);">
+      <button href="" class="btn btn-success btn-sm" onclick="updateMedicineStock(<?php echo $row['id_unit_user']; ?>);">
         <i class="fa fa-edit"></i>
       </button>
       <button class="btn btn-danger btn-sm" onclick="cancel();">
@@ -133,13 +143,18 @@ function showEditOptionsRow($seq_no, $row)
 <?php
 }
 
-function updateMedicineStock($id, $batch_id, $expiry_date, $quantity, $mrp, $rate)
+function updateMedicineStock($id_unit_user, $name_unit_user, $name_room_unit, $create_by, $created_at)
 {
+  var_dump($name_unit_user);
+  var_dump($name_room_unit);
   require "db_connection.php";
-  $query = "UPDATE medicines_stock SET BATCH_ID = '$batch_id', EXPIRY_DATE = '$expiry_date', QUANTITY = $quantity, MRP = $mrp, RATE = $rate WHERE ID = $id";
+  $query = "UPDATE unit_user SET name_unit_user = '$name_unit_user', name_room_unit = '$name_room_unit', create_by = '$create_by', created_at= '$created_at' WHERE id_unit_user = $id_unit_user";  
   $result = mysqli_query($con, $query);
   if (!empty($result))
-    showMedicinesStock("0");
+    // showMedicinesStock("0");
+    echo "thành công";
+  else
+    echo "thất bại";
 }
 
 function searchMedicineStock($text, $column)
