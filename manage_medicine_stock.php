@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sidenav.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pagination.css">
     <script src="js/manage_medicine_stock.js"></script>
     <script src="js/validateForm.js"></script>
     <script src="js/restrict.js"></script>
@@ -52,19 +53,20 @@
             			<tr>
             				<th style="width: 1%;">STT</th>
             				<th style="width: 14%;">Tên đơn vị sử dụng</th>
-                    <th style="width: 5%;">Phòng </th>
+                    <th style="width: 15%;">Phòng </th>
+                    <th style="width: 14%;">Người tạo</th>
                     <th style="width: 14%;">Ngày tạo</th>
-                    <th style="width: 10%;">Hành dộng</th>
+                    <th style="width: 6%;">Hành động</th>
             			</tr>
             		</thead>
                 <tbody id="medicines_stock_div">
                   <?php
                     require 'php/manage_medicine_stock.php';
-                    if(isset($_GET['out_of_stock']))
-                      echo "<script>searchMedicineStock('0', 'QUANTITY');</script>";
-                    else if(isset($_GET['expired']))
-                      echo "<script>searchMedicineStock('', 'EXPIRY_DATE');</script>";
-                    else
+                    // if(isset($_GET['out_of_stock']))
+                    //   echo "<script>searchMedicineStock('0', 'QUANTITY');</script>";
+                    // else if(isset($_GET['expired']))
+                    //   echo "<script>searchMedicineStock('', 'EXPIRY_DATE');</script>";
+                    // else
                       showMedicinesStock("0");
                   ?>
             		</tbody>

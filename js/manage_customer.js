@@ -11,41 +11,45 @@ function deleteCustomer(id) {
     }
 }
 
-function editCustomer(id) {
+function editCustomer(id_user_manager) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById('customers_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_customer.php?action=edit&id=" + id, true);
+    xhttp.open("GET", "php/manage_customer.php?action=edit&id_user_manager=" + id_user_manager, true);
     xhttp.send();
 }
 
-function updateCustomer(id) {
-    var customer_name = document.getElementById("customer_name");
-    var contact_number = document.getElementById("customer_contact_number");
-    var customer_address = document.getElementById("customer_address");
-    var doctor_name = document.getElementById("customer_doctors_name");
-    var doctor_address = document.getElementById("customer_doctors_address");
-    if (!validateName(customer_name.value, "name_error"))
-        customer_name.focus();
-    else if (!validateContactNumber(contact_number.value, "contact_number_error"))
-        contact_number.focus();
-    else if (!validateAddress(customer_address.value, "address_error"))
-        customer_address.focus();
-    else if (!validateName(doctor_name.value, 'doctor_name_error'))
-        doctor_name.focus();
-    else if (!validateAddress(doctor_address.value, 'doctor_address_error'))
-        doctor_address.focus();
+function updateCustomer(id_user_manager) {
+    var name_user_manager = document.getElementById("name_user_manager");
+    var sdt = document.getElementById("sdt");
+    var gmail = document.getElementById("gmail");
+    var room = document.getElementById("room");
+    var position_manager = document.getElementById("position_manager");
+    var create_by = document.getElementById("create_by");
+    if (!validateName(name_user_manager.value, "name_err"))
+        name_user_manager.focus();
+    else if (!validateContactNumber(sdt.value, "sdt_err"))
+        sdt.focus();
+    else if (!validateAddress(gmail.value, "gmail_err"))
+        gmail.focus();
+    else if (!validateName(room.value, 'room_err'))
+        room.focus();
+    else if (!validateName(position_manager.value, 'position_manager_err'))
+        position_manager.focus();
+    else if (!validateName(create_by.value, 'create_by_err'))
+        create_by.focus();
     else {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('customers_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manage_customer.php?action=update&id=" + id + "&name=" + customer_name.value + "&contact_number=" + contact_number.value + "&address=" + customer_address.value + "&doctor_name=" + doctor_name.value + "&doctor_address=" + doctor_address.value, true);
+        xhttp.open("GET", "php/manage_customer.php?action=update&id_user_manager=" + id_user_manager + "&name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
         xhttp.send();
     }
+    // alert('Cập nhật thành công !');
 }
 
 function cancel() {
@@ -67,3 +71,9 @@ function searchCustomer(text) {
     xhttp.open("GET", "php/manage_customer.php?action=search&text=" + text, true);
     xhttp.send();
 }
+
+var myDiv = document.getElementById("myDiv");
+// Hẹn thời gian 5 giây và sau đó ẩn thẻ div
+// setTimeout(function() {
+//     myDiv.style.display = "none";
+// }, 1000);
