@@ -22,12 +22,16 @@
     <!-- including side navigations -->
     <?php include("sections/sidenav.html"); ?>
     <div class="container-fluid">
-        <div class="container">
+        <div class="container" id="sys_div">
             <!-- header section -->
             <?php
             require "php/header.php";
             createHeader('user', 'Chỉnh sửa thông tin hệ thống', 'Thay đổi thông tin');
             // header section end
+            // if(isset($_GET["mess"]) && $_GET['mess']){
+            //     $mess = $_GET['mess'];
+            //     echo "<div class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>$mess</div>";
+            // }
             $id_sys = $_GET['id_sys'];
             require "php/db_connection.php";
             if ($con) {
@@ -35,55 +39,108 @@
                 $result = mysqli_query($con, $query);
                 $row = mysqli_fetch_array($result);
                 $id_sys = $row['id_sys'];
-                $name_team_sys = $row['name_team_sys'];
+                $id_unit_user_sys = $row['unit_user_id'];
+                $id_unit_sys_sys = $row['unit_sys_id'];
+                $id_user_manager_sys = $row['user_manager_id'];
+                $id_team_sys_sys = $row['team_sys_id'];
+
                 $name_sys = $row['name_sys'];
                 $first_number = $row['first_number'];
-                $name_unit_manager = $row['name_unit_manager'];
-                $name_user_manager = $row['name_user_manager'];
                 $describe_sys = $row['describe_sys'];
                 $document_sys = $row['document_sys'];
                 $created_at = $row['created_at'];
                 $server_sys = $row['server_sys'];
                 $ip_sys = $row['ip_sys'];
                 $config_sys = $row['config_sys'];
+                $create_by = $row['create_by'];
+                $file_des = $row['file_des'];
             }
+
+
             ?>
             <div class="row">
+                <?php 
+                    if(isset($_GET["mess"]) && $_GET['mess']){
+                        $mess = $_GET['mess'];
+                        echo "<div class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>$mess</div>";
+                    }
+                ?>
                 <div class="row col col-md-12">
 
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="id_sys">Id hệ thống :</label>
                             <input id="id_sys" type="text" class="form-control" value="<?php echo $id_sys; ?>"
-                                placeholder="id_sys" onkeyup="validateName(this.value, 'id_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="id_error"
-                                style="display: none;"></code>
+                                placeholder="id_sys" disabled>
                         </div>
                     </div>
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Tên nhóm hệ thống :</label>
-                            <input id="name_team_sys" type="text" class="form-control"
-                                value="<?php echo $name_team_sys; ?>" placeholder="name_team_sys"
-                                onkeyup="validateName(this.value, 'name_team_sys_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="name_team_sys_error"
-                                style="display: none;"></code>
+                            <label for="name_sys">Tên hệ thống :</label>
+                            <input id="name_sys" type="text" class="form-control" value="<?php echo $name_sys; ?>"
+                                placeholder="id_sys" >
                         </div>
                     </div>
-                    <div class="row col col-md-12" type="hidden" id="hidden">
-                        <div class="col col-md-12 form-group">
+                    <div class="row col col-md-12" style="flex-direction: row-reverse;">
+
+                        <div class="col col-md-6 form-group">
+                            <label for="name_team_sys">Tên nhóm hệ thống mới :</label>
+                            <?php
+                            require "php/db_connection.php";
+                            $team_sys = "";
+                            if ($con) {
+                                $query = "SELECT * FROM team_sys_manager";
+                                $result = mysqli_query($con, $query);
+
+                                echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" >';
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $id_team_sys = $row['id_team_sys'];
+                                    $name_team_sys = $row['name_team_sys'];
+                                    if ($id_team_sys == $id_team_sys_sys){
+                                        $team_sys = $name_team_sys;
+                                        echo "<option value= '$id_team_sys' selected='selected'>$name_team_sys</option>";
+                                    }
+                                    else
+                                        echo "<option value= '$id_team_sys' >$name_team_sys</option>";
+                                }
+                                echo '</select>';
+                            }
+                            ?>
+                        </div>
+                        <div class="col col-md-6 form-group">
                             <label for="name_team_sys">Tên nhóm hệ thống :</label>
+                            <input id="name_team_sys" type="text" class="form-control"
+                                value="<?php echo $team_sys; ?>" placeholder="name_team_sys"
+                                 disabled>
+
+                        </div>
+                    </div>
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
+                            <label for="first_number">Tên đầu số :</label>
+                            <input id="first_number" type="number" class="form-control"
+                                placeholder="first_number" value="<?php echo $first_number; ?>"
+                            >
+                        </div>
+                    </div>
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
+                            <label for="name_team_sys">Đơn vị quản lý :</label>
                             <?php
                             require "php/db_connection.php";
                             if ($con) {
-                                $query = "SELECT * FROM unit_user ";
+                                $query = "SELECT * FROM unit_sys";
                                 $result = mysqli_query($con, $query);
-                                $row = mysqli_fetch_array($result);
-                                echo '<select name="select_name" class=" form-control pdm chosen-select col col-md-12" >';
+                                echo '<select name="unit_sys" id="unit_sys" class=" form-control pdm chosen-select col col-md-12" >';
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    $id_unit_user = $row['id_unit_user'];
-                                    $name_unit_user = $row['name_unit_user'];
-                                    echo "<option value='$id_unit_user'>$name_unit_user</option>";
+                                    $id_unit_sys = $row['id_unit_sys'];
+                                    $name_unit_sys = $row['name_unit_sys'];
+                                    
+                                    if ($id_unit_sys == $id_unit_sys_sys){
+                                        echo "<option value= '$id_unit_sys' selected='selected'>$name_unit_sys</option>";
+                                    }
+                                    else
+                                        echo "<option value='$id_unit_sys'>$name_unit_sys</option>";
                                 }
                                 echo '</select>';
                             }
@@ -92,32 +149,50 @@
                     </div>
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Tên đầu số :</label>
-                            <input id="first_number" type="number" class="form-control"
-                                value="<?php echo $first_number; ?>" placeholder="first_number"
-                                onkeyup="validateName(this.value, 'first_number_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="first_number_error"
-                                style="display: none;"></code>
+                            <label for="name_team_sys">Đơn vị sử dụng :</label>
+                            <?php
+                            require "php/db_connection.php";
+                            if ($con) {
+                                $query = "SELECT * FROM unit_user";
+                                $result = mysqli_query($con, $query);
+                                echo '<select name="unit_user" id="unit_user" class=" form-control pdm chosen-select col col-md-12" >';
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $id_unit_user = $row['id_unit_user'];
+                                    $name_unit_user = $row['name_unit_user'];
+                                    
+                                    if ($id_unit_user == $id_unit_user_sys){
+                                        echo "<option value= '$id_unit_user' selected='selected'>$name_unit_user</option>";
+                                    }
+                                    else
+                                        echo "<option value='$id_unit_user'>$name_unit_user</option>";
+                                }
+                                echo '</select>';
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="row col col-md-12">
-                        <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Tên đơn vị quản lý :</label>
-                            <input id="name_unit_manager" type="text" class="form-control"
-                                value="<?php echo $name_unit_manager; ?>" placeholder="name_unit_manager"
-                                onkeyup="validateName(this.value, 'name_unit_manager_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2"
-                                id="name_unit_manager_error" style="display: none;"></code>
-                        </div>
-                    </div>
-                    <div class="row col col-md-12">
-                        <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Tên người quả trị :</label>
-                            <input id="name_user_manager" type="text" class="form-control"
-                                value="<?php echo $name_user_manager; ?>" placeholder="name_user_manager"
-                                onkeyup="validateName(this.value, 'name_user_manager_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2"
-                                id="name_user_manager_error" style="display: none;"></code>
+                    <div class="col col-md-12 form-group">
+                            <label for="manager_user">Người quản lý :</label>
+                            <?php
+                            require "php/db_connection.php";
+                            if ($con) {
+                                $query = "SELECT * FROM manager_user";
+                                $result = mysqli_query($con, $query);
+                                echo '<select name="manager_user" id="manager_user" class=" form-control pdm chosen-select col col-md-12" >';
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $id_user = $row['id_user'];
+                                    $name_user_manager = $row['name_user_manager'];
+                                    
+                                    if ($id_user == $id_user_manager_sys){
+                                        echo "<option value= '$id_user' selected='selected'>$name_user_manager</option>";
+                                    }
+                                    else
+                                        echo "<option value='$id_user'>$name_user_manager</option>";
+                                }
+                                echo '</select>';
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="row col col-md-12">
@@ -125,50 +200,65 @@
                             <label for="name_team_sys">Mô tả hệ thống :</label>
                             <input id="describe_sys" type="text" class="form-control"
                                 value="<?php echo $describe_sys; ?>" placeholder="describe_sys"
-                                onkeyup="validateName(this.value, 'describe_sys_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="describe_sys_error"
-                                style="display: none;"></code>
+                                 >
                         </div>
                     </div>
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Tài liệu hệ thống :</label>
                             <input type="text" id="document_sys" class="form-control" value="<?php echo $document_sys; ?>"
-                                placeholder="document_sys" onkeyup="validateName(this.value, 'document_sys_error');"
-                                disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="document_sys_error"
-                                style="display: none;"></code>
+                                placeholder="document_sys"
+                                >
                         </div>
                     </div>
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Server hệ thống :</label>
                             <input id="server_sys" type="text" class="form-control" value="<?php echo $server_sys; ?>"
-                                placeholder="server_sys" onkeyup="validateName(this.value, 'server_sys_error');"
-                                disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="server_sys_error"
-                                style="display: none;"></code>
+                                placeholder="server_sys"
+                                >
+                        </div>
+                    </div>
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
+                            <label for="create_by">Người tạo:</label>
+                            <input id="create_by" type="number" class="form-control" value="<?php echo $create_by; ?>"
+                                placeholder="create_by">
                         </div>
                     </div>
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Ip hệ thống :</label>
                             <input id="ip_sys" type="number" class="form-control" value="<?php echo $ip_sys; ?>"
-                                placeholder="ip_sys" onkeyup="validateName(this.value, 'username_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="ip_sys_error"
-                                style="display: none;"></code>
+                                placeholder="ip_sys" >
                         </div>
                     </div>
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Cấu hình hệ thống :</label>
                             <input id="config_sys" type="text" class="form-control" value="<?php echo $config_sys; ?>"
-                                placeholder="config_sys" onkeyup="validateName(this.value, 'config_sys_error');"
-                                disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="config_sys_error"
-                                style="display: none;"></code>
+                                placeholder="config_sys"
+                                >
                         </div>
                     </div>
+
+                    <div class="row col col-md-12" >
+                        <div class="col col-md-12 form-group">
+                            <label for="file">File mô tả :</label>
+                            <tr>
+                                <td><a href="php/read.php?filename=<?php echo $target_dir . $file_des; ?>" formtarget="_blank" id="file_des_sv">
+                                <input id="file_des_sv" type="text" class="form-control"
+                                value="<?php echo $file_des; ?>" disabled></a></td>
+                            </tr>
+                        </div>
+                    </div>
+                    <div class="row col col-md-12" id="file_des_div">
+                        <div class="col col-md-12 form-group">
+                            <label for="file_des">File mô tả mới:</label>
+                            <input  id="file_des" type="file" name="file_des" />
+                        </div>
+                    </div>
+
 
                     <!-- horizontal line -->
                     <div class="col col-md-12">
@@ -176,28 +266,11 @@
                             style="padding: 0px; width: 95%; border-top: 2px solid  #02b6ff;">
                     </div>
 
-                    <!-- form submit button -->
-                    <div class="row col col-md-12 m-auto" id="edit">
+                    <div class="row col col-md-12 m-auto"  >
                         <div class="col col-md-2 form-group float-right"></div>
-                        <div id="edit_button" class="col col-md-3 form-group float-right">
-                            <button class="btn btn-primary form-control font-weight-bold" onclick="edit();">Chỉnh
-                                sửa</button>
-                        </div>
-                        <div id="update_button" class="col col-md-3 form-group float-right">
-                            <button class="btn btn-secondary form-control font-weight-bold" onclick="goBack();">Quay lại
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row col col-md-12 m-auto" id="update_cancel" style="display: none;">
-                        <div class="col col-md-2 form-group float-right"></div>
-                        <div id="cancel_button" class="col col-md-3 form-group float-right">
-                            <button class="btn btn-warning form-control font-weight-bold" onclick="edit(true);">Hủy bỏ
-                            </button>
-                        </div>
                         <div id="update_button" class="col col-md-3 form-group float-right">
                             <button class="btn btn-success form-control font-weight-bold"
-                                onclick="updateAdminDetails();">Lưu thay đổi</button>
+                                onclick="update();">Lưu thay đổi</button>
                         </div>
                     </div>
                     <!-- result message -->
