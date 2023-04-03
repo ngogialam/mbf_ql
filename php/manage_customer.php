@@ -74,29 +74,29 @@ function showEditOptionsRow($seq_no, $row) {
   ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['ID'] ?></td>
+    <td><?php echo $row['id_user_manager'] ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['NAME']; ?>" placeholder="Name" id="customer_name" onkeyup="validateName(this.value, 'name_error');">
+      <input type="text" class="form-control" value="<?php echo $row['name_user_manager']; ?>" placeholder="Name" id="customer_name" onkeyup="validateName(this.value, 'name_error');">
       <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['CONTACT_NUMBER']; ?>" placeholder="Contact Number" id="customer_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
+      <input type="number" class="form-control" value="<?php echo $row['sdt']; ?>" placeholder="Contact Number" id="customer_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
       <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code>
     </td>
     <td>
-      <textarea class="form-control" placeholder="Address" id="customer_address" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['ADDRESS']; ?></textarea>
+      <textarea class="form-control" placeholder="Address" id="customer_address" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['gmail']; ?></textarea>
       <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['DOCTOR_NAME']; ?>" placeholder="Doctor's Name" id="customer_doctors_name" onkeyup="validateName(this.value, 'doctor_name_error');">
+      <input type="text" class="form-control" value="<?php echo $row['room']; ?>" placeholder="Doctor's Name" id="customer_doctors_name" onkeyup="validateName(this.value, 'doctor_name_error');">
       <code class="text-danger small font-weight-bold float-right" id="doctor_name_error" style="display: none;"></code>
     </td>
     <td>
-      <textarea class="form-control" placeholder="Doctor's Address" id="customer_doctors_address" onblur="validateAddress(this.value, 'doctor_address_error');"><?php echo $row['DOCTOR_ADDRESS']; ?></textarea>
+      <textarea class="form-control" placeholder="Doctor's Address" id="customer_doctors_address" onblur="validateAddress(this.value, 'doctor_address_error');"><?php echo $row['created_at']; ?></textarea>
       <code class="text-danger small font-weight-bold float-right" id="doctor_address_error" style="display: none;"></code>
     </td>
     <td>
-      <button href="" class="btn btn-success btn-sm" onclick="updateCustomer(<?php echo $row['ID']; ?>);">
+      <button href="" class="btn btn-success btn-sm" onclick="updateCustomer(<?php echo $row['id_user_manager']; ?>);">
         <i class="fa fa-edit"></i>
       </button>
       <button class="btn btn-danger btn-sm" onclick="cancel();">
