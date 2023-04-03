@@ -1,54 +1,58 @@
 <!-- supplier details content -->
 <!-- supplier name control -->
-<div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="name_team_sys">Tên nhóm hệ thống :</label>
-    <input type="text" class="form-control" name="name_team_sys" placeholder="Tên nhóm hệ thống" id="name_team_sys" >
+<form action="php/add_new_supplier.php" method="post" enctype="multipart/form-data">
+<div class="row" id='new_sys_team'>
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="name_team_sys">Tên nhóm hệ thống :</label>
+      <input type="text" class="form-control" name="name_team_sys" placeholder="Tên nhóm hệ thống" id="name_team_sys">
+    </div>
   </div>
-</div>
 
-<!-- supplier email control -->
-<div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="type">Loại</label>
-    <input type="text" autocomplete="off" class="form-control" name='type_sys' placeholder="Loại" id="type_sys" >
-    <code class="text-danger small font-weight-bold float-right" id="email_error" style="display: none;"></code>
+  <!-- supplier email control -->
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="type">Loại</label>
+      <input type="text" autocomplete="off" class="form-control" name='type_sys' placeholder="Loại" id="type_sys">
+      <code class="text-danger small font-weight-bold float-right" id="email_error" style="display: none;"></code>
+    </div>
   </div>
-</div>
 
-<!-- supplier contact number control -->
-<div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="describe_sys">Mô tả hệ thống :</label>
-    <input type="text" class="form-control" name='describe_sys' placeholder="Mô tả" id="describe_sys" >
+  <!-- supplier contact number control -->
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="describe_sys">Mô tả hệ thống :</label>
+      <input type="text" class="form-control" name='describe_sys' placeholder="Mô tả" id="describe_sys">
+    </div>
   </div>
-</div>
 
-<!-- supplier address control -->
-<div class="row col col-md-12">
-  <div class="col col-md-12 form-group">
-    <label class="font-weight-bold" for="create_by">Người tạo :</label>
-    <textarea class="form-control" placeholder="Người tạo" name="create_by" id="create_by"></textarea>
+  <!-- supplier address control -->
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="create_by">Người tạo :</label>
+      <textarea class="form-control" placeholder="Người tạo" name="create_by" id="create_by"></textarea>
+    </div>
   </div>
-</div>
-<!-- supplier details content end -->
+  <!-- supplier details content end -->
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="file_des">File mô tả :</label>
+      <input type="file" class="form-control" name='file_des' placeholder="Mô tả" id="file_des">
+    </div>
+  </div>
+  <div class="col col-md-12">
+    <hr class="col-md-12 float-left" style="padding: 0px; width: 95%; border-top: 2px solid  #02b6ff;">
+  </div>
 
-<div class="col col-md-12">
-  <hr class="col-md-12 float-left" style="padding: 0px; width: 95%; border-top: 2px solid  #02b6ff;">
-</div>
-
-<!-- new user button -->
-<div class="row col col-md-12">
-  &emsp;
-  <div class="form-group m-auto">
-    <button class="btn btn-primary form-control" onclick="addSupplier();">Thêm mới nhóm hệ thống</button>
+  <!-- new user button -->
+  <div class="row col col-md-12">
+    &emsp;
+    <div class="form-group m-auto">
+      <button class="btn btn-primary form-control">Thêm mới nhóm hệ thống</button>
+    </div>
   </div>
-  <!--
-  &emsp;
-  <div class="form-group">
-    <button class="btn btn-success form-control">Save and Add Another</button>
-  </div>
-  -->
+  <!-- result message -->
+  <div id="supplier_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center"
+    style="font-family: sans-serif;"></div>
 </div>
-<!-- result message -->
-<div id="supplier_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;"></div>
+</form>

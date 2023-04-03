@@ -47,11 +47,10 @@
                     <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">
                 </div>
 
-
-
                 <!-- Modal xem chi tiết hệ thống -->
                 <?php
                 $id_team_sys = $_GET['id_team_sys'];
+                $target_dir = "../uploads/";
                 require "php/db_connection.php";
                 if ($con) {
                     $query = "SELECT * FROM team_sys_manager WHERE id_team_sys = $id_team_sys";
@@ -63,6 +62,7 @@
                         $describe_sys = $row['describe_sys'];
                         $create_by = $row['create_by'];
                         $created_at = $row['created_at'];
+                        $file_des = $row['file_des'];
                     }
                 }
 
@@ -118,10 +118,25 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
+                            <label for="file">File mô tả :</label>
+                            <tr>
+                                <td><?php
+                                ?>
+                                <td><a href="php/read.php?filename=<?php echo $target_dir . $file_des; ?>" formtarget="_blank" id="file_des_sv">
+                                <?php echo $file_des; ?></a></td>
+                            </tr>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-            <button class="btn btn-info btn-sm" onclick="goBack()">Quay lại</button>
-        </div>
+                <div class="row col col-md-12 m-auto" id="edit">
+                        <div class="col col-md-2 form-group float-right"></div>
+                        <div id="update_button" class="col col-md-3 form-group float-right">
+                            <button class="btn btn-secondary form-control font-weight-bold" onclick="goBack();">Quay lại
+                            </button>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
