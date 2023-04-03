@@ -53,7 +53,7 @@
             			<tr>
             				<th style="width: 1%;">STT</th>
                     <th style="width: 12%;">Tên nhóm người sử dụng</th>
-                    <th style="width: 12%;">Người sử dụng</th>
+                    <th style="width: 12%;">Trạng thái</th>
                     <th style="width: 12%;">Người tạo</th>
                     <th style="width: 12%;">Ngày tạo</th>
                     <th style="width: 12%;">Hành động</th>
