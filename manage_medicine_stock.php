@@ -62,11 +62,11 @@
                 <tbody id="medicines_stock_div">
                   <?php
                     require 'php/manage_medicine_stock.php';
-                    if(isset($_GET['out_of_stock']))
-                      echo "<script>searchMedicineStock('0', 'QUANTITY');</script>";
-                    else if(isset($_GET['expired']))
-                      echo "<script>searchMedicineStock('', 'EXPIRY_DATE');</script>";
-                    else
+                    // if(isset($_GET['out_of_stock']))
+                    //   echo "<script>searchMedicineStock('0', 'QUANTITY');</script>";
+                    // else if(isset($_GET['expired']))
+                    //   echo "<script>searchMedicineStock('', 'EXPIRY_DATE');</script>";
+                    // else
                       showMedicinesStock("0");
                   ?>
             		</tbody>

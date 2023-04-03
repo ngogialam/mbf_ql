@@ -31,10 +31,10 @@ function updateMedicine(id_unit_sys) {
         medicine_name.focus();
     else if (!notNull(name_room.value, "name_room_error"))
         packing.focus();
-    else if (!validateName(create_by.value, "create_by_error"))
-        generic_name.focus();
+    else if (!notNull(create_by.value, "create_by_error"))
+        create_by.focus();
     else if (!notNull(created_at.value, "created_at_error"))
-        generic_name.focus();
+        created_at.focus();
     else {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
