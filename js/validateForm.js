@@ -138,29 +138,26 @@ function addCustomer() {
 }
 
 function addSupplier() {
-    document.getElementById("new_sys_team").innerHTML = "";
+    document.getElementById("supplier_acknowledgement").innerHTML = "";
     var name_team_sys = document.getElementById("name_team_sys");
-    var type = document.getElementById("type_sys");
-    var describe = document.getElementById("describe_sys");
-    // 
-    console.log(document.getElementById("file_des"))
-    console.log(name_team_sys)
-    console.log(type)
-    console.log(describe)
-    var file_des = document.getElementById("file_des").files[0];
-
+    var type_sys = document.getElementById("type_sys");
+    var describe_sys = document.getElementById("describe_sys");
+    var create_by = document.getElementById("create_by");
+    // if (!validateName(name_team_sys.value, "name_team_sys"))
+    //     name_team_sys.focus();
+    // else if (!validateName(type_sys.value, "type_sys"))
+    //     type_sys.focus();
+    // else if (!validateName(describe_sys.value, "describe_sys"))
+    //     describe_sys.focus();
+    // else {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById("new_sys_team").innerHTML = xhttp.responseText;
+            document.getElementById("supplier_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open('POST','php/add_new_supplier.php',true);
-    var formData = new FormData();
-    formData.append("file_des", file_des);
-    formData.append('name_team_sys', name_team_sys.value);
-    formData.append('type_sys', type.value);
-    formData.append('describe_sys', describe.value);
-    xhttp.send(formData);
+    xhttp.open("GET", "php/add_new_supplier.php?name_team_sys=" + name_team_sys.value + "&type_sys=" + type_sys.value + "&describe_sys=" + describe_sys.value + "&create_by=" + create_by.value, true);
+    xhttp.send();
+    // }
 }
 
 function addMedicine() {
