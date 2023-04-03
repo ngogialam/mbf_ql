@@ -28,7 +28,7 @@
 
 <body>
     <!-- including side navigations -->
-    <?php include("sections/sidenav.html"); ?>
+    <?php include("sidenav.html"); ?>
 
     <div class="container-fluid" style="margin-right: 0px;">
         <div class="container">
@@ -46,30 +46,12 @@
                 <div class="col col-md-12">
                     <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">
                 </div>
-                <?php
-                $id_sys = $_GET['id_sys'];
-                require "php/db_connection.php";
-                if ($con) {
-                    $query = "SELECT * FROM sys_ql WHERE id_sys = $id_sys";
-                    $result = mysqli_query($con, $query);
-                    while ($row = mysqli_fetch_array($result)) {
-                        $id_sys = $row['id_sys'];
-                        $name_team_sys = $row['name_team_sys'];
-                        $name_sys = $row['name_sys'];
-                        $first_number = $row['first_number'];
-                        $name_unit_manager = $row['name_unit_manager'];
-                        $name_user_manager = $row['name_user_manager'];
-                        $describe_sys = $row['describe_sys'];
-                        $document_sys = $row['document_sys'];
-                        $created_at = $row['created_at'];
-                        $server_sys = $row['server_sys'];
-                        $ip_sys = $row['ip_sys'];
-                        $config_sys = $row['config_sys'];
+                <h3> tetstststtststststyayukasfjladgcfioaslđsdgyucfíadgfcáyidgfcsiayđgtáidu</h3>
 
-                    }
-                }
-                var_dump('ggggggg');
-                ?>
+
+
+                <!-- Modal xem chi tiết hệ thống -->
+
                 <div class="row">
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
@@ -162,14 +144,67 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Thoát</button>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-info btn-sm" onclick="goBack()">Quay lại</button>
+    </div>
+    <!-- edit cho ng dùng -->
+    <div class="modal modalCloseReload" id="editfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="witdh: 100%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="form-group row">
+                    <label for="email_address" class="col-md-4 col-form-label text-md-right">test tính năng</label>
+                    <div class="col-md-6">
+                        <select class="form-control pdm chosen-select" id="namePartner" name="namePartner">
+                            <!-- <option>Chọn đối tác </option> -->
+                            <?php foreach ($listPartner as $key => $partner) { ?>
+                                <option value="<?= $partner->id ?>"> <?= $partner->name ?> </option>
+                            <?php } ?>
+                        </select>
+                        <span class="error_text errNamePartner"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">Tài khoản </label>
+                    <div class="col-md-6">
+                        <input type="text" name="phoneUser" id="phoneUser" class="form-control" autocomplete="off">
+                        <span style="font-weight: bold; font-size: 15px;" class="error_text errCheck"></span>
+
+                        <span class="error_text errPhoneName"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">Tên tài khoản </label>
+                    <div class="col-md-6">
+                        <div id="result" style="margin-top:15px;">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    <button type="button" style="background:#FFC0CB;" class="btn btn-default d-none" id="test"
+                        data-toggle="modal" data-target="#modalAdd" onclick="editAccount()">Cập nhật đối tác cho tài
+                        khoản</button>
+                    <button id="hide_div" type="button" style="background:#FF9900;"
+                        class="btn btn-success btn-ok saveMenus btnAddMenu" onclick="addAccount()">Thêm mới tài
+                        khoản</button>
+                </div>
+            </div>
         </div>
     </div>
+    </div>
+    <!-- form content end -->
     <hr style="border-top: 2px solid #ff5252;">
+    </div>
+    </div>
 </body>
 
 </html>

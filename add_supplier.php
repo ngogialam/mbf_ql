@@ -27,12 +27,9 @@
           // header section end
         ?>
         <div class="row">
-          <div class="row col col-md-6" id="new_system_team">
+          <div class="row col col-md-6">
             <?php
-              if(isset($_GET["mess"]) && $_GET['mess']){
-                $mess = $_GET['mess'];
-                echo "<div class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>$mess</div>";
-              }
+              // form content
               require "sections/add_new_supplier.html";
             ?>
           </div>
