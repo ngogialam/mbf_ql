@@ -79,7 +79,7 @@
                   <th>Server hệ thống</th>
                   <th>Cấu hình hệ thống</th>
                   <th>Thời gian tạo</th>
-                  <th>Action</th>
+                  <th >Action</th> 
                 </tr>
               </thead>
               <tbody id="invoices_div">

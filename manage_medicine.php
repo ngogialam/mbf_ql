@@ -58,6 +58,7 @@
                   <th style="width:5%">STT</th>
                   <th style="width: 20%;">Tên đơn vị</th>
                   <th style="width: 20%;">Tên phòng ban</th>
+                  <th style="width: 20%;">Người tạo</th>
                   <th style="width: 20%;">Ngày tạo</th>
                   <th style="width: 15%;">Hành động</th>
                 </tr>
