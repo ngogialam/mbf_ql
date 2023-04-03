@@ -97,7 +97,7 @@ function changePassword() {
   if(!checkAdminPassword(old_password.value, 'old_password_error'))
     old_password.focus();
   else if(password.value.indexOf(' ') >= 0) {
-    
+    document.getElementById('password_error').style.display = "block";
     document.getElementById('password_error').innerHTML = "mustn't contain spaces!";
     password.focus();
   }

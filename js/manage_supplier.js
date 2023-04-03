@@ -44,13 +44,15 @@ function updateSupplier(id) {
   var file_des = document.querySelector('#file_des').files[0];
   var file_des_sv = document.getElementById('file_des_sv');
 
+  console.log(file_des)
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
       document.getElementById('suppliers_div').innerHTML = xhttp.responseText;
   };
-
+  var formData = new FormData();
+  
 
   xhttp.open('POST','php/manage_supplier.php',true);
   var formData = new FormData();
