@@ -60,7 +60,7 @@
             				<th style="width: 12%;">Số điện thoại</th>
                     <th style="width: 15%;">Gmail</th>
                     <th style="width: 10%;">Phòng</th>
-                    <th style="width: 12%;">Vị trí</th>
+                    <th style="width: 12%;">Chức vụ</th>
                     <th style="width: 12%;">Người tạo</th>
                     <th style="width: 12%;">Hành động</th>
             			</tr>
@@ -68,7 +68,7 @@
                 <tbody id="purchases_div">
                   <?php
                     require 'php/report.php';
-                    showPurchases(0);
+                    showUser(0);
                   ?>
             		</tbody>
             	</table>
