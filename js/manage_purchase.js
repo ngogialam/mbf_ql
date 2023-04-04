@@ -1,4 +1,4 @@
-function deletePurchase(id) {
+function deletePurchase(id_team_user) {
     var confirmation = confirm("Are you sure?");
     if (confirmation) {
         var xhttp = new XMLHttpRequest();
@@ -6,7 +6,7 @@ function deletePurchase(id) {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('purchases_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manage_purchase.php?action=delete&id=" + id, true);
+        xhttp.open("GET", "php/manage_purchase.php?action=delete&id=" + id_team_user, true);
         xhttp.send();
     }
 }
@@ -28,8 +28,8 @@ function updatePurchase(id_team_user) {
     var created_at = document.getElementById("created_at");
     if (!notNull(name_team_user.value, "name_team_user_error"))
         name_team_user.focus();
-    else if (!notNull(user_status.value, "user_status_error"))
-        user_status.focus();
+    // else if (!checkValue(user_status.value, "user_status_error"))
+    //     user_status.focus();
     else if (!notNull(create_by.value, "create_by_error"))
         create_by.focus();
     else if (!notNull(created_at.value, "created_at_error"))
@@ -38,7 +38,7 @@ function updatePurchase(id_team_user) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
+                document.getElementById('purchases_div').innerHTML = xhttp.responseText;
         };
         xhttp.open("GET", "php/manage_purchase.php?action=update&id_team_user=" + id_team_user + "&name_team_user=" + name_team_user.value + "&user_status=" + user_status.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
         xhttp.send();
