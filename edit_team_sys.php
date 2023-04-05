@@ -53,9 +53,7 @@
                         <div class="col col-md-12 form-group">
                             <label for="id_team_sys">Id nhóm hệ thống :</label>
                             <input id="id_team_sys" type="text" class="form-control" value="<?php echo $id_team_sys; ?>"
-                                placeholder="id_team_sys" onkeyup="validateName(this.value, 'id_error');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="id_error"
-                                style="display: none;"></code>
+                                placeholder="id_team_sys" disabled>
                         </div>
                     </div>
                     <div class="row col col-md-12">
@@ -63,9 +61,7 @@
                             <label for="name_team_sys">Tên nhóm hệ thống :</label>
                             <input id="name_team_sys" type="text" class="form-control"
                                 value="<?php echo $name_team_sys; ?>" placeholder="name_team_sys"
-                                onkeyup="validateName(this.value, 'name_team_sys_error');">
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="name_team_sys_error"
-                                style="display: none;"></code>
+                                >
                         </div>
                     </div>
                     <div class="row col col-md-12">
@@ -73,9 +69,7 @@
                             <label for="type_sys">Loại:</label>
                             <input id="type_sys" type="number" class="form-control"
                                 value="<?php echo $type_sys; ?>" placeholder="type_sys"
-                                onkeyup="validateName(this.value, 'type_sys');" >
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="type_sys"
-                                style="display: none;"></code>
+                                >
                         </div>
                     </div>
                     <div class="row col col-md-12">
@@ -90,9 +84,7 @@
                             <label for="create_by">Người tạo :</label>
                             <input id="create_by" type="text" class="form-control"
                                 value="<?php echo $create_by; ?>" placeholder="create by"
-                                onkeyup="validateName(this.value, 'create_by');" >
-                            <code class="text-danger small font-weight-bold float-right mb-2"
-                                id="create_by" style="display: none;"></code>
+                             >
                         </div>
                     </div>
                     <div class="row col col-md-12">
@@ -100,9 +92,7 @@
                             <label for="created_at">Ngày tạo :</label>
                             <input id="created_at" type="text" class="form-control"
                                 value="<?php echo $created_at; ?>" placeholder="created_at"
-                                onkeyup="validateName(this.value, 'created_at');" disabled>
-                            <code class="text-danger small font-weight-bold float-right mb-2" id="created_at"
-                                style="display: none;"></code>
+                                 disabled>
                         </div>
                     </div>
                     <div class="row col col-md-12">

@@ -69,12 +69,10 @@
                   <th>STT</th>
                   <th>ID hệ thống</th>
                   <th>Tên hệ thống </a></th>
-                  <th>Tên nhóm hệ thống </th>
-                  <th>Đầug số</th>
-                  <th>Tên đơn vị quản lý</th>
-                  <th>Tên người quản lý</th>
-                  <th>Mô tả hệ thống</th>
-                  <th>Tài liệu hệ thống</th>
+                  <th>Đầu số </th>
+                  <th>Đơn vị quản lý</th>
+                  <th>Người quản lý</th>
+                  <th>Nhóm hệ thống</th>
                   <th>IP hệ thống</th>
                   <th>Server hệ thống</th>
                   <th>Cấu hình hệ thống</th>
