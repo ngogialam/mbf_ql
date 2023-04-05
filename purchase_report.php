@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/home.css">
     <script src="js/suggestions.js"></script>
     <script src="js/add_new_purchase.js"></script>
-    <script src="js/manage_purchase.js"></script>
+    <script src="js/managerUser.js"></script>
     <script src="js/validateForm.js"></script>
     <script src="js/restrict.js"></script>
   </head>
@@ -67,7 +67,7 @@
             		</thead>
                 <tbody id="purchases_div">
                   <?php
-                    require 'php/report.php';
+                    require 'php/managerUser.php';
                     showUser(0);
                   ?>
             		</tbody>
