@@ -7,12 +7,12 @@
       $query = "DELETE FROM purchases WHERE VOUCHER_NUMBER = $id";
       $result = mysqli_query($con, $query);
       if(!empty($result))
-    		showPurchases(0);
+    		showUser(0);
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "edit") {
       $id = $_GET["id"];
-      showPurchases($id);
+      showUser($id);
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "update") {
@@ -25,13 +25,13 @@
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "cancel")
-      showPurchases(0);
+    showUser(0);
 
     if(isset($_GET["action"]) && $_GET["action"] == "search")
       searchPurchase(strtoupper($_GET["text"]), $_GET["tag"]);
   }
 
-  function showPurchases($id) {
+  function showUser($id) {
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
@@ -40,14 +40,14 @@
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
         if($row['id_user'] == $id)
-          showEditOptionsRow($seq_no, $row);
+        showEditUserRow($seq_no, $row);
         else
-          showPurchaseRow($seq_no, $row);
+          showUserRow($seq_no, $row);
       }
     }
   }
 
-  function showPurchaseRow($seq_no, $row) {
+  function showUserRow($seq_no, $row) {
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
@@ -64,10 +64,10 @@
           <i class="fa fa-fax"></i>
         </button>
       -->
-        <button href="" class="btn btn-info btn-sm" onclick="editPurchase(<?php echo $row['id_user']; ?>);">
+        <button href="" class="btn btn-info btn-sm" onclick="editUser(<?php echo $row['id_user']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deletePurchase(<?php echo $row['id_user']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteUser(<?php echo $row['id_user']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -75,7 +75,7 @@
     <?php
   }
 
-function showEditOptionsRow($seq_no, $row) {
+function showEditUserRow($seq_no, $row) {
   ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
@@ -117,7 +117,7 @@ function updatePurchase($id, $suppliers_name, $invoice_date, $grand_total, $paym
   $query = "UPDATE purchases SET SUPPLIER_NAME = '$suppliers_name', PURCHASE_DATE = '$invoice_date', TOTAL_AMOUNT = $grand_total, PAYMENT_STATUS = '$payment_status' WHERE VOUCHER_NUMBER = $id";
   $result = mysqli_query($con, $query);
   if(!empty($result))
-    showPurchases(0);
+  showUser(0);
 }
 
 function searchPurchase($text, $column) {
@@ -128,7 +128,7 @@ function searchPurchase($text, $column) {
     $result = mysqli_query($con, $query);
     while($row = mysqli_fetch_array($result)) {
       $seq_no++;
-      showPurchaseRow($seq_no, $row);
+      showUserRow($seq_no, $row);
     }
   }
 }
