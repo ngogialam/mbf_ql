@@ -4,7 +4,7 @@ require "db_connection.php";
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
     $id_team_user = $_GET["id_team_user"];
-    $query = "DELETE FROM purchases WHERE VOUCHER_NUMBER = $id_team_user";
+    $query = "DELETE FROM manager_team_user WHERE id_team_user = $id_team_user";
     $result = mysqli_query($con, $query);
     if (!empty($result))
       showPurchases(0);
@@ -53,7 +53,7 @@ function showPurchaseRow($seq_no, $row)
 ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['name_team_user'] ?></td>   
+    <td><?php echo $row['name_team_user'] ?></td>
     <td><?php if ($row['user_status'] == "1") {
           echo "Hoạt động";
         } else {
@@ -111,10 +111,16 @@ function showEditOptionsRow($seq_no, $row)
 function updatePurchase($id_team_user, $name_team_user, $user_status, $create_by, $created_at)
 {
   require "db_connection.php";
-  $query = "UPDATE manager_team_user SET SUPPLIER_NAME = '$suppliers_name', PURCHASE_DATE = '$invoice_date', TOTAL_AMOUNT = $grand_total, PAYMENT_STATUS = '$payment_status' WHERE VOUCHER_NUMBER = $id_team_user";
+  $query = "UPDATE manager_team_user SET name_team_user = '$name_team_user', user_status = '$user_status', create_by = '$create_by', created_at = '$created_at' WHERE id_team_user = $id_team_user";
   $result = mysqli_query($con, $query);
-  if (!empty($result))
-    showPurchases(0);
+  var_dump($query);
+  if (!empty($result)) {
+    echo "thành công";
+  } else {
+    echo "thất bại";
+  }
+
+  showPurchases(0);
 }
 
 function searchPurchase($text, $column)

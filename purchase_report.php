@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/home.css">
     <script src="js/suggestions.js"></script>
     <script src="js/add_new_purchase.js"></script>
-    <script src="js/manage_purchase.js"></script>
+    <script src="js/managerUser.js"></script>
     <script src="js/validateForm.js"></script>
     <script src="js/restrict.js"></script>
   </head>
@@ -60,15 +60,15 @@
             				<th style="width: 12%;">Số điện thoại</th>
                     <th style="width: 15%;">Gmail</th>
                     <th style="width: 10%;">Phòng</th>
-                    <th style="width: 12%;">Vị trí</th>
+                    <th style="width: 12%;">Chức vụ</th>
                     <th style="width: 12%;">Người tạo</th>
                     <th style="width: 12%;">Hành động</th>
             			</tr>
             		</thead>
                 <tbody id="purchases_div">
                   <?php
-                    require 'php/report.php';
-                    showPurchases(0);
+                    require 'php/managerUser.php';
+                    showUser(0);
                   ?>
             		</tbody>
             	</table>
