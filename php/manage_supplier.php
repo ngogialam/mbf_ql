@@ -4,7 +4,7 @@
   if($con) {
     if(isset($_GET["action"]) && $_GET["action"] == "delete") {
       $id = $_GET["id"];
-      $query = "DELETE FROM suppliers WHERE ID = $id";
+      $query = "DELETE FROM team_sys_manager WHERE id_team_sys = $id";
       $result = mysqli_query($con, $query);
       if(!empty($result))
     		showSuppliers(0);
