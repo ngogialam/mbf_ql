@@ -4,7 +4,7 @@
   if($con) {
     if(isset($_GET["action"]) && $_GET["action"] == "delete") {
       $id = $_GET["id"];
-      $query = "DELETE FROM purchases WHERE VOUCHER_NUMBER = $id";
+      $query = "DELETE FROM manager_user WHERE id_user = $id";
       $result = mysqli_query($con, $query);
       if(!empty($result))
     		showUser(0);
@@ -59,11 +59,6 @@
       <td><?php echo $row['positon_manager']; ?></td>
       <td><?php echo $row['create_by']; ?></td>
       <td>
-        <!--
-        <button class="btn btn-warning btn-sm" onclick="printPurchase(<?php echo $row['VOUCHER_NUMBER']; ?>);">
-          <i class="fa fa-fax"></i>
-        </button>
-      -->
         <button href="" class="btn btn-info btn-sm" onclick="editUser(<?php echo $row['id_user']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>

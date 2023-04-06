@@ -4,7 +4,7 @@ require "db_connection.php";
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
     $id = $_GET["id"];
-    $query = "DELETE FROM medicines WHERE ID = $id";
+    $query = "DELETE FROM unit_sys WHERE id_unit_sys = $id";
     $result = mysqli_query($con, $query);
     if (!empty($result))
       showMedicines(0);
