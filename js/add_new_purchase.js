@@ -261,3 +261,19 @@ function addNewPurchase(suppliers_name, invoice_number, payment_type, invoice_da
   xhttp.open("GET", "php/add_new_purchase.php?action=add_new_purchase&suppliers_name=" + suppliers_name + "&invoice_number=" + invoice_number + "&payment_type=" + payment_type + "&invoice_date=" + invoice_date + "&invoice_date=" + invoice_date + "&grand_total=" + grand_total, true);
   xhttp.send();
 }
+
+
+function addNewGroupUser(){
+  document.getElementById("team_user").innerHTML = "";
+  var name_team_user = document.getElementById("name_team_user");
+  var user_status = document.getElementById("user_status");
+  var create_by = document.getElementById("create_by");
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+      if (xhttp.readyState = 4 && xhttp.status == 200)
+          document.getElementById("team_user").innerHTML = xhttp.responseText;
+  };
+  xhttp.open("GET", "php/add_new_team.php?action=add_new_team&name_team_user=" + name_team_user.value + "&user_status=" + user_status.value + "&create_by=" + create_by.value , true);
+  xhttp.send();
+}
