@@ -1,53 +1,64 @@
-function deletePurchase(id_team_user) {
+function deleteUser(id_team_user) {
     var confirmation = confirm("Are you sure?");
     if (confirmation) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+                document.getElementById('user_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manage_purchase.php?action=delete&id=" + id_team_user, true);
+        xhttp.open("GET", "php/managerUser.php?action=delete&id_user=" + id_user, true);
         xhttp.send();
     }
 }
 
-function editPurchase(id_team_user) {
+function editUser(id_user) {
+    console.log("55555555");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+            document.getElementById('user_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_purchase.php?action=edit&id_team_user=" + id_team_user, true);
+    xhttp.open("GET", "php/managerUser.php?action=edit&id_user=" + id_user, true);
     xhttp.send();
 }
 
-function updatePurchase(id_team_user) {
-    var name_team_user = document.getElementById("name_team_user");
-    var user_status = document.getElementById("user_status");
+function updateUser(id_user) {
+    var id_team_user = document.getElementById("id_team_user");
+    var name_user_manager = document.getElementById("name_user_manager");
+    var sdt = document.getElementById("sdt");
+    var gmail = document.getElementById("gmail");
+    var room = document.getElementById("room");
+    var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
     var created_at = document.getElementById("created_at");
-    if (!notNull(name_team_user.value, "name_team_user_error"))
-        name_team_user.focus();
-    // else if (!checkValue(user_status.value, "user_status_error"))
-    //     user_status.focus();
+    if (!validateName(name_user_manager.value, "name_err"))
+        name_user_manager.focus();
+    else if (!validateContactNumber(sdt.value, "sdt_err"))
+        sdt.focus();
+    else if (!validateAddress(gmail.value, "gmail_err"))
+        gmail.focus();
+    else if (!notNull(room.value, 'room_err'))
+        room.focus();
+    else if (!notNull(position_manager.value, 'position_manager_err'))
+        position_manager.focus();
     else if (!notNull(create_by.value, "create_by_error"))
         create_by.focus();
-    else if (!notNull(created_at.value, "created_at_error"))
+    else if (!notNull(created_at.value, "created_at_err"))
         created_at.focus();
     else {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+                document.getElementById('user_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manage_purchase.php?action=update&id_team_user=" + id_team_user + "&name_team_user=" + name_team_user.value + "&user_status=" + user_status.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
+        xhttp.open("GET", "php/managerUser.php?action=update&id_user=" + id_user + "&id_team_user=" + id_team_user.value + "&name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
         xhttp.send();
     }
 }
 
 function printPurchase(id) {
     //Get the HTML of div
-    var divElements = document.getElementById("purchases_div").innerHTML;
+    var divElements = document.getElementById("user_div").innerHTML;
 
     //Get the HTML of whole page
     var oldPage = document.body.innerHTML;
@@ -66,9 +77,9 @@ function cancel() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+            document.getElementById('user_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_purchase.php?action=cancel", true);
+    xhttp.open("GET", "php/managerUser.php?action=cancel", true);
     xhttp.send();
 }
 
@@ -97,8 +108,8 @@ function searchPurchase(text, tag) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+            document.getElementById('user_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_purchase.php?action=search&text=" + text + "&tag=" + tag, true);
+    xhttp.open("GET", "php/managerUser.php?action=search&text=" + text + "&tag=" + tag, true);
     xhttp.send();
 }
