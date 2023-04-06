@@ -45,7 +45,7 @@ function updateMedicineStock(id_unit_user) {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manage_medicine_stock.php?action=update&id_unit_user=" + id_unit_user + "&name_unit_user=" + name_unit_user.value + "&name_room=" + name_room_unit.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
+        xhttp.open("GET", "php/manage_medicine_stock.php?action=update&id_unit_user=" + id_unit_user + "&name_unit_user=" + name_unit_user.value + "&name_room_unit=" + name_room_unit.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
         xhttp.send();
     }
     document.getElementById("name_room_unit").value;
