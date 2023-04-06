@@ -20,7 +20,7 @@
       <div class="modal-dialog">
       	<div class="modal-content">
       		<div class="modal-header" style="background-color: #ff5252; color: white">
-            <div class="font-weight-bold">Add New Supplier</div>
+            <div class="font-weight-bold">Thêm mới đơn vị quản lý</div>
       			<button class="close" style="outline: none;" onclick="document.getElementById('add_new_supplier_model').style.display = 'none';"><i class="fa fa-close"></i></button>
       		</div>
       		<div class="modal-body">
@@ -49,7 +49,7 @@
           <div class="row col col-md-6">
             <?php
               // form content
-              require "sections/add_new_agency_unit.html";
+              require "sections/add_new_unit_manager.html";
             ?>
           </div>
         </div>

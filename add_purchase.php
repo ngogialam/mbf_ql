@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Add New Purchase</title>
+    <title>Thêm mới nhóm người sử dụng</title>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
@@ -22,7 +22,7 @@
       <div class="modal-dialog">
       	<div class="modal-content">
       		<div class="modal-header" style="background-color: #ff5252; color: white">
-            <div class="font-weight-bold">Add New Supplier</div>
+            <div class="font-weight-bold">Thêm mới nhóm người sử dụng</div>
       			<button class="close" style="outline: none;" onclick="document.getElementById('add_new_supplier_model').style.display = 'none';"><i class="fa fa-close"></i></button>
       		</div>
       		<div class="modal-body">
@@ -42,7 +42,7 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('bar-chart', 'Thêm mới người dùng', 'Thêm người sử dụng');
+          createHeader('bar-chart', 'Thêm mới nhóm người dùng', 'Thêm mới nhóm người sử dụng');
         ?>
         <!-- header section end -->
 
@@ -50,34 +50,49 @@
         <div class="row">
           <!-- manufacturer details content -->
           <div class="row col col-md-12">
-
-            <div class="col col-md-4 form-group">
-              <label class="font-weight-bold" for="suppliers_name">Tên nhóm người sử dụng :</label>
-              <input id="suppliers_name" type="text" class="form-control" placeholder="Tên nhóm người sử dụng" name="name_team_user" onkeyup="showSuggestions(this.value, 'supplier');">
-              <div id="supplier_suggestions" class="list-group position-fixed" style="z-index: 1; width: 25.10%; overflow: auto; max-height: 200px;"></div>
-            </div>
-
-            <div class="col col-md-3 form-group">
-              <label class="font-weight-bold" for=""> Trạng thái người sử dụng:</label>
-              <input type="number" class="form-control" placeholder="Trạng thái người sử dụng" id="invoice_number" name="user_status" onblur="notNull(this.value, 'invoice_number_error'); checkInvoice(this.value, 'invoice_number_error');">
-              <code class="text-danger small font-weight-bold float-right" id="invoice_number_error" style="display: none;"></code>
-            </div>
-            <div class="col col-md-3 form-group">
-              <label class="font-weight-bold" for=""> Người tạo:</label>
-              <input type="number" class="form-control" placeholder="Người t" id="invoice_number" name="create_by" onblur="notNull(this.value, 'invoice_number_error'); checkInvoice(this.value, 'invoice_number_error');">
-              <code class="text-danger small font-weight-bold float-right" id="invoice_number_error" style="display: none;"></code>
-            </div>
-          </div>
-
           <div class="row col col-md-12">
-            <div class="col col-md-2 font-weight-bold" style="color: green; cursor:pointer" onclick="document.getElementById('add_new_supplier_model').style.display = 'block';">
-            	<i class="fa fa-plus"></i>&nbsp;Thêm mới nhóm người sử dụng  
-            </div>
-          </div>
-          <!-- supplier details content end -->
-        </div>
-        <!-- form content end -->
-        <hr style="border-top: 2px solid #ff5252;">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="medicine_name"> Tên nhóm người sử dụng :</label>
+      <input type="text" class="form-control" id="name_team_user" placeholder="Tên nhóm người sử dụng" >
+    </div>
+  </div>
+  
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="generic_name">Trạng thái người sử dụng :</label>
+        <select name="user_status" id="user_status" class=" form-control pdm chosen-select col col-md-12" >
+              <option value= '1' selected='selected'>Hoạt động</option>
+              <option value='2'>Không hoạt động</option>
+        </select>
+    </div>
+  </div>
+  
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="suppliers_name">Người tạo :</label>
+      <input  type="text" class="form-control" id="create_by" placeholder="Người tạo" name="suppliers_name" >
+    </div>
+  </div>
+  
+  <hr>
+  
+  
+  <!-- new user button -->
+  <div class="row col col-md-12">
+    &emsp;
+    <div class="form-group m-auto">
+      <button class="btn btn-primary form-control" onclick="addNewGroupUser();">Thêm mới nhóm người sử dụng</button>
+    </div>
+    <!--
+    &emsp;
+    <div class="form-group">
+      <button class="btn btn-success form-control">Save and Add Another</button>
+    </div>
+  -->
+  </div>
+  <!-- customer details content end -->
+  <!-- result message -->
+  <div id="team_user" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;"></div>
       </div>
     </div>
   </body>

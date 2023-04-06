@@ -143,13 +143,6 @@ function addSupplier() {
     var type_sys = document.getElementById("type_sys");
     var describe_sys = document.getElementById("describe_sys");
     var create_by = document.getElementById("create_by");
-    // if (!validateName(name_team_sys.value, "name_team_sys"))
-    //     name_team_sys.focus();
-    // else if (!validateName(type_sys.value, "type_sys"))
-    //     type_sys.focus();
-    // else if (!validateName(describe_sys.value, "describe_sys"))
-    //     describe_sys.focus();
-    // else {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
@@ -160,25 +153,65 @@ function addSupplier() {
     // }
 }
 
-function addMedicine() {
+function addUnitManager() {
     document.getElementById("medicine_acknowledgement").innerHTML = "";
-    var name = document.getElementById("medicine_name");
-    var packing = document.getElementById("packing");
-    var generic_name = document.getElementById("generic_name");
-    var suppliers_name = document.getElementById("suppliers_name");
-    if (!notNull(name.value, "medicine_name_error"))
-        name.focus();
-    else if (!notNull(packing.value, "pack_error"))
-        packing.focus();
-    else if (!notNull(generic_name.value, "generic_name_error"))
-        generic_name.focus();
+    var name = document.getElementById("name_unit_sys");
+    var packing = document.getElementById("name_room");
+    var generic_name = document.getElementById("create_by");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/add_new_unit_manager.php?name_unit_sys=" + name.value + "&name_room=" + packing.value + "&create_by=" + generic_name.value , true);
+    xhttp.send();
+}
+
+function addUnitUser() {
+    document.getElementById("medicine_acknowledgement").innerHTML = "";
+    var name_unit_user = document.getElementById("name_unit_user");
+    var name_room_unit = document.getElementById("name_room_unit");
+    var create_by = document.getElementById("create_by");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/add_new_unit_user.php?name_unit_user=" + name_unit_user.value + "&name_room_unit=" + name_room_unit.value + "&create_by=" + create_by.value , true);
+    xhttp.send();
+}
+
+function addManager() {
+    document.getElementById("customer_acknowledgement").innerHTML = "";
+    var name_user_manager = document.getElementById("name_user_manager");
+    var sdt = document.getElementById("sdt");
+    var gmail = document.getElementById("gmail");
+    var room = document.getElementById("room");
+    var position_manager = document.getElementById("position_manager");
+    var create_by = document.getElementById("create_by");
+    if (!validateName(name_user_manager.value, "name_err"))
+        name_user_manager.focus();
+    else if (!validateContactNumber(sdt.value, "sdt_err"))
+        sdt.focus();
+    else if (!validateAddress(gmail.value, "gmail_err"))
+        gmail.focus();
+    else if (!validateName(room.value, 'room_err'))
+        room.focus();
+    else if (!validateName(position_manager.value, 'position_manager_err'))
+        position_manager.focus();
+    else if (!validateName(create_by.value, 'create_by_err'))
+        create_by.focus();
     else {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
+                document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/add_new_medicine.php?name=" + name.value + "&packing=" + packing.value + "&generic_name=" + generic_name.value + "&suppliers_name=" + suppliers_name.value, true);
+        xhttp.open("GET", "php/add_new_user.php?name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
         xhttp.send();
     }
+    console.log(name_user_manager);
+    return false;
 }
