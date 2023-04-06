@@ -45,7 +45,7 @@ foreach ($data as $row) {
     $excel->getActiveSheet()->setCellValue('C' . $numRow, $row['sdt']);
     $excel->getActiveSheet()->setCellValue('D' . $numRow, $row['gmail']);
     $excel->getActiveSheet()->setCellValue('E' . $numRow, $row['room']);
-    $excel->getActiveSheet()->setCellValue('F' . $numRow, $row['positon_manager']);
+    $excel->getActiveSheet()->setCellValue('F' . $numRow, $row['position_manager']);
     $excel->getActiveSheet()->setCellValue('G' . $numRow, $row['create_by']);
     $excel->getActiveSheet()->setCellValue('H' . $numRow, $row['created_at']);
     $numRow++;
