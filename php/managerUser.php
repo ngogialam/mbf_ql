@@ -56,7 +56,7 @@
       <td><?php echo $row['sdt']; ?></td>
       <td><?php echo $row['gmail']; ?></td>
       <td><?php echo $row['room']; ?></td>
-      <td><?php echo $row['position_manager']; ?></td>
+      <td><?php echo $row['positon_manager']; ?></td>
       <td><?php echo $row['create_by']; ?></td>
       <td>
         <!--
