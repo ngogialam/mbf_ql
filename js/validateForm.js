@@ -112,27 +112,14 @@ function addCustomer() {
     var room = document.getElementById("room");
     var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
-    if (!validateName(name_user_manager.value, "name_err"))
-        name_user_manager.focus();
-    else if (!validateContactNumber(sdt.value, "sdt_err"))
-        sdt.focus();
-    else if (!validateAddress(gmail.value, "gmail_err"))
-        gmail.focus();
-    else if (!validateName(room.value, 'room_err'))
-        room.focus();
-    else if (!validateName(position_manager.value, 'position_manager_err'))
-        position_manager.focus();
-    else if (!validateName(create_by.value, 'create_by_err'))
-        create_by.focus();
-    else {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
-        };
-        xhttp.open("GET", "php/add_new_customer.php?name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
-        xhttp.send();
-    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/add_new_customer.php?name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
+    xhttp.send();
+
     console.log(name_user_manager);
     return false;
 }
@@ -189,29 +176,17 @@ function addManager() {
     var sdt = document.getElementById("sdt");
     var gmail = document.getElementById("gmail");
     var room = document.getElementById("room");
+    var team_sys_manager = document.getElementById("team_sys_manager");
     var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
-    if (!validateName(name_user_manager.value, "name_err"))
-        name_user_manager.focus();
-    else if (!validateContactNumber(sdt.value, "sdt_err"))
-        sdt.focus();
-    else if (!validateAddress(gmail.value, "gmail_err"))
-        gmail.focus();
-    else if (!validateName(room.value, 'room_err'))
-        room.focus();
-    else if (!validateName(position_manager.value, 'position_manager_err'))
-        position_manager.focus();
-    else if (!validateName(create_by.value, 'create_by_err'))
-        create_by.focus();
-    else {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
-        };
-        xhttp.open("GET", "php/add_new_user.php?name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
-        xhttp.send();
-    }
-    console.log(name_user_manager);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/add_new_user.php?name_user_manager=" + name_user_manager.value+ "&team_sys_manager="+ team_sys_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
+    xhttp.send();
+    console.log(team_sys_manager);
     return false;
 }

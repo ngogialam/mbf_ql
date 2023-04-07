@@ -3,10 +3,18 @@
   if(isset($_GET["action"]) && $_GET["action"] == "delete") {
     require "db_connection.php";
     $id_sys = $_GET["id_sys"];
-    $query = "DELETE FROM sys_ql WHERE id_sys = $id_sys";
-    $result = mysqli_query($con, $query);
-    if(!empty($result))
-  		showInvoices();
+
+    try{
+      $query1 = "DELETE FROM sys_ql WHERE id_sys = $id_sys";
+      $result1 = mysqli_query($con, $query1);
+      if (!empty($result1))
+        showCustomers(0);
+    } catch (Exception $e){
+      ?>
+        <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
+      <?php
+      showCustomers(0);
+    }
   }
 
   if(isset($_GET["action"]) && $_GET["action"] == "refresh")
