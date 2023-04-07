@@ -227,43 +227,25 @@
       }
     }
   }
-  function searchSysNumber($number) {
+  function printInvoice($invoice_number) {
     require "db_connection.php";
     if($con) {
-      $seq_no = 0;
-      $query = "SELECT * FROM sys_ql WHERE UPPER(ip_sys) LIKE '%$number%'";
+      $query = "SELECT * FROM sales INNER JOIN customers ON sales.CUSTOMER_ID = customers.ID WHERE INVOICE_NUMBER = $invoice_number";
       $result = mysqli_query($con, $query);
-      while($row = mysqli_fetch_array($result)) {
-        $seq_no++;
-        showInvoiceRow($seq_no, $row);
-      }
-    }
-  }
+      $row = mysqli_fetch_array($result);
+      $customer_name = $row['NAME'];
+      $address = $row['ADDRESS'];
+      $contact_number = $row['CONTACT_NUMBER'];
+      $doctor_name = $row['DOCTOR_NAME'];
+      $doctor_address = $row['DOCTOR_ADDRESS'];
 
-
-
-
-  function showDetailSys($id_sys, $mess){
-    // header section end
-    require "db_connection.php";
-    if ($con) {
-        $query = "SELECT * FROM sys_ql WHERE id_sys = $id_sys";
-        $result = mysqli_query($con, $query);
-        $row = mysqli_fetch_array($result);
-        $id_unit_user_sys = $row['unit_user_id'];
-        $id_unit_sys_sys = $row['unit_sys_id'];
-        $id_user_manager_sys = $row['user_manager_id'];
-        $id_team_sys_sys = $row['team_sys_id'];
-
-        $name_sys = $row['name_sys'];
-        $first_number = $row['first_number'];
-        $describe_sys = $row['describe_sys'];
-        $document_sys = $row['document_sys'];
-        $created_at = $row['created_at'];
-        $server_sys = $row['server_sys'];
-        $ip_sys = $row['ip_sys'];
-        $config_sys = $row['config_sys'];
-        $file_des = $row['file_des'];
+      $query = "SELECT * FROM invoices WHERE INVOICE_NUMBER = $invoice_number";
+      $result = mysqli_query($con, $query);
+      $row = mysqli_fetch_array($result);
+      $invoice_date = $row['INVOICE_DATE'];
+      $total_amount = $row['TOTAL_AMOUNT'];
+      $total_discount = $row['TOTAL_DISCOUNT'];
+      $net_total = $row['NET_TOTAL'];
     }
     ?>
     <div class="row">
