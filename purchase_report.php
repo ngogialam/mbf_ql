@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Purchase</title>
+    <title>Danh sách người dùng</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -55,17 +55,18 @@
             		<thead>
             			<tr>
             				<th style="width: 1%;">STT</th>
-                    <th style="width: 12%;">Nhóm người sử dụng</th>
-                    <th style="width: 18%;">Tên người dùng</th>
-            				<th style="width: 12%;">Số điện thoại</th>
-                    <th style="width: 15%;">Gmail</th>
-                    <th style="width: 10%;">Phòng</th>
-                    <th style="width: 12%;">Chức vụ</th>
-                    <th style="width: 12%;">Người tạo</th>
-                    <th style="width: 12%;">Hành động</th>
+                    <th >Nhóm người sử dụng</th>
+                    <th>Tên người dùng</th>
+            				<th >Số điện thoại</th>
+                    <th >Gmail</th>
+                    <th >Phòng</th>
+                    <th>Chức vụ</th>
+                    <th >Người tạo</th>
+                    <th>Thời gian tạo</th>
+                    <th>Hành động</th>
             			</tr>
             		</thead>
-                <tbody id="purchases_div">
+                <tbody id="user_div">
                   <?php
                     require 'php/managerUser.php';
                     showUser(0);
