@@ -69,12 +69,12 @@
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
-                  <th>STT</th>
-                  <th>ID hệ thống</th>
+                  <th>STT</th>                 
                   <th>Tên hệ thống </a></th>
                   <th>Đầu số </th>
                   <th>Đơn vị quản lý</th>
                   <th>Người quản lý</th>
+                  <th>Mô tả hệ thống</th>
                   <th>Nhóm hệ thống</th>
                   <th>IP hệ thống</th>
                   <th>Server hệ thống</th>

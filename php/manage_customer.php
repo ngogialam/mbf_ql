@@ -3,7 +3,7 @@ require "db_connection.php";
 
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-    $id_user_manager = $_GET["id"];
+    $id_user_manager = $_GET["id_user_manager"];
     try{
       $query1 = "DELETE FROM user_manager WHERE id_user_manager = $id_user_manager";
       $result1 = mysqli_query($con, $query1);
