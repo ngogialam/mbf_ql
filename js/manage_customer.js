@@ -74,6 +74,3 @@ function searchCustomer(text) {
 
 var myDiv = document.getElementById("myDiv");
 // Hẹn thời gian 5 giây và sau đó ẩn thẻ div
-// setTimeout(function() {
-//     myDiv.style.display = "none";
-// }, 1000);
