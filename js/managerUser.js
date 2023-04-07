@@ -1,4 +1,4 @@
-function deleteUser(id_team_user) {
+function deleteUser(id_user) {
     var confirmation = confirm("Are you sure?");
     if (confirmation) {
         var xhttp = new XMLHttpRequest();

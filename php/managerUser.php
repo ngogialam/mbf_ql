@@ -2,9 +2,9 @@
 require "db_connection.php";
   if($con) {
     if(isset($_GET["action"]) && $_GET["action"] == "delete") {
-      $id = $_GET["id"];
+      $id_user = $_GET["id_user"];
       try{
-        $query1 = "DELETE FROM manager_user WHERE id_user = $id";
+        $query1 = "DELETE FROM manager_user WHERE id_user = $id_user";
         $result1 = mysqli_query($con, $query1);
         if (!empty($result1))
         showUser(0);

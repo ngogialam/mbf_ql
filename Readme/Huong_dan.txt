@@ -1,0 +1,5 @@
+Hướng dẫn:
+- Tải bản xampp-730 trên rồi giải nén
+- Vào phpmyadmin tạo db tên "htql_mbf"
+- insert database bd_ht ở trên 
+- chạy và đăng nhập 
