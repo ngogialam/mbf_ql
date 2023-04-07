@@ -1,39 +1,45 @@
 <?php
 require "db_connection.php";
+  if($con) {
+    if(isset($_GET["action"]) && $_GET["action"] == "delete") {
+      $id = $_GET["id"];
+      try{
+        $query1 = "DELETE FROM manager_user WHERE id_user = $id";
+        $result1 = mysqli_query($con, $query1);
+        if (!empty($result1))
+        showUser(0);
+      } catch (Exception $e){
+        ?>
+          <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
+        <?php
+          showUser(0);
+        }
+        
+    }
 
-if ($con) {
-  if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-    $id_user = $_GET["id_user"];
+    if (isset($_GET["action"]) && $_GET["action"] == "edit") {
+      $id_user = $_GET["id_user"];
+      showUser($id_user);
+    }
 
-    $query = "DELETE FROM manager_user WHERE id_user = $id_user";
-    $result = mysqli_query($con, $query);
-    if (!empty($result))
+    if (isset($_GET["action"]) && $_GET["action"] == "update") {
+      $id_user = $_GET["id_user"];
+      $id_team_user = $_GET["id_team_user"];
+      $name_user_manager = ucwords($_GET["name_user_manager"]);
+      $sdt = $_GET["sdt"];
+      $gmail = ucwords($_GET["gmail"]);
+      $room = ucwords($_GET["room"]);
+      $position_manager = ucwords($_GET["position_manager"]);
+      $create_by = $_GET["create_by"];
+      $created_at = $_GET["created_at"];
+      updateUser($id_user, $id_team_user, $name_user_manager, $sdt, $gmail, $room, $position_manager, $create_by, $created_at);
+    }
+
+    if (isset($_GET["action"]) && $_GET["action"] == "cancel")
       showUser(0);
-  }
 
-  if (isset($_GET["action"]) && $_GET["action"] == "edit") {
-    $id_user = $_GET["id_user"];
-    showUser($id_user);
-  }
-
-  if (isset($_GET["action"]) && $_GET["action"] == "update") {
-    $id_user = $_GET["id_user"];
-    $id_team_user = $_GET["id_team_user"];
-    $name_user_manager = ucwords($_GET["name_user_manager"]);
-    $sdt = $_GET["sdt"];
-    $gmail = ucwords($_GET["gmail"]);
-    $room = ucwords($_GET["room"]);
-    $position_manager = ucwords($_GET["position_manager"]);
-    $create_by = $_GET["create_by"];
-    $created_at = $_GET["created_at"];
-    updateUser($id_user, $id_team_user, $name_user_manager, $sdt, $gmail, $room, $position_manager, $create_by, $created_at);
-  }
-
-  if (isset($_GET["action"]) && $_GET["action"] == "cancel")
-    showUser(0);
-
-  if (isset($_GET["action"]) && $_GET["action"] == "search")
-    searchUser(strtoupper($_GET["text"]), $_GET["tag"]);
+    if (isset($_GET["action"]) && $_GET["action"] == "search")
+      searchUser(strtoupper($_GET["text"]), $_GET["tag"]);
 }
 
 function showUser($id_user)
