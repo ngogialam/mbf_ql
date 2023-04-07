@@ -4,10 +4,18 @@
   if($con) {
     if(isset($_GET["action"]) && $_GET["action"] == "delete") {
       $id = $_GET["id"];
-      $query = "DELETE FROM suppliers WHERE ID = $id";
-      $result = mysqli_query($con, $query);
-      if(!empty($result))
-    		showSuppliers(0);
+
+      try{
+        $query1 = "DELETE FROM team_sys_manager WHERE id_team_sys = $id";
+        $result1 = mysqli_query($con, $query1);
+        if (!empty($result1))
+        showSuppliers(0);
+      } catch (Exception $e){
+        ?>
+          <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
+        <?php
+          showSuppliers(0);
+        }
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "edit") {

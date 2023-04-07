@@ -11,6 +11,19 @@ function deletePurchase(id_team_user) {
     }
 }
 
+function deleteUser(id) {
+    var confirmation = confirm("Are you sure?");
+    if(confirmation) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if(xhttp.readyState = 4 && xhttp.status == 200)
+          document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+      };
+      xhttp.open("GET", "php/managerUser.php?action=delete&id=" + id, true);
+      xhttp.send();
+    }
+  }
+
 function editPurchase(id_team_user) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

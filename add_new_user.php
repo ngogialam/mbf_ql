@@ -40,6 +40,34 @@
     </div>
 </div>
 
+<div class="row col col-md-12" style="flex-direction: row-reverse;">
+
+<div class="col col-md-12 form-group">
+    <label for="name_team_sys">Tên nhóm hệ thống :</label>
+    <?php
+    require "php/db_connection.php";
+    $team_sys = "";
+    if ($con) {
+        $query = "SELECT * FROM team_sys_manager";
+        $result = mysqli_query($con, $query);
+
+        echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" >';
+        while ($row = mysqli_fetch_assoc($result)) {
+            $id_team_sys = $row['id_team_sys'];
+            $name_team_sys = $row['name_team_sys'];
+            if ($id_team_sys == $id_team_sys_sys){
+                $team_sys = $name_team_sys;
+                echo "<option value= '$id_team_sys' selected='selected'>$name_team_sys</option>";
+            }
+            else
+                echo "<option value= '$id_team_sys' >$name_team_sys</option>";
+        }
+        echo '</select>';
+    }
+    ?>
+</div>
+</div>
+
 <!-- customer address control -->
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
