@@ -219,6 +219,19 @@
       }
     }
   }
+  function searchSysNumber($number) {
+    require "db_connection.php";
+    if($con) {
+      $seq_no = 0;
+      $query = "SELECT * FROM sys_ql WHERE UPPER(ip_sys) LIKE '%$number%'";
+      $result = mysqli_query($con, $query);
+      while($row = mysqli_fetch_array($result)) {
+        $seq_no++;
+        showInvoiceRow($seq_no, $row);
+      }
+    }
+  }
+
 
 
 

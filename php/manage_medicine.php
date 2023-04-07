@@ -107,6 +107,13 @@ function updateMedicine($id_unit_sys, $name_unit_sys, $name_room, $create_by, $c
   require "db_connection.php";
   $query = "UPDATE unit_sys SET name_unit_sys = '$name_unit_sys', name_room = '$name_room', create_by = '$create_by', created_at = '$created_at' WHERE id_unit_sys = $id_unit_sys";
   $result = mysqli_query($con, $query);
+  // if ($result) {
+  //   $_SESSION['message'] = "Cập nhật dữ liệu thành công.";
+  //   $_SESSION['status'] = "success";
+  // } else {
+  //   $_SESSION['message'] = "Cập nhật dữ liệu thất bại: ";
+  //   $_SESSION['status'] = "error";
+  // }
   if (!empty($result))
     // showMedicines(0);
     echo "Thành công";

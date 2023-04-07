@@ -18,7 +18,7 @@
   <script src="js/restrict.js"></script>
 </head>
 
-<body>
+<body> 
   <!-- including side navigations -->
   <?php include("sections/sidenav.html"); ?>
 
