@@ -44,6 +44,16 @@ function searchInvoice(text, tag) {
     xhttp.send();
 }
 
+function searchSysNumber(number, tag) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById('invoices_div').innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/manage_invoice.php?action=search&number=" + number + "&tag=" + tag, true);
+    xhttp.send();
+}
+
 function printInvoice(invoice_number) {
     var print_content;
     var xhttp = new XMLHttpRequest();
@@ -110,13 +120,13 @@ function edit(action) {
         document.getElementById('admin_acknowledgement').innerHTML = "";
 }
 
-function update(){
+function update() {
     var id_sys = document.getElementById('id_sys').value;
     var team_sys_manager = document.getElementById("team_sys_manager").value;
     var name_sys = document.getElementById("name_sys").value;
     var first_number = document.getElementById("first_number").value;
     var unit_sys = document.getElementById("unit_sys").value;
-    
+
     var unit_user = document.getElementById("unit_user").value;
     var manager_user = document.getElementById("manager_user").value;
     var describe = document.getElementById("describe_sys").value;
@@ -127,7 +137,7 @@ function update(){
     var config_sys = document.getElementById("config_sys").value;
     var create_by = document.getElementById("create_by").value;
     var file_des = document.querySelector('#file_des').files[0];
-    
+
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -152,11 +162,11 @@ function update(){
     formData.append('config_sys', config_sys);
     formData.append('create_by', create_by);
     formData.append("file_des", file_des);
-    
+
     xhttp.send(formData);
 }
 
-function create(){
+function create() {
     var team_sys_manager = document.getElementById("team_sys_manager").value;
     var name_sys = document.getElementById("name_sys").value;
     var first_number = document.getElementById("first_number").value;
@@ -170,7 +180,7 @@ function create(){
     var config_sys = document.getElementById("config_sys").value;
     var create_by = document.getElementById("create_by").value;
     var file_des = document.querySelector('#file_des').files[0];
-    
+
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -194,6 +204,6 @@ function create(){
     formData.append('config_sys', config_sys);
     formData.append('create_by', create_by);
     formData.append("file_des", file_des);
-    
+
     xhttp.send(formData);
 }
