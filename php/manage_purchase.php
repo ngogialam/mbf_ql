@@ -4,10 +4,18 @@ require "db_connection.php";
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
     $id_team_user = $_GET["id"];
-    $query = "DELETE FROM manager_team_user WHERE id_team_user = $id_team_user";
-    $result = mysqli_query($con, $query);
-    if (!empty($result))
-      showPurchases(0);
+
+    try{
+      $query1 = "DELETE FROM manager_team_user WHERE id_team_user = $id_team_user";
+      $result1 = mysqli_query($con, $query1);
+      if (!empty($result1))
+        showPurchases(0);
+    } catch (Exception $e){
+      ?>
+        <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
+      <?php
+        showPurchases(0);
+      }
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "edit") {
