@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <script src="bootstrap/js/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="shortcut icon" href="images/icon.svg" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/sidenav.css">
@@ -37,10 +36,11 @@
 
         <div class="col-md-12 form-group form-inline">
           <label class="font-weight-bold" for="">Search :&emsp;</label>
-          <input type="text" class="form-control" id="" placeholder="Tên đơn vị/ Tên phòng ban "  style="width:50%"
-            onkeyup="searchMedicine(this.value);">
-          &emsp;        
-        
+          <input type="text" class="form-control" id="" placeholder="Tên đơn vị/ Tên phòng ban " style="width:50%" onkeyup="searchMedicine(this.value);">
+          &emsp;
+          <button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
+          &emsp;
+
           <a class="btn btn-success" href="php/exportUnitSys.php">Xuất Excel</a>
         </div>
 

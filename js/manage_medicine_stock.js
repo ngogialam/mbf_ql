@@ -85,3 +85,14 @@ function searchMedicineStock(text, tag) {
     xhttp.open("GET", "php/manage_medicine_stock.php?action=search&text=" + text + "&tag=" + tag, true);
     xhttp.send();
 }
+
+function refresh() {
+    console.log('5');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/manage_medicine_stock.php?action=refresh", true);
+    xhttp.send();
+}

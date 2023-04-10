@@ -9,14 +9,16 @@ if ($con) {
       $result1 = mysqli_query($con, $query1);
       if (!empty($result1))
         showMedicinesStock("0");
-      else{
+      else {
         echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
         showMedicinesStock("0");
       }
-    } catch (Exception $e){
-      ?>
-        <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
-      <?php
+    } catch (Exception $e) {
+?>
+      <td colspan="10">
+        <div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div>
+      </td>
+  <?php
       showMedicinesStock("0");
     }
   }
@@ -40,6 +42,9 @@ if ($con) {
 
   if (isset($_GET["action"]) && $_GET["action"] == "search")
     searchMedicineStock(strtoupper($_GET["text"]));
+
+  if (isset($_GET["action"]) && $_GET["action"] == "refresh")
+    showMedicinesStock("0");
 }
 
 function showMedicinesStock($id_unit_user)
@@ -155,7 +160,7 @@ function showEditOptionsRow($seq_no, $row)
 }
 
 function updateMedicineStock($id_unit_user, $name_unit_user, $name_room_unit, $create_by, $created_at)
-{  
+{
   require "db_connection.php";
   $query = "UPDATE unit_user SET name_unit_user = '$name_unit_user', name_room_unit = '$name_room_unit', create_by = '$create_by', created_at= '$created_at' WHERE id_unit_user = $id_unit_user";
   $result = mysqli_query($con, $query);
