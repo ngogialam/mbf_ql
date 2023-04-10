@@ -8,7 +8,8 @@
       try{
         $query1 = "DELETE FROM team_sys_manager WHERE id_team_sys = $id";
         $result1 = mysqli_query($con, $query1);
-        if (!empty($result1))
+        if (empty($result1))
+          echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
         showSuppliers(0);
       } catch (Exception $e){
         ?>

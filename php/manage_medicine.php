@@ -9,7 +9,11 @@ if ($con) {
       $query1 = "DELETE FROM unit_sys WHERE id_unit_sys = $id";
       $result1 = mysqli_query($con, $query1);
       if (!empty($result1))
-      showMedicines(0);
+        showMedicines(0);
+      else{
+        echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
+        showMedicines(0);
+      }
     } catch (Exception $e){
       ?>
         <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 

@@ -10,14 +10,16 @@ if ($con) {
       $result1 = mysqli_query($con, $query1);
       if (!empty($result1))
         showPurchases(0);
-    } catch (Exception $e) {
-?>
-      <td colspan="10">
-        <div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div>
-      </td>
-  <?php
-      showPurchases(0);
-    }
+      else{
+        echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
+        showPurchases(0);
+      }
+    } catch (Exception $e){
+      ?>
+        <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
+      <?php
+        showPurchases(0);
+      }
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "edit") {
