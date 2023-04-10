@@ -1,12 +1,13 @@
 <?php
 require "db_connection.php";
-if ($con) {
-  if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-    $id_user = $_GET["id_user"];
-    try {
-      $query1 = "DELETE FROM manager_user WHERE id_user = $id_user";
-      $result1 = mysqli_query($con, $query1);
-      if (!empty($result1))
+  if($con) {
+    if(isset($_GET["action"]) && $_GET["action"] == "delete") {
+      $id_user = $_GET["id_user"];
+      try{
+        $query1 = "DELETE FROM manager_user WHERE id_user = $id_user";
+        $result1 = mysqli_query($con, $query1);
+        if (empty($result1))
+          echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
         showUser(0);
     } catch (Exception $e) {
 ?>
