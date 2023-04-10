@@ -5,17 +5,19 @@ if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
     $id_team_user = $_GET["id"];
 
-    try{
+    try {
       $query1 = "DELETE FROM manager_team_user WHERE id_team_user = $id_team_user";
       $result1 = mysqli_query($con, $query1);
       if (!empty($result1))
         showPurchases(0);
-    } catch (Exception $e){
-      ?>
-        <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
-      <?php
-        showPurchases(0);
-      }
+    } catch (Exception $e) {
+?>
+      <td colspan="10">
+        <div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div>
+      </td>
+  <?php
+      showPurchases(0);
+    }
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "edit") {
@@ -36,7 +38,11 @@ if ($con) {
     showPurchases(0);
 
   if (isset($_GET["action"]) && $_GET["action"] == "search")
-    searchPurchase(strtoupper($_GET["text"]), $_GET["tag"]);
+    searchPurchase(strtoupper($_GET["text"]));
+
+  if (isset($_GET["action"]) && $_GET["action"] == "search1") {
+    searchStatus(strtoupper($_GET["number1"]));
+  }
 }
 
 function showPurchases($id_team_user)
@@ -58,7 +64,7 @@ function showPurchases($id_team_user)
 
 function showPurchaseRow($seq_no, $row)
 {
-?>
+  ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td><?php echo $row['name_team_user'] ?></td>
@@ -131,12 +137,26 @@ function updatePurchase($id_team_user, $name_team_user, $user_status, $create_by
   showPurchases(0);
 }
 
-function searchPurchase($text, $column)
+function searchPurchase($text)
 {
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM manager_user WHERE $column LIKE '%$text%'";
+    $query = "SELECT * FROM manager_team_user WHERE name_team_user LIKE '%$text%' or user_status LIKE '%$text%'";
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_array($result)) {
+      $seq_no++;
+      showPurchaseRow($seq_no, $row);
+    }
+  }
+}
+function searchStatus($number1)
+{
+  require "db_connection.php";
+  if ($con) {
+    $seq_no = 0;
+    $query = "SELECT * FROM manager_team_user WHERE user_status = '$number1'";
+    // $query = "SELECT * FROM manager_team_user WHERE user_status = '$user_status'";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;

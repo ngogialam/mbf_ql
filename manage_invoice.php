@@ -48,12 +48,9 @@
 
         <div class="col-md-12 form-group form-inline">
           <label class="font-weight-bold" for="">Search :&emsp;</label>
-          <input type="text" class="form-control" id="by_invoice_number" placeholder="Nhập tên hệ thống "
+          <input style="width:50%" type="text" class="form-control" id="by_invoice_number" placeholder="Nhập tên hệ thống/Ip hệ thống "
             onkeyup="searchInvoice(this.value);">
-          &emsp; 
-          <input type="number" class="form-control" id="by_invoice_number" placeholder="Nhập ip hệ thống "
-            onkeyup="searchSysNumber(this.value);">
-          &emsp;         
+          &emsp;          
           <button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
           &emsp;  
           <a class="btn btn-success" href="php/exportSys.php">Xuất file</a>

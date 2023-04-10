@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Medicines Stock</title>
+    <title>Đơn vị sử dụng </title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -35,9 +35,8 @@
 
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-            <input type="text" class="form-control" id="by_name" placeholder="Theo tên" onkeyup="searchMedicineStock(this.value, 'NAME');">
-            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="Theo phòng" onkeyup="searchMedicineStock(this.value, 'GENERIC_NAME');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Theo ngày tạo" onkeyup="searchMedicineStock(this.value, 'SUPPLIER_NAME');">
+            <input type="text"  style="width:50%" class="form-control" id="by_name" placeholder="Tên đơn vị/ Tên phòng ban" onkeyup="searchMedicineStock(this.value);">
+            &emsp;
             &emsp; <a class="btn btn-success" href="php/exportUnitUser.php">Xuất Excel</a>
           </div>
 

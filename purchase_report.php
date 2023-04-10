@@ -35,12 +35,7 @@
         <div class="row">
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-            <input type="text" class="form-control" id="by_voucher_number" placeholder="Theo tên người sử dụng" onkeyup="searchPurchase(this.value, 'name_user_manager');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="Gmail" onkeyup="searchPurchase(this.value, 'gmail');">
-            &emsp;<input type="number" class="form-control" id="by_invoice_number" placeholder="Số điện thoại" onkeyup="searchPurchase(this.value, 'sdt');">
-            &emsp;<label class="font-weight-bold" for="">Theo ngày :&emsp;</label>
-            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'created_at');">
-            &emsp;
+            <input type="text" class="form-control" id="by_voucher_number" placeholder="Tên/Nhóm/sđt người sử dụng" onkeyup="searchUser(this.value);">            
             &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
             &emsp; <a class="btn btn-success" href="php/exportUser.php">Xuất Excel</a>
           </div>

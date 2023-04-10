@@ -36,7 +36,7 @@ if ($con) {
     showMedicines(0);
 
   if (isset($_GET["action"]) && $_GET["action"] == "search")
-    searchMedicine(strtoupper($_GET["text"]), $_GET["tag"]);
+    searchMedicine(strtoupper($_GET["text"]));
 }
 //id_unit_sys
 function showMedicines($id_unit_sys)
@@ -129,18 +129,12 @@ function updateMedicine($id_unit_sys, $name_unit_sys, $name_room, $create_by, $c
     echo "Thất bại";
 }
 
-function searchMedicine($text, $tag)
+function searchMedicine($text)
 {
-  require "db_connection.php";
-  if ($tag == "name")
-    $column = "NAME";
-  if ($tag == "generic_name")
-    $column = "GENERIC_NAME";
-  if ($tag == "suppliers_name")
-    $column = "SUPPLIER_NAME";
+  require "db_connection.php"; 
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM medicines WHERE UPPER($column) LIKE '%$text%'";
+    $query = "SELECT * FROM unit_sys WHERE UPPER(name_unit_sys) LIKE '%$text%' OR name_room LIKE '%$text%' ";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;

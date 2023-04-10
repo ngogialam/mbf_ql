@@ -209,7 +209,7 @@ function searchCustomer($text)
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM customers WHERE UPPER(NAME) LIKE '%$text%'";
+    $query = "SELECT * FROM user_manager WHERE UPPER(name_user_manager) LIKE '%$text%' OR sdt LIKE '%$text%' OR gmail LIKE '%$text%'";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;
