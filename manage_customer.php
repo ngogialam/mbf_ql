@@ -38,7 +38,7 @@
 
         <div class="col-md-12 form-group form-inline">
           <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-          <input type="text" class="form-control" id="" placeholder="Tìm kiếm người quản trị"
+          <input style="width:50%" type="text" class="form-control" id="" placeholder="Nhập tên/số điện thoại"
             onkeyup="searchCustomer(this.value);">
           &emsp;
           <a class="btn btn-success" href="php/exportUserManager.php">Xuất Excel</a>

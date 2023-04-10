@@ -189,13 +189,13 @@
 
     ?>
     <tr>
-      <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['id_sys']; ?></td>
+      <td><?php echo $seq_no; ?></td>      
       <td><?php echo $row['name_sys']; ?></td> 
       <td><?php echo $row['first_number']; ?></td>
       <td><?php echo $name_unit_manager; ?></td>
       <td><?php echo $name_user_manager; ?></td>
       <td><?php echo $name_team_sys; ?></td>
+      <td><?php echo $row['describe_sys']; ?></td>
       <td><?php echo $row['ip_sys']; ?></td>
       <td><?php echo $row['server_sys']; ?></td>
       <td><?php echo $row['config_sys']; ?></td>
@@ -219,7 +219,7 @@
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
-      $query = "SELECT * FROM sys_ql WHERE UPPER(name_sys) LIKE '%$text%'";
+      $query = "SELECT * FROM sys_ql WHERE UPPER(name_sys) LIKE '%$text%' OR ip_sys like '%$text%' ";
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;

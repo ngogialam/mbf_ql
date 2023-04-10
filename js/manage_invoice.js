@@ -44,16 +44,6 @@ function searchInvoice(text, tag) {
     xhttp.send();
 }
 
-function searchSysNumber(number, tag) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('invoices_div').innerHTML = xhttp.responseText;
-    };
-    xhttp.open("GET", "php/manage_invoice.php?action=search&number=" + number + "&tag=" + tag, true);
-    xhttp.send();
-}
-
 function printInvoice(invoice_number) {
     var print_content;
     var xhttp = new XMLHttpRequest();
