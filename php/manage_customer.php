@@ -3,7 +3,7 @@ require "db_connection.php";
 
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-    $id_user_manager = $_GET["id"];
+    $id_user_manager = $_GET["id_user_manager"];
     try{
       $query1 = "DELETE FROM user_manager WHERE id_user_manager = $id_user_manager";
       $result1 = mysqli_query($con, $query1);
@@ -207,7 +207,7 @@ function searchCustomer($text)
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM customers WHERE UPPER(NAME) LIKE '%$text%'";
+    $query = "SELECT * FROM user_manager WHERE UPPER(name_user_manager) LIKE '%$text%' OR sdt LIKE '%$text%' OR gmail LIKE '%$text%'";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;

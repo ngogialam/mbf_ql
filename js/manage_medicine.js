@@ -56,25 +56,13 @@ function cancel() {
     xhttp.send();
 }
 
-function searchMedicine(text, tag) {
-    if (tag == "name") {
-        document.getElementById("by_generic_name").value = "";
-        document.getElementById("by_suppliers_name").value = "";
-    }
-    if (tag == "generic_name") {
-        document.getElementById("by_name").value = "";
-        document.getElementById("by_suppliers_name").value = "";
-    }
-    if (tag == "suppliers_name") {
-        document.getElementById("by_name").value = "";
-        document.getElementById("by_generic_name").value = "";
-    }
+function searchMedicine(text) {
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById('medicines_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_medicine.php?action=search&text=" + text + "&tag=" + tag, true);
+    xhttp.open("GET", "php/manage_medicine.php?action=search&text=" + text, true);
     xhttp.send();
 }

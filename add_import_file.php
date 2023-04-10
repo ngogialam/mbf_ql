@@ -28,7 +28,52 @@
             createHeader('handshake', 'Các trang Import', 'Nhập file excel');
             // header section end
             ?>
-          
+          <div class="row">
+                <div class="col-md-12">
+                    <h6>Nhập danh sách hệ thống: </h6>
+                </div>
+                <div class="col-md-4">
+                    <a href="uploads/Danh_sach_he_thong.xlsx" class="btn btn-primary"> Tải mẫu file về</a>
+                </div>
+                </hr>
+                <div class="col-md-8">
+                    <?php
+                    require "php/db_connection.php";
+                    require "php/PHPExcel.php";
+                    if (isset($_POST['import_sys'])) {
+                        $file = $_FILES['file']['tmp_name'];
+                        $objReader = PHPExcel_IOFactory::createReaderForFile($file);
+                        $objReader->setLoadSheetsOnly('He_thong');
+                        $objExcel = $objReader->load($file);
+                        $sheetData = $objExcel->getActiveSheet()->toArray('null', true, true, true);
+                        // print_r($sheetData);
+                        $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow();
+                        // echo $highestRow;
+                        for ($row = 2; $row <= $highestRow; $row++) {
+                            $name_team_sys = $sheetData[$row]['A'];
+                            $type_sys = $sheetData[$row]['B'];
+                            $describe_sys = $sheetData[$row]['C'];
+                            $create_by = $sheetData[$row]['D'];
+
+                            $query = "INSERT INTO team_sys_manager(name_team_sys,type_sys,describe_sys,create_by) VALUES ('$name_team_sys','$type_sys','$describe_sys','$create_by')";
+                            $result = mysqli_query($con, $query);
+                        }
+                        if (!empty($result))
+                            echo "Nhập dữ liệu danh sách hệ thống thành công";
+                        else
+                            echo "Không thành công, xem lại định dạng file!";
+                    }
+
+                    ?>
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file"><br><br>
+                        <input type="submit" value="Submit" name="import_sys">
+                    </form>
+                </div>
+            </div>
+            <hr style="border-top: 2px solid #ff5252;">
+
+            <!-- ///////////////////////////////////////////////////////////------------------------------------------------------------------- -->
             <div class="row">
                 <div class="col-md-12">
                     <h6>Nhập danh sách nhóm hệ thống: </h6>
@@ -39,8 +84,7 @@
                 </hr>
                 <div class="col-md-8">
                     <?php
-                    require "php/db_connection.php";
-                    require "php/PHPExcel.php";
+                    require "php/db_connection.php";                    
                     if (isset($_POST['import_team_sys'])) {
                         $file = $_FILES['file']['tmp_name'];
                         $objReader = PHPExcel_IOFactory::createReaderForFile($file);
