@@ -41,6 +41,8 @@
           <input style="width:50%" type="text" class="form-control" id="" placeholder="Nhập tên/số điện thoại"
             onkeyup="searchCustomer(this.value);">
           &emsp;
+          <button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
+          &emsp; 
           <a class="btn btn-success" href="php/exportUserManager.php">Xuất Excel</a>
         </div>
 

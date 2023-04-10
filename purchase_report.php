@@ -35,7 +35,7 @@
         <div class="row">
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-            <input type="text" class="form-control" id="by_voucher_number" placeholder="Tên/Nhóm/sđt người sử dụng" onkeyup="searchUser(this.value);">            
+            <input type="text" style="width:50%" class="form-control" id="by_voucher_number" placeholder="Tên/Nhóm/sđt người sử dụng" onkeyup="searchUser(this.value);">            
             &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
             &emsp; <a class="btn btn-success" href="php/exportUser.php">Xuất Excel</a>
           </div>
