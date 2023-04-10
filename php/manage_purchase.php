@@ -73,7 +73,7 @@ function showPurchaseRow($seq_no, $row)
     <td><?php if ($row['user_status'] == "1") {
           echo "Hoạt động";
         } else {
-          echo "Đã tắt";
+          echo "Đang tắt";
         } ?></td>
     <td><?php echo $row['create_by']; ?></td>
     <td><?php echo $row['created_at']; ?></td>
@@ -157,8 +157,7 @@ function searchStatus($number1)
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM manager_team_user WHERE user_status = '$number1'";
-    // $query = "SELECT * FROM manager_team_user WHERE user_status = '$user_status'";
+    $query = "SELECT * FROM manager_team_user WHERE user_status = '$number1'";    
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;
