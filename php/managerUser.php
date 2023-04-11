@@ -93,10 +93,30 @@ function showEditUserRow($seq_no, $row)
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td>
-      <select id="id_team_user" class="form-control">
+      <!-- <select id="id_team_user" class="form-control">
         <option value="<?php echo $row['id_team_user']; ?>"><?php echo $row['name_team_user']; ?></option>
         <option value="0">Chọn nhóm người dùng</option>
-      </select>
+      </select> -->
+      <?php
+                             require "db_connection.php";                          
+                            if ($con) {
+                              $name_team_user = "";
+                                $query1 = "SELECT * FROM manager_team_user";
+                                $result1 = mysqli_query($con, $query1);
+
+                                echo '<select name="name_team_user" id="id_team_user" class=" form-control pdm chosen-select col col-md-12" >';
+                                while ($row1 = mysqli_fetch_assoc($result1)) {
+                                    $id_team_user = $row1['id_team_user'];
+                                    $name_team_user = $row1['name_team_user'];
+                                    if ($id_team_user == $id_team_user){                                       
+                                        echo "<option value= '$id_team_user' selected='selected'>$name_team_user</option>";
+                                    }
+                                    else
+                                        echo "<option value= '$id_team_user' >$name_team_user</option>";
+                                }
+                                echo '</select>';
+                            }
+                            ?>
     </td>
     <td>
       <input type="text" class="form-control" value="<?php echo $row['name_user_manager']; ?>" placeholder="Name" id="name_user_manager" onkeyup="validateName(this.value, 'name_err');">
@@ -143,7 +163,7 @@ function showEditUserRow($seq_no, $row)
 function updateUser($id_user, $id_team_user, $name_user_manager, $sdt, $gmail, $room, $position_manager, $create_by, $created_at)
 {
   require "db_connection.php";
-  $query = "UPDATE manager_user SET id_team_user = $id_team_user, name_user_manager = '$name_user_manager', sdt = $sdt, gmail = '$gmail', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at' WHERE id_user = $id_user";
+  $query = "UPDATE manager_user SET id_team_user = $id_team_user, name_user_manager = '$name_user_manager', sdt = '$sdt', gmail = '$gmail', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at' WHERE id_user = $id_user";
   $result = mysqli_query($con, $query);
   var_dump($query);
   if (!empty($result)) {

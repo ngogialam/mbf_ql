@@ -68,6 +68,7 @@
                 <tr>
                   <th>STT</th>                 
                   <th>Tên hệ thống </a></th>
+                  <th>Loại hệ thống </a></th>
                   <th>Đầu số </th>
                   <th>Đơn vị quản lý</th>
                   <th>Người quản lý</th>
@@ -77,7 +78,7 @@
                   <th>Server hệ thống</th>
                   <th>Cấu hình hệ thống</th>
                   <th>Thời gian tạo</th>
-                  <th >Action</th> 
+                  <th>Action</th> 
                 </tr>
               </thead>
               <tbody id="invoices_div">

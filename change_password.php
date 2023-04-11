@@ -27,7 +27,7 @@
           // header section end
         ?>
         <div class="row">
-          <div class="row col col-md-6">
+          <div class="row col col-md-9">
 
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
