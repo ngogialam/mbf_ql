@@ -151,7 +151,7 @@ function addUnitManager() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_unit_manager.php?name_unit_sys=" + name.value + "&name_room=" + packing.value + "&create_by=" + generic_name.value , true);
+    xhttp.open("GET", "php/add_new_unit_manager.php?name_unit_sys=" + name.value + "&name_room=" + packing.value + "&create_by=" + generic_name.value, true);
     xhttp.send();
 }
 
@@ -166,7 +166,7 @@ function addUnitUser() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_unit_user.php?name_unit_user=" + name_unit_user.value + "&name_room_unit=" + name_room_unit.value + "&create_by=" + create_by.value , true);
+    xhttp.open("GET", "php/add_new_unit_user.php?name_unit_user=" + name_unit_user.value + "&name_room_unit=" + name_room_unit.value + "&create_by=" + create_by.value, true);
     xhttp.send();
 }
 
@@ -176,7 +176,7 @@ function addManager() {
     var sdt = document.getElementById("sdt");
     var gmail = document.getElementById("gmail");
     var room = document.getElementById("room");
-    var team_sys_manager = document.getElementById("team_sys_manager");
+    var manager_team_user = document.getElementById("manager_team_user");
     var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
 
@@ -185,7 +185,7 @@ function addManager() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_user.php?name_user_manager=" + name_user_manager.value+ "&team_sys_manager="+ team_sys_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
+    xhttp.open("GET", "php/add_new_user.php?name_user_manager=" + name_user_manager.value + "&manager_team_user=" + manager_team_user.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
     xhttp.send();
     console.log(team_sys_manager);
     return false;

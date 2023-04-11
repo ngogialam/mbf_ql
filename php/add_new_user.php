@@ -5,7 +5,7 @@
    $sdt = $_GET["sdt"];
    $gmail = ucwords($_GET["gmail"]);
    $room = ucwords($_GET["room"]);
-   $team_user = $_GET['team_sys_manager'];
+   $manager_team_user = $_GET['manager_team_user'];
    $position_manager = ucwords($_GET["position_manager"]);
    $create_by = ucwords($_GET["create_by"]);
 
@@ -15,7 +15,7 @@
    if($row)
      echo "manager_user ".$row['name_user_manager']." with contact number $sdt already exists!";
    else {
-     $query = "INSERT INTO manager_user (name_user_manager, id_team_user, sdt, gmail, room,  position_manager, create_by) VALUES('$name_user_manager', '$team_user', '$sdt', '$gmail', '$room', '$position_manager', '$create_by')";
+     $query = "INSERT INTO manager_user (name_user_manager, id_team_user, sdt, gmail, room,  position_manager, create_by) VALUES('$name_user_manager', '$manager_team_user', '$sdt', '$gmail', '$room', '$position_manager', '$create_by')";
      $result = mysqli_query($con, $query);
      if(!empty($result))
        echo "$name_user_manager added...";

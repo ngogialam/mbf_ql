@@ -23,58 +23,51 @@
         <!-- header section -->
         <?php
           require "php/header.php";
-          createHeader('user', 'Profile', 'Manage Admin Details');
+          createHeader('user', 'Quản lý tài khoản', 'Thông tin tài khoản đăng nhập');
           // header section end
           require "php/db_connection.php";         
           if($con) {
             $query = "SELECT * FROM admin_credentials";
             $result = mysqli_query($con, $query);
             $row = mysqli_fetch_array($result);
+            $id_admin = $row['ID'];
             $username = $row['USERNAME'];
+            $contact = $row['CONTACT_NUMBER'];
+            $email = $row['EMAIL'];
+            $created_at= $row['created_at'];
           }
           
         ?>
    
         <div class="row">
-          <div class="row col col-md-6">
-
-            <!-- <div class="row col col-md-12">
-              <div class="col col-md-12 form-group">
-                <label class="font-weight-bold" for="pharmacy_name">Pharmacy Name :</label>
-                <input id="pharmacy_name" type="text" class="form-control" value="<?php echo $pharmacy_name; ?>" placeholder="pharmacy name" onkeyup="validateName(this.value, 'pharmacy_name_error');" disabled>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="pharmacy_name_error" style="display: none;"></code>
-              </div>
-            </div> -->
-
-            <!-- <div class="row col col-md-12">
-              <div class="col col-md-12 form-group">
-                <label class="font-weight-bold" for="address">Address :</label>
-                <textarea id="address" class="form-control" placeholder="address" onkeyup="validateAddress(this.value, 'address_error');" style="max-height: 100px;" disabled><?php echo $address; ?></textarea>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="address_error" style="display: none;"></code>
-              </div>
-            </div>
+          <div class="row col col-md-9">            
 
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
-                <label class="font-weight-bold" for="email">Email :</label>
-                <input id="email" type="email" class="form-control" value="<?php echo $email; ?>" placeholder="email" onkeyup="notNull(this.value, 'email_error');" disabled>
+                <label class="font-weight-bold" for="username">Tên tài khoản :</label>
+                <input id="username" type="text" class="form-control" value="<?php echo $username; ?>" placeholder="username" onkeyup="notNull(this.value, 'username_error');" disabled>
+                <code class="text-danger small font-weight-bold float-right mb-2" id="username_error" style="display: none;"></code>
+              </div>
+            </div>
+            <div class="row col col-md-12">
+              <div class="col col-md-12 form-group">
+                <label class="font-weight-bold" for="contact">Số điện thoại liên hệ :</label>
+                <input id="contact" type="text" class="form-control" value="<?php echo $contact; ?>" placeholder="contact" onkeyup="notNull(this.value, 'contact_error');" disabled>
+                <code class="text-danger small font-weight-bold float-right mb-2" id="contact_error" style="display: none;"></code>
+              </div>
+            </div>
+            <div class="row col col-md-12">
+              <div class="col col-md-12 form-group">
+                <label class="font-weight-bold" for="email">Email liên hệ :</label>
+                <input id="email" type="text" class="form-control" value="<?php echo $email; ?>" placeholder="email" onkeyup="notNull(this.value, 'email_error');" disabled>
                 <code class="text-danger small font-weight-bold float-right mb-2" id="email_error" style="display: none;"></code>
               </div>
             </div>
-
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
-                <label class="font-weight-bold" for="contact_number">Contact Number :</label>
-                <input id="contact_number" type="number" class="form-control" value="<?php echo $contact_number; ?>" placeholder="contact number" onkeyup="validateContactNumber(this.value, 'contact_number_error');" disabled>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="contact_number_error" style="display: none;"></code>
-              </div>
-            </div> -->
-
-            <div class="row col col-md-12">
-              <div class="col col-md-12 form-group">
-                <label class="font-weight-bold" for="username">Username :</label>
-                <input id="username" type="text" class="form-control" value="<?php echo $username; ?>" placeholder="username" onkeyup="notNull(this.value, 'username_error');" disabled>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="username_error" style="display: none;"></code>
+                <label class="font-weight-bold" for="created_at">Ngày tạo :</label>
+                <input id="created_at" type="text" class="form-control" value="<?php echo $created_at; ?>" placeholder="created_at" onkeyup="notNull(this.value, 'created_at_error');" disabled>
+                <code class="text-danger small font-weight-bold float-right mb-2" id="created_at_error" style="display: none;"></code>
               </div>
             </div>
 
