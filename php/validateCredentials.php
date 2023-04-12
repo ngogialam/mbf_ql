@@ -31,7 +31,7 @@
       $username = $_GET["uname"];
       $password = $_GET["pswd"];
 
-      $query = "SELECT * FROM admin_credentials WHERE USERNAME = '$username' AND PASSWORD_1 = '$password'";
+      $query = "SELECT * FROM admin_credentials WHERE USERNAME_USER = '$username' AND PASSWORD_1 = '$password'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       if($row)  {

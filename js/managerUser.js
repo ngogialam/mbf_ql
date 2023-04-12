@@ -24,7 +24,7 @@ function editUser(ID) {
 
 function updateUser(ID) {
     var id_team_user = document.getElementById("id_team_user");
-    var USERNAME = document.getElementById("USERNAME");
+    var USERNAME_USER = document.getElementById("USERNAME_USER");
     var CONTACT_NUMBER = document.getElementById("CONTACT_NUMBER");
     var PASSWORD_1 = document.getElementById("PASSWORD_1");
     var EMAIL = document.getElementById("EMAIL");
@@ -32,8 +32,9 @@ function updateUser(ID) {
     var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
     var created_at = document.getElementById("created_at");
-    if (!validateName(USERNAME.value, "USERNAME_err"))
-        USERNAME.focus();
+
+    if (!notNull(USERNAME_USER.value, "USERNAME_USER_err"))
+        USERNAME_USER.focus();
     else if (!validateContactNumber(CONTACT_NUMBER.value, "CONTACT_NUMBER_err"))
         CONTACT_NUMBER.focus();
     else if (!validateAddress(EMAIL.value, "EMAIL_err"))
@@ -54,7 +55,7 @@ function updateUser(ID) {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('user_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/managerUser.php?action=update&ID=" + ID + "&id_team_user=" + id_team_user.value + "&USERNAME=" + USERNAME.value + "&CONTACT_NUMBER=" + CONTACT_NUMBER.value + "&PASSWORD_1=" + PASSWORD_1.value + "&EMAIL=" + EMAIL.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
+        xhttp.open("GET", "php/managerUser.php?action=update&ID=" + ID + "&USERNAME_USER=" + USERNAME_USER.value + "&id_team_user=" + id_team_user.value + "&CONTACT_NUMBER=" + CONTACT_NUMBER.value + "&PASSWORD_1=" + PASSWORD_1.value + "&EMAIL=" + EMAIL.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
         xhttp.send();
     }
 }

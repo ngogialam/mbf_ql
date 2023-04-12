@@ -3,7 +3,7 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="name_user_manager">Tên người quản trị :</label>
-        <input type="text" class="form-control" placeholder="Tên người quản trị" id="name_user_manager" onkeyup="validateName(this.value, 'name_err');">
+        <input type="text" class="form-control" placeholder="Tên người quản trị" id="name_user_manager" onkeyup="notNull(this.value, 'name_err');">
         <code class="text-danger small font-weight-bold float-right" id="name_err" style="display: none;"></code>
     </div>
 </div>
@@ -31,7 +31,7 @@
 
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="room">Phòng ban :</label>
-        <textarea class="form-control" placeholder="Phòng ban" id="room" onblur="validateName(this.value, 'room_err');"></textarea>
+        <textarea class="form-control" placeholder="Phòng ban" id="room" onblur="notNull(this.value, 'room_err');"></textarea>
         <code class="text-danger small font-weight-bold float-right" id="room_err" style="display: none;"></code>
     </div>
 </div>
@@ -39,14 +39,14 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="position">Chức vụ :</label>
-        <textarea class="form-control" placeholder="Chức vụ" id="position_manager" onblur="validateName(this.value, 'position_manager_err');"></textarea>
+        <textarea class="form-control" placeholder="Chức vụ" id="position_manager" onblur="notNull(this.value, 'position_manager_err');"></textarea>
         <code class="text-danger small font-weight-bold float-right" id="position_manager_err" style="display: none;"></code>
     </div>
 </div>
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="position">Người tạo :</label>
-        <input type="text" class="form-control" placeholder="Người tạo" id="create_by" onblur="validateName(this.value, 'create_by_err');">
+        <input type="text" class="form-control" placeholder="Người tạo" id="create_by" onblur="notNull(this.value, 'create_by_err');">
         <code class="text-danger small font-weight-bold float-right" id="create_by_err" style="display: none;"></code>
     </div>
 </div>
@@ -59,7 +59,7 @@
 <div class="row col col-md-12">
     &emsp;
     <div class="form-group m-auto">
-        <button class="btn btn-primary" onclick="addUser();">Thêm mới người sử dụng</button>
+        <button class="btn btn-primary" onclick="addCustomer();">Thêm mới người quản trị</button>
     </div>
     <!--
   &emsp;

@@ -197,11 +197,11 @@ function checkInputFile(value, error) {
     result.style.display = "block";
 
     var extention = value.split('.').pop();
-    if (extention != 'pdf' && extention != 'ppt'&& extention != 'doc'&& extention != 'xlsx'&& extention != 'xls'&& extention != 'docx' && value != "")
+    if (extention != 'pdf' && extention != 'ppt' && extention != 'doc' && extention != 'xlsx' && extention != 'xls' && extention != 'docx' && value != "")
         result.innerHTML = "Chỉ upload được file pdf, doc, docx, ppt, xls, xlsx!";
     else {
         var file_des = document.querySelector('#file_des').files[0]
-        if (file_des){
+        if (file_des) {
             var fileSize = file_des.size / 1024 / 1024; // in MiB
             if (fileSize > 3) {
                 result.innerHTML = "File có dung lượng quá lớn (>5M)";
@@ -213,4 +213,3 @@ function checkInputFile(value, error) {
     }
     return false;
 }
-
