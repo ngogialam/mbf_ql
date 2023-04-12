@@ -83,33 +83,12 @@ function cancel() {
     xhttp.send();
 }
 
-function searchPurchase(text, tag) {
-    if (tag == "VOUCHER_NUMBER") {
-        document.getElementById("by_suppliers_name").value = "";
-        document.getElementById("by_invoice_number").value = "";
-        document.getElementById("by_purchase_date").value = "";
-    }
-    if (tag == "SUPPLIER_NAME") {
-        document.getElementById("by_voucher_number").value = "";
-        document.getElementById("by_invoice_number").value = "";
-        document.getElementById("by_purchase_date").value = "";
-    }
-    if (tag == "INVOICE_NUMBER") {
-        document.getElementById("by_suppliers_name").value = "";
-        document.getElementById("by_voucher_number").value = "";
-        document.getElementById("by_purchase_date").value = "";
-    }
-    if (tag == "PURCHASE_DATE") {
-        document.getElementById("by_suppliers_name").value = "";
-        document.getElementById("by_voucher_number").value = "";
-        document.getElementById("by_invoice_number").value = "";
-    }
-
+function searchUser(text) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById('user_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/managerUser.php?action=search&text=" + text + "&tag=" + tag, true);
+    xhttp.open("GET", "php/managerUser.php?action=search&text=" + text, true);
     xhttp.send();
 }

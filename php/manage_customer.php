@@ -3,17 +3,16 @@ require "db_connection.php";
 
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
-    $id_user_manager = $_GET["id"];
-    try{
+    $id_user_manager = $_GET["id_user_manager"];
+    try {
       $query1 = "DELETE FROM user_manager WHERE id_user_manager = $id_user_manager";
       $result1 = mysqli_query($con, $query1);
       if (empty($result1))
         echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
       showCustomers(0);
-    } catch (Exception $e){
+    } catch (Exception $e) {
       showCustomers(0);
     }
-
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "edit") {
@@ -37,6 +36,9 @@ if ($con) {
 
   if (isset($_GET["action"]) && $_GET["action"] == "search")
     searchCustomer(strtoupper($_GET["text"]));
+
+  if (isset($_GET["action"]) && $_GET["action"] == "refresh")
+    showCustomers(0);
 }
 
 // function showCustomers($id) {
@@ -128,7 +130,7 @@ function showCustomerRow($seq_no, $row)
       <?php echo $row['created_at']; ?>
     </td>
     <td>
-      <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['id_user_manager']; ?>);">       
+      <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['id_user_manager']; ?>);">
         <i class="fa fa-pencil"></i>
       </button>
       <button class="btn btn-danger btn-sm" onclick="deleteCustomer(<?php echo $row['id_user_manager']; ?>);">
@@ -199,7 +201,7 @@ function updateCustomer($id_user_manager, $name_user_manager, $sdt, $gmail, $roo
     echo '<div id="myDiv">
     <h6> Cập nhật thành công !</h6>    
     </div>';
-    showCustomers(0);  
+  showCustomers(0);
 }
 
 function searchCustomer($text)
@@ -207,7 +209,7 @@ function searchCustomer($text)
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM customers WHERE UPPER(NAME) LIKE '%$text%'";
+    $query = "SELECT * FROM user_manager WHERE UPPER(name_user_manager) LIKE '%$text%' OR sdt LIKE '%$text%' OR gmail LIKE '%$text%'";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;

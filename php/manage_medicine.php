@@ -5,25 +5,27 @@ if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
     $id = $_GET["id"];
 
-    try{
+    try {
       $query1 = "DELETE FROM unit_sys WHERE id_unit_sys = $id";
       $result1 = mysqli_query($con, $query1);
       if (!empty($result1))
         showMedicines(0);
-      else{
+      else {
         echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
         showMedicines(0);
       }
-    } catch (Exception $e){
-      ?>
-        <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
-      <?php
+    } catch (Exception $e) {
+?>
+      <td colspan="10">
+        <div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div>
+      </td>
+  <?php
       showMedicines(0);
     }
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "edit") {
-    $id_unit_sys = $_GET["id_unit_sys"];  
+    $id_unit_sys = $_GET["id_unit_sys"];
     showMedicines($id_unit_sys);
   }
 
@@ -40,7 +42,10 @@ if ($con) {
     showMedicines(0);
 
   if (isset($_GET["action"]) && $_GET["action"] == "search")
-    searchMedicine(strtoupper($_GET["text"]), $_GET["tag"]);
+    searchMedicine(strtoupper($_GET["text"]));
+
+  if (isset($_GET["action"]) && $_GET["action"] == "refresh")
+    showMedicines(0);
 }
 //id_unit_sys
 function showMedicines($id_unit_sys)
@@ -62,7 +67,7 @@ function showMedicines($id_unit_sys)
 
 function showMedicineRow($seq_no, $row)
 {
-?>
+  ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td><?php echo $row['name_unit_sys']; ?></td>
@@ -133,18 +138,12 @@ function updateMedicine($id_unit_sys, $name_unit_sys, $name_room, $create_by, $c
     echo "Thất bại";
 }
 
-function searchMedicine($text, $tag)
+function searchMedicine($text)
 {
   require "db_connection.php";
-  if ($tag == "name")
-    $column = "NAME";
-  if ($tag == "generic_name")
-    $column = "GENERIC_NAME";
-  if ($tag == "suppliers_name")
-    $column = "SUPPLIER_NAME";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM medicines WHERE UPPER($column) LIKE '%$text%'";
+    $query = "SELECT * FROM unit_sys WHERE UPPER(name_unit_sys) LIKE '%$text%' OR name_room LIKE '%$text%' ";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;

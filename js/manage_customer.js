@@ -1,4 +1,4 @@
-function deleteCustomer(id) {
+function deleteCustomer(id_user_manager) {
     var confirmation = confirm("Are you sure?");
     if (confirmation) {
         var xhttp = new XMLHttpRequest();
@@ -6,7 +6,7 @@ function deleteCustomer(id) {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('customers_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manage_customer.php?action=delete&id=" + id, true);
+        xhttp.open("GET", "php/manage_customer.php?action=delete&id_user_manager=" + id_user_manager, true);
         xhttp.send();
     }
 }
@@ -74,3 +74,14 @@ function searchCustomer(text) {
 
 var myDiv = document.getElementById("myDiv");
 // Hẹn thời gian 5 giây và sau đó ẩn thẻ div
+
+function refresh() {
+    console.log('5');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById('customers_div').innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/manage_customer.php?action=refresh", true);
+    xhttp.send();
+}

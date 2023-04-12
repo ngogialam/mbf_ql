@@ -13,16 +13,16 @@ function deletePurchase(id_team_user) {
 
 function deleteUser(id) {
     var confirmation = confirm("Are you sure?");
-    if(confirmation) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if(xhttp.readyState = 4 && xhttp.status == 200)
-          document.getElementById('purchases_div').innerHTML = xhttp.responseText;
-      };
-      xhttp.open("GET", "php/managerUser.php?action=delete&id=" + id, true);
-      xhttp.send();
+    if (confirmation) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState = 4 && xhttp.status == 200)
+                document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+        };
+        xhttp.open("GET", "php/managerUser.php?action=delete&id=" + id, true);
+        xhttp.send();
     }
-  }
+}
 
 function editPurchase(id_team_user) {
     var xhttp = new XMLHttpRequest();
@@ -85,33 +85,23 @@ function cancel() {
     xhttp.send();
 }
 
-function searchPurchase(text, tag) {
-    if (tag == "VOUCHER_NUMBER") {
-        document.getElementById("by_suppliers_name").value = "";
-        document.getElementById("by_invoice_number").value = "";
-        document.getElementById("by_purchase_date").value = "";
-    }
-    if (tag == "SUPPLIER_NAME") {
-        document.getElementById("by_voucher_number").value = "";
-        document.getElementById("by_invoice_number").value = "";
-        document.getElementById("by_purchase_date").value = "";
-    }
-    if (tag == "INVOICE_NUMBER") {
-        document.getElementById("by_suppliers_name").value = "";
-        document.getElementById("by_voucher_number").value = "";
-        document.getElementById("by_purchase_date").value = "";
-    }
-    if (tag == "PURCHASE_DATE") {
-        document.getElementById("by_suppliers_name").value = "";
-        document.getElementById("by_voucher_number").value = "";
-        document.getElementById("by_invoice_number").value = "";
-    }
-
+function searchPurchase(text) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById('purchases_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_purchase.php?action=search&text=" + text + "&tag=" + tag, true);
+    xhttp.open("GET", "php/manage_purchase.php?action=search&text=" + text, true);
     xhttp.send();
+}
+
+function searchStatus(number1) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById('purchases_div').innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/manage_purchase.php?action=search1&number1=" + number1, true);
+    xhttp.send();
+
 }

@@ -4,19 +4,21 @@ require "db_connection.php";
 if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "delete") {
     $id_unit_user = $_GET["id"];
-    try{
+    try {
       $query1 = "DELETE FROM unit_user WHERE id_unit_user = $id_unit_user";
       $result1 = mysqli_query($con, $query1);
       if (!empty($result1))
         showMedicinesStock("0");
-      else{
+      else {
         echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không xoá được</div></td>";
         showMedicinesStock("0");
       }
-    } catch (Exception $e){
-      ?>
-        <td colspan="10"><div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div></td> 
-      <?php
+    } catch (Exception $e) {
+?>
+      <td colspan="10">
+        <div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;">Không xoá được</div>
+      </td>
+  <?php
       showMedicinesStock("0");
     }
   }
@@ -39,7 +41,10 @@ if ($con) {
     showMedicinesStock("0");
 
   if (isset($_GET["action"]) && $_GET["action"] == "search")
-    searchMedicineStock(strtoupper($_GET["text"]), $_GET["tag"]);
+    searchMedicineStock(strtoupper($_GET["text"]));
+
+  if (isset($_GET["action"]) && $_GET["action"] == "refresh")
+    showMedicinesStock("0");
 }
 
 function showMedicinesStock($id_unit_user)
@@ -101,7 +106,7 @@ function showMedicinesStock($id_unit_user)
 
 function showMedicineStockRow($seq_no, $row)
 {
-?>
+  ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td><?php echo $row['name_unit_user']; ?></td>
@@ -123,7 +128,7 @@ function showMedicineStockRow($seq_no, $row)
 
 function showEditOptionsRow($seq_no, $row)
 {
-?>  
+?>
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td>
@@ -156,10 +161,8 @@ function showEditOptionsRow($seq_no, $row)
 
 function updateMedicineStock($id_unit_user, $name_unit_user, $name_room_unit, $create_by, $created_at)
 {
-  var_dump($name_unit_user);
-  var_dump($name_room_unit);
   require "db_connection.php";
-  $query = "UPDATE unit_user SET name_unit_user = '$name_unit_user', name_room_unit = '$name_room_unit', create_by = '$create_by', created_at= '$created_at' WHERE id_unit_user = $id_unit_user";  
+  $query = "UPDATE unit_user SET name_unit_user = '$name_unit_user', name_room_unit = '$name_room_unit', create_by = '$create_by', created_at= '$created_at' WHERE id_unit_user = $id_unit_user";
   $result = mysqli_query($con, $query);
   if (!empty($result))
     // showMedicinesStock("0");
@@ -168,36 +171,17 @@ function updateMedicineStock($id_unit_user, $name_unit_user, $name_room_unit, $c
     echo "thất bại";
 }
 
-function searchMedicineStock($text, $column)
+function searchMedicineStock($text)
 {
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-
-    if ($column == "EXPIRY_DATE")
-      $query = "SELECT * FROM medicines INNER JOIN medicines_stock ON medicines.NAME = medicines_stock.NAME";
-    else if ($column == 'QUANTITY')
-      $query = "SELECT * FROM medicines INNER JOIN medicines_stock ON medicines.NAME = medicines_stock.NAME WHERE medicines_stock.$column = 0";
-    else
-      $query = "SELECT * FROM medicines INNER JOIN medicines_stock ON medicines.NAME = medicines_stock.NAME WHERE UPPER(medicines.$column) LIKE '%$text%'";
-
+    $query = "SELECT * FROM unit_user  WHERE name_unit_user LIKE N'%$text%' or name_room_unit LIKE N'%$text%'";
     $result = mysqli_query($con, $query);
-
-    if ($column == 'EXPIRY_DATE') {
-      while ($row = mysqli_fetch_array($result)) {
-        $expiry_date = $row['EXPIRY_DATE'];
-        if (substr($expiry_date, 3) < date('y'))
-          showMedicineStockRow($seq_no, $row);
-        else if (substr($expiry_date, 3) == date('y')) {
-          if (substr($expiry_date, 0, 2) < date('m'))
-            showMedicineStockRow($seq_no, $row);
-        }
-      }
-    } else {
-      while ($row = mysqli_fetch_array($result)) {
-        $seq_no++;
-        showMedicineStockRow($seq_no, $row);
-      }
+    var_dump($query);
+    while ($row = mysqli_fetch_array($result)) {
+      $seq_no++;
+      showMedicineStockRow($seq_no, $row);
     }
   }
 }
