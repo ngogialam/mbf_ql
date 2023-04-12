@@ -55,31 +55,7 @@
             <button class="btn btn-default btn-block btn-custom">Login</button>
           </div>
         </form>
-      </div>
-      <!-- <div class="card-body">
-        <form name="login-form" class="login-form" action="home.php" method="post" onsubmit="return validateCredentials();">
-          <div class="logo">
-            <img src="images/prof.jpg" class="profile" />
-            <h1 class="logo-caption"><span class="tweak">L</span>ogin</h1>
-          </div> 
-          <div class="input-group form-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-user text-white"></i></span>
-            </div>
-            <input name="gmail" type="text" class="form-control" placeholder="gmail" onkeyup="validate();" required>
-          </div> 
-          <div class="input-group form-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-key text-white"></i></span>
-            </div>
-            <input name="password" type="password" class="form-control" placeholder="password" onkeyup="validate();" required>
-          </div> 
-          <div class="form-group">
-            <button class="btn btn-default btn-block btn-custom">Login</button>
-          </div>
-        </form>
-      </div> -->
-      <!-- cord-body class -->
+      </div>      
       <div class="card-footer">
         <div class="text-center">
           <a class="text-light" onclick="displayForgotPasswordForm();" style="cursor: pointer;">Forgot password?</a>

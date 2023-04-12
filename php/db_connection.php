@@ -2,7 +2,7 @@
 $SERVER = 'localhost';
 $USERNAME = 'root';
 $PASSWORD = '';
-$DB = 'htql_mbf';
+$DB = 'test';
 $charset = 'utf8';
 
 @$con = mysqli_connect($SERVER, $USERNAME, $PASSWORD, $DB)
