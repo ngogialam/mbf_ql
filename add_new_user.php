@@ -35,8 +35,8 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="name_user_manager">Tên người dùng :</label>
-        <input type="text" class="form-control" placeholder="Tên người dùng" id="name_user_manager" onkeyup="notNull(this.value, 'name_err');">
-        <code class="text-danger small font-weight-bold float-right" id="name_err" style="display: none;"></code>
+        <input type="text" class="form-control" placeholder="Tên người dùng" id="USERNAME" onkeyup="notNull(this.value, 'USERNAME_err');">
+        <code class="text-danger small font-weight-bold float-right" id="USERNAME_err" style="display: none;"></code>
     </div>
 </div>
 
@@ -72,8 +72,8 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="phone_number">Số điện thoại :</label>
-        <input type="number" class="form-control" placeholder="Số điện thoại" id="sdt" onblur="validateContactNumber(this.value, 'sdt_err');">
-        <code class="text-danger small font-weight-bold float-right" id="sdt_err" style="display: none;"></code>
+        <input type="number" class="form-control" placeholder="Số điện thoại" id="CONTACT_NUMBER" onblur="validateContactNumber(this.value, 'CONTACT_NUMBER_err');">
+        <code class="text-danger small font-weight-bold float-right" id="CONTACT_NUMBER_err" style="display: none;"></code>
     </div>
 </div>
 
@@ -81,8 +81,8 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="email">Email :</label>
-        <input type="text" class="form-control" placeholder="Email" id="gmail" onkeyup="validateAddress(this.value, 'gmail_err');">
-        <code class="text-danger small font-weight-bold float-right" id="gmail_err" style="display: none;"></code>
+        <input type="text" class="form-control" placeholder="Email" id="EMAIL" onkeyup="validateAddress(this.value, 'EMAIL_err');">
+        <code class="text-danger small font-weight-bold float-right" id="EMAIL_err" style="display: none;"></code>
     </div>
 </div>
 
@@ -108,6 +108,13 @@
         <label class="font-weight-bold" for="position">Người tạo :</label>
         <input type="text" class="form-control" placeholder="Người tạo" id="create_by" onblur="notNull(this.value, 'create_by_err');">
         <code class="text-danger small font-weight-bold float-right" id="create_by_err" style="display: none;"></code>
+    </div>
+</div>
+<div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="position">Password đăng nhập :</label>
+        <input type="text" class="form-control" placeholder="Password đăng nhập" id="PASSWORD_1" onblur="notNull(this.value, 'PASSWORD_1_err');">
+        <code class="text-danger small font-weight-bold float-right" id="PPASSWORD_1_err" style="display: none;"></code>
     </div>
 </div>
 <!-- horizontal line -->

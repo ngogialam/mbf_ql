@@ -3,10 +3,19 @@
   if(isset($_GET['action']) && $_GET['action'] == 'is_setup_done')
     isSetupDone();
 
+  // function isSetupDone() {
+  //   require "db_connection.php";
+  //   if($con) {
+  //     $query = "SELECT * FROM admin_credentials";
+  //     $result = mysqli_query($con, $query);
+  //     $row = mysqli_fetch_array($result);
+  //     echo ($row) ? "true" : "false";
+  //   }
+  // }
   function isSetupDone() {
     require "db_connection.php";
     if($con) {
-      $query = "SELECT * FROM admin_credentials";
+      $query = "SELECT * FROM manager_user";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "true" : "false";
@@ -22,7 +31,7 @@
       $username = $_GET["uname"];
       $password = $_GET["pswd"];
 
-      $query = "SELECT * FROM admin_credentials WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+      $query = "SELECT * FROM admin_credentials WHERE USERNAME = '$username' AND PASSWORD_1 = '$password'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       if($row)  {
@@ -34,6 +43,24 @@
         echo "false";
     }
   }
+  // function isAdmin() {
+  //   require "db_connection.php";
+  //   if($con) {
+  //     $gmail = $_GET["gmail"];
+  //     $password = $_GET["pswd"];
+
+  //     $query = "SELECT * FROM manager_user WHERE gmail = '$gmail' AND password = '$password'";
+  //     $result = mysqli_query($con, $query);
+  //     $row = mysqli_fetch_array($result);
+  //     if($row)  {
+  //       $query = "UPDATE manager_user SET IS_LOGGED_IN = 'true'";
+  //       $result = mysqli_query($con, $query);
+  //       echo "true";
+  //     }
+  //     else
+  //       echo "false";
+  //   }
+  // }
 
   if(isset($_GET['action']) && $_GET['action'] == 'store_admin_info')
     storeAdminData();
