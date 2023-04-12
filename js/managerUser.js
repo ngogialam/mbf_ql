@@ -1,4 +1,4 @@
-function deleteUser(id_user) {
+function deleteUser(ID) {
     var confirmation = confirm("Are you sure?");
     if (confirmation) {
         var xhttp = new XMLHttpRequest();
@@ -6,39 +6,42 @@ function deleteUser(id_user) {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('user_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/managerUser.php?action=delete&id_user=" + id_user, true);
+        xhttp.open("GET", "php/managerUser.php?action=delete&ID=" + ID, true);
         xhttp.send();
     }
 }
 
-function editUser(id_user) {
+function editUser(ID) {
     console.log("55555555");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById('user_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/managerUser.php?action=edit&id_user=" + id_user, true);
+    xhttp.open("GET", "php/managerUser.php?action=edit&ID=" + ID, true);
     xhttp.send();
 }
 
-function updateUser(id_user) {
+function updateUser(ID) {
     var id_team_user = document.getElementById("id_team_user");
-    var name_user_manager = document.getElementById("name_user_manager");
-    var sdt = document.getElementById("sdt");
-    var gmail = document.getElementById("gmail");
+    var USERNAME = document.getElementById("USERNAME");
+    var CONTACT_NUMBER = document.getElementById("CONTACT_NUMBER");
+    var PASSWORD_1 = document.getElementById("PASSWORD_1");
+    var EMAIL = document.getElementById("EMAIL");
     var room = document.getElementById("room");
     var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
     var created_at = document.getElementById("created_at");
-    if (!validateName(name_user_manager.value, "name_err"))
-        name_user_manager.focus();
-    else if (!validateContactNumber(sdt.value, "sdt_err"))
-        sdt.focus();
-    else if (!validateAddress(gmail.value, "gmail_err"))
-        gmail.focus();
+    if (!validateName(USERNAME.value, "USERNAME_err"))
+        USERNAME.focus();
+    else if (!validateContactNumber(CONTACT_NUMBER.value, "CONTACT_NUMBER_err"))
+        CONTACT_NUMBER.focus();
+    else if (!validateAddress(EMAIL.value, "EMAIL_err"))
+        EMAIL.focus();
     else if (!notNull(room.value, 'room_err'))
         room.focus();
+    else if (!notNull(PASSWORD_1.value, 'PASSWORD_1_err'))
+        PASSWORD_1.focus();
     else if (!notNull(position_manager.value, 'position_manager_err'))
         position_manager.focus();
     else if (!notNull(create_by.value, "create_by_error"))
@@ -51,7 +54,7 @@ function updateUser(id_user) {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('user_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/managerUser.php?action=update&id_user=" + id_user + "&id_team_user=" + id_team_user.value + "&name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
+        xhttp.open("GET", "php/managerUser.php?action=update&ID=" + ID + "&id_team_user=" + id_team_user.value + "&USERNAME=" + USERNAME.value + "&CONTACT_NUMBER=" + CONTACT_NUMBER.value + "&PASSWORD_1=" + PASSWORD_1.value + "&EMAIL=" + EMAIL.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
         xhttp.send();
     }
 }

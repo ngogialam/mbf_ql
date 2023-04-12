@@ -1,26 +1,28 @@
 <?php
  require "db_connection.php";
  if($con) {
-   $name_user_manager = ucwords($_GET["name_user_manager"]);
-   $sdt = $_GET["sdt"];
-   $gmail = ucwords($_GET["gmail"]);
+   $USERNAME = ucwords($_GET["USERNAME"]);
+   $CONTACT_NUMBER = $_GET["CONTACT_NUMBER"];
+   $EMAIL = ucwords($_GET["EMAIL"]);
    $room = ucwords($_GET["room"]);
    $manager_team_user = $_GET['manager_team_user'];
    $position_manager = ucwords($_GET["position_manager"]);
    $create_by = ucwords($_GET["create_by"]);
+   $PASSWORD_1 = ucwords($_GET["PASSWORD_1"]);
 
-   $query = "SELECT * FROM manager_user WHERE sdt = '$sdt'";
+   $query = "SELECT * FROM admin_credentials WHERE CONTACT_NUMBER = '$CONTACT_NUMBER'";
    $result = mysqli_query($con, $query);
    $row = mysqli_fetch_array($result);
    if($row)
-     echo "manager_user ".$row['name_user_manager']." with contact number $sdt already exists!";
+     echo "admin_credentials ".$row['USERNAME']." with contact number $CONTACT_NUMBER already exists!";
    else {
-     $query = "INSERT INTO manager_user (name_user_manager, id_team_user, sdt, gmail, room,  position_manager, create_by) VALUES('$name_user_manager', '$manager_team_user', '$sdt', '$gmail', '$room', '$position_manager', '$create_by')";
+     $query = "INSERT INTO admin_credentials (USERNAME, id_team_user, CONTACT_NUMBER, EMAIL, room,  position_manager, create_by, PASSWORD_1) VALUES('$USERNAME', '$manager_team_user', '$CONTACT_NUMBER', '$EMAIL', '$room', '$position_manager', '$create_by', '$PASSWORD_1')";
+     var_dump( $query);
      $result = mysqli_query($con, $query);
      if(!empty($result))
-       echo "$name_user_manager added...";
+       echo "$USERNAME added...";
      else
-       echo "Failed to add $name_user_manager!";
+       echo "Failed to add $USERNAME!";
    }
  }
 ?>
