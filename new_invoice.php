@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="shortcut icon" href="" type="image/x-icon">
@@ -25,8 +27,10 @@
         <div class="container" id="sys_div">
             <!-- header section -->
             <?php
+            
             require "php/header.php";
             createHeader('user', 'Thêm mới thông tin hệ thống', 'Tạo mới thông tin');
+            
             ?>
             <div class="row">
                 <div class="row col col-md-12">
@@ -46,7 +50,6 @@
                         </div>
                     </div>
                     <div class="row col col-md-12" style="flex-direction: row-reverse;">
-
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Tên nhóm hệ thống :</label>
                             <?php
@@ -82,6 +85,7 @@
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Đơn vị quản lý :</label>
+                            <input type="hidden" id="list_unit_user" name="list_unit_user"/>
                             <?php
                             require "php/db_connection.php";
                             if ($con) {
@@ -103,32 +107,100 @@
                             ?>
                         </div>
                     </div>
-                    <div class="row col col-md-12">
+                    <div class="row col col-md-12" id="" >
                         <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Đơn vị sử dụng :</label>
-                            <?php
-                            require "php/db_connection.php";
-                            if ($con) {
-                                $query = "SELECT * FROM unit_user";
-                                $result = mysqli_query($con, $query);
-                                echo '<select name="unit_user" id="unit_user" class=" form-control pdm chosen-select col col-md-12" >';
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id_unit_user = $row['id_unit_user'];
-                                    $name_unit_user = $row['name_unit_user'];
-                                    
-                                    if ($id_unit_user == $id_unit_user_sys){
-                                        echo "<option value= '$id_unit_user' selected='selected'>$name_unit_user</option>";
-                                    }
-                                    else
-                                        echo "<option value='$id_unit_user'>$name_unit_user</option>";
-                                }
-                                echo '</select>';
-                            }
-                            ?>
+                            <hr style="border: 1px solid green;">
                         </div>
                     </div>
                     <div class="row col col-md-12">
-                    <div class="col col-md-12 form-group">
+                        <div class="col col-md-6 form-group">
+                            <div class="col col-md-12 table-responsive" id="unit_div">
+                                <div class="table-responsive">
+                                    <input type="hidden" id="list_unit_user" name="list_unit_user" />
+                                    <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                        <th>Đơn vị sử dụng</th>
+                                        <th >Hành động</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <?php 
+                                            if(isset($_COOKIE["list_unit_user"]))
+                                                $list_unit_user = explode('/',$_COOKIE["list_unit_user"], -1);
+                                            else
+                                                $list_unit_user = array();
+                                            if($list_unit_user){    
+                                                foreach (array_values($list_unit_user) as $idx => $val) {
+                                                    $query = "SELECT * FROM unit_user WHERE id_unit_user = $val";
+                                                    $result = mysqli_query($con, $query);
+                                                    if($row = mysqli_fetch_assoc($result)){
+                                                        $name = $row['name_unit_user'];
+                                                        echo "<tr><td>$name</td>";
+                                                        ?>
+                                                        <td><button href='' class='btn btn-info btn-sm' onclick='deleteUnitInSYS(<?php echo $idx; ?>)'><i class='fa fa-trash'></i></button></td></tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            }
+                                        ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-6 ">
+                            <div class="col col-md-12 form-group">
+                                <div class="row col col-md-12"  >
+                                    <div class="row col col-md-12"  >
+                                        <label for="name_team_sys">Đơn vị sử dụng :</label>
+                                        
+                                        <?php
+                                        require "php/db_connection.php";
+                                        if ($con) {
+                                            $query = "SELECT * FROM unit_user";
+                                            $result = mysqli_query($con, $query);
+                                            echo '<select name="unit_user" id="unit_user" class=" form-control pdm chosen-select col col-md-12" >';
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $id_unit_user = $row['id_unit_user'];
+                                                $name_unit_user = $row['name_unit_user'];
+                                                
+                                                if ($id_unit_user == $id_unit_user_sys){
+                                                    echo "<option value= '$id_unit_user' selected='selected'>$name_unit_user</option>";
+                                                }
+                                                else
+                                                    echo "<option value='$id_unit_user'>$name_unit_user</option>";
+                                            }
+                                            echo '</select>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div >
+                                <div class="row col col-md-12" id="" >
+                                    <div class="col col-md-12 form-group">
+                                      <br/>
+                                    </div>
+                                </div>
+                                <div class="row col col-md-12 m-auto"  >
+                                        <div id="ubutton" class="col col-md-5 form-group float-right">
+                                        <button class="btn btn-success form-control font-weight-bold"
+                                        onclick="addUnitInSYS()">Thêm</button>
+                                        </div>
+                                        <div id="ubutton" class="col col-md-5 form-group float-right">
+                                        <button class="btn btn-success form-control font-weight-bold"
+                                        onclick="deleteCookie('list_unit_user', 'unit_div')">Xoá toàn bộ</button>   
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col col-md-12" id="" >
+                        <div class="col col-md-12 form-group">
+                            <hr style="border: 1px solid green;">
+                        </div>
+                    </div>
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
                             <label for="manager_user">Người quản lý :</label>
                             <?php
                             require "php/db_connection.php";
@@ -158,22 +230,103 @@
                                  >
                         </div>
                     </div>
-                    <div class="row col col-md-12">
+                    <div class="row col col-md-12" id="" >
                         <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Tài liệu hệ thống :</label>
-                            <input type="text" id="document_sys" class="form-control" 
-                                placeholder="tài liệu hệ thống"
-                                >
+                            <hr style="border: 1px solid green;">
                         </div>
                     </div>
-                    <div class="row col col-md-12">
-                        <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Server hệ thống :</label>
-                            <input id="server_sys" type="text" class="form-control" 
-                                placeholder="server hệ thống"
-                                >
+                    <div class="row col col-md-12" id="block_info_div">
+                        <div class="row col col-md-6">
+                            <div class="col col-md-12 table-responsive">
+                                <div class="table-responsive">
+                                    <input type="hidden" id="list_block_infor" name="list_block_infor" value='<?php echo $_COOKIE["list_block_infor"];?>'/>
+                                    <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                        <th>STT</th>
+                                        <th>Server hệ thống</th>
+                                        <th>IP hệ thống</th>
+                                        <th>Cấu hình hệ thống</th>
+                                        <th>File mô tả</th>
+                                        <th>Action</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sys_div">
+                                        <?php 
+                                            if(isset($_COOKIE["list_block_infor"]))
+                                                $list_block_infor = explode('/',$_COOKIE["list_block_infor"], -1);
+                                            else
+                                                $list_block_infor = array();
+
+                                            if($list_block_infor){    
+                                                foreach (array_values($list_block_infor) as $idx => $val) {
+                                                    $list_block_infor_detail = explode('|',$val, -1);
+                                                    echo "<tr>";
+                                                    echo "<td>$idx</td>";
+                                                    foreach($list_block_infor_detail as $detail){
+                                                        echo "<td>$detail</td>";
+                                                    }
+                                                    ?>
+                                                    <td><button href='' class='btn btn-info btn-sm' onclick='deleteBlockInfor(<?php echo $idx; ?>)'><i class='fa fa-trash'></i></button></td></tr>
+                                                    <?php
+                                                }
+                                            }
+                                        ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col col-md-6">
+                            <div class="row col col-md-12" id="file_des_div" >
+                                <div class="col col-md-12 form-group">
+                                    <label for="file">File mô tả :</label>
+                                    <input id="file_des" type="file" name="file_des" onblur="checkInputFile(this.value, 'file_des_error');"/>
+                                    <code class="text-danger small font-weight-bold float-right" id="file_des_error" style="display: none;"></code>
+                                </div>
+                            </div>
+                            <div class="row col col-md-12">
+                                <div class="col col-md-12 form-group">
+                                    <label for="name_team_sys">Server hệ thống :</label>
+                                    <input id="server_sys" type="text" class="form-control" 
+                                        placeholder="server hệ thống"
+                                        >
+                                </div>
+                            </div>
+
+                            <div class="row col col-md-12">
+                                <div class="col col-md-12 form-group">
+                                    <label for="name_team_sys">Ip hệ thống :</label>
+                                    <input id="ip_sys" type="number" class="form-control"
+                                        placeholder="ip hệ thống" >
+                                </div>
+                            </div>
+                            <div class="row col col-md-12">
+                                <div class="col col-md-12 form-group">
+                                    <label for="name_team_sys">Cấu hình hệ thống :</label>
+                                    <input id="config_sys" type="text" class="form-control" 
+                                        placeholder="cấu hình hệ thống"
+                                        >
+                                </div>
+                            </div>
+                            <div class="row col col-md-12 m-auto"  >
+                                <div id="ubutton" class="col col-md-5 form-group float-right">
+                                <button class="btn btn-success form-control font-weight-bold"
+                                        onclick="addBlockInfor()">Thêm</button>
+                                </div>
+                                <div id="ubutton" class="col col-md-5 form-group float-right">
+                                <button class="btn btn-success form-control font-weight-bold"
+                                        onclick="deleteCookie('list_block_infor', 'block_info_div')">Xoá toàn bộ</button>   
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
+                    <div class="row col col-md-12" id="" >
+                        <div class="col col-md-12 form-group">
+                            <hr style="border: 1px solid green;">
+                        </div>
+                    </div>                    
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="create_by">Người tạo:</label>
@@ -181,30 +334,6 @@
                                 placeholder="Người tạo">
                         </div>
                     </div>
-                    <div class="row col col-md-12">
-                        <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Ip hệ thống :</label>
-                            <input id="ip_sys" type="number" class="form-control"
-                                placeholder="ip hệ thống" >
-                        </div>
-                    </div>
-                    <div class="row col col-md-12">
-                        <div class="col col-md-12 form-group">
-                            <label for="name_team_sys">Cấu hình hệ thống :</label>
-                            <input id="config_sys" type="text" class="form-control" 
-                                placeholder="cấu hình hệ thống"
-                                >
-                        </div>
-                    </div>
-
-                    <div class="row col col-md-12" id="file_des_div" >
-                        <div class="col col-md-12 form-group">
-                            <label for="file">File mô tả :</label>
-                            <input id="file_des" type="file" name="file_des" />
-                        </div>
-                    </div>
-
-
                     <!-- horizontal line -->
                     <div class="col col-md-12">
                         <hr class="col-md-12 float-left"
@@ -216,6 +345,7 @@
                         <div id="update_button" class="col col-md-3 form-group float-right">
                             <button class="btn btn-success form-control font-weight-bold"
                                 onclick="create();">Tạo mới</button>
+ 
                         </div>
                     </div>
                     <!-- result message -->
