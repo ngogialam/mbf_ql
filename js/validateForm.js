@@ -151,7 +151,7 @@ function addUnitManager() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_unit_manager.php?name_unit_sys=" + name.value + "&name_room=" + packing.value + "&create_by=" + generic_name.value , true);
+    xhttp.open("GET", "php/add_new_unit_manager.php?name_unit_sys=" + name.value + "&name_room=" + packing.value + "&create_by=" + generic_name.value, true);
     xhttp.send();
 }
 
@@ -166,28 +166,28 @@ function addUnitUser() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_unit_user.php?name_unit_user=" + name_unit_user.value + "&name_room_unit=" + name_room_unit.value + "&create_by=" + create_by.value , true);
+    xhttp.open("GET", "php/add_new_unit_user.php?name_unit_user=" + name_unit_user.value + "&name_room_unit=" + name_room_unit.value + "&create_by=" + create_by.value, true);
     xhttp.send();
 }
 
 function addManager() {
     document.getElementById("customer_acknowledgement").innerHTML = "";
-    var name_user_manager = document.getElementById("name_user_manager");
-    var sdt = document.getElementById("sdt");
-    var gmail = document.getElementById("gmail");
+    var USERNAME = document.getElementById("USERNAME");
+    var CONTACT_NUMBER = document.getElementById("CONTACT_NUMBER");
+    var EMAIL = document.getElementById("EMAIL");
     var room = document.getElementById("room");
-    var team_sys_manager = document.getElementById("team_sys_manager");
+    var manager_team_user = document.getElementById("manager_team_user");
     var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
+    var PASSWORD_1 = document.getElementById("PASSWORD_1");
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_user.php?name_user_manager=" + name_user_manager.value+ "&team_sys_manager="+ team_sys_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
+    xhttp.open("GET", "php/add_new_user.php?USERNAME=" + USERNAME.value + "&manager_team_user=" + manager_team_user.value + "&CONTACT_NUMBER=" + CONTACT_NUMBER.value + "&EMAIL=" + EMAIL.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value + "&PASSWORD_1=" + PASSWORD_1.value, true);
     xhttp.send();
-    console.log(team_sys_manager);
     return false;
 }
 
@@ -208,7 +208,6 @@ function checkInputFile(value, error) {
             } else {
                 result.style.display = "none";
                 return true;
-
             }
         }
     }

@@ -50,7 +50,6 @@
                         </div>
                     </div>
                     <div class="row col col-md-12" style="flex-direction: row-reverse;">
-
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Tên nhóm hệ thống :</label>
                             <?php
@@ -59,8 +58,7 @@
                             if ($con) {
                                 $query = "SELECT * FROM team_sys_manager";
                                 $result = mysqli_query($con, $query);
-
-                                echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" >';
+                                echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" multiple>';
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $id_team_sys = $row['id_team_sys'];
                                     $name_team_sys = $row['name_team_sys'];
@@ -123,7 +121,7 @@
                                     <thead>
                                         <tr>
                                         <th>Đơn vị sử dụng</th>
-                                        <th >Action</th> 
+                                        <th >Hành động</th> 
                                         </tr>
                                     </thead>
                                     <tbody >

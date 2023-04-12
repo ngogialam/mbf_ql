@@ -50,8 +50,9 @@
             		<thead>
             			<tr>
             				<th style="width: 1%;">STT</th>
-                    <th >Nhóm người sử dụng</th>
                     <th>Tên người dùng</th>
+                    <th style="width: 19%;">Nhóm người sử dụng</th>
+                    <th >Mật Khẩu</th>                   
             				<th >Số điện thoại</th>
                     <th >Gmail</th>
                     <th >Phòng</th>

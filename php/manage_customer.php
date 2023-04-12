@@ -28,7 +28,8 @@ if ($con) {
     $room = ucwords($_GET["room"]);
     $position_manager = ucwords($_GET["position_manager"]);
     $create_by = $_GET["create_by"];
-    updateCustomer($id_user_manager, $name_user_manager, $sdt, $gmail, $room, $position_manager, $create_by);
+    $created_at = $_GET["created_at"];
+    updateCustomer($id_user_manager, $name_user_manager, $sdt, $gmail, $room, $position_manager, $create_by, $created_at);
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -176,7 +177,8 @@ function showEditOptionsRow($seq_no, $row)
       <code class="text-danger small font-weight-bold float-right" id="create_by_err" style="display: none;"></code>
     </td>
     <td>
-      <?php echo $row['created_at'] ?>
+      <input type="date" class="datepicker form-control hasDatepicker" value="<?php echo $row['created_at']; ?>" placeholder="Thời gian tạo" id="created_at" onblur="checkDate(this.value, 'created_at_error');">
+      <code class="text-danger small font-weight-bold float-right" id="created_at_error" style="display: none;"></code>
     </td>
     <td>
       <button href="" class="btn btn-success btn-sm" onclick="updateCustomer(<?php echo $row['id_user_manager']; ?>);">
@@ -190,18 +192,19 @@ function showEditOptionsRow($seq_no, $row)
 <?php
 }
 
-function updateCustomer($id_user_manager, $name_user_manager, $sdt, $gmail, $room, $position_manager, $create_by)
+function updateCustomer($id_user_manager, $name_user_manager, $sdt, $gmail, $room, $position_manager, $create_by, $created_at)
 {
   require "db_connection.php";
-  $query = "UPDATE user_manager SET name_user_manager = '$name_user_manager', sdt = '$sdt', gmail = '$gmail', room = '$room', position_manager = '$position_manager', create_by = '$create_by' WHERE id_user_manager = $id_user_manager";
+  $query = "UPDATE user_manager SET name_user_manager = '$name_user_manager', sdt = '$sdt', gmail = '$gmail', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at' WHERE id_user_manager = $id_user_manager";
   $result = mysqli_query($con, $query);
   // if (!empty($result))  
   //   showCustomers(0);  
-  if (!empty($result))
-    echo '<div id="myDiv">
-    <h6> Cập nhật thành công !</h6>    
-    </div>';
-  showCustomers(0);
+  if (!empty($result)) {
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật thành công tài khoản $name_user_manager !</div></td>";
+    showCustomers(0);
+  } else {
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Không thành công</div></td>";
+  }
 }
 
 function searchCustomer($text)

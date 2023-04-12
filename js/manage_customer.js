@@ -28,6 +28,7 @@ function updateCustomer(id_user_manager) {
     var room = document.getElementById("room");
     var position_manager = document.getElementById("position_manager");
     var create_by = document.getElementById("create_by");
+    var created_at = document.getElementById("created_at");
     if (!validateName(name_user_manager.value, "name_err"))
         name_user_manager.focus();
     else if (!validateContactNumber(sdt.value, "sdt_err"))
@@ -40,13 +41,15 @@ function updateCustomer(id_user_manager) {
         position_manager.focus();
     else if (!validateName(create_by.value, 'create_by_err'))
         create_by.focus();
+    else if (!notNull(created_at.value, "created_at_error"))
+        created_at.focus();
     else {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('customers_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manage_customer.php?action=update&id_user_manager=" + id_user_manager + "&name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value, true);
+        xhttp.open("GET", "php/manage_customer.php?action=update&id_user_manager=" + id_user_manager + "&name_user_manager=" + name_user_manager.value + "&sdt=" + sdt.value + "&gmail=" + gmail.value + "&room=" + room.value + "&position_manager=" + position_manager.value + "&create_by=" + create_by.value + "&created_at=" + created_at.value, true);
         xhttp.send();
     }
     // alert('Cập nhật thành công !');

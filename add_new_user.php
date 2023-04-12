@@ -25,7 +25,7 @@
       <!-- header section -->
       <?php
       require "php/header.php";
-      createHeader('handshake', 'Thêm mới người quản trị người dùng', 'Thêm mới ');
+      createHeader('handshake', 'Thêm mới người người dùng', 'Thêm mới ');
       // header section end
       ?>      
       <div class="row">
@@ -34,33 +34,33 @@
 <!-- customer name control -->
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
-        <label class="font-weight-bold" for="name_user_manager">Tên người quản trị :</label>
-        <input type="text" class="form-control" placeholder="Tên người quản trị" id="name_user_manager" onkeyup="validateName(this.value, 'name_err');">
-        <code class="text-danger small font-weight-bold float-right" id="name_err" style="display: none;"></code>
+        <label class="font-weight-bold" for="name_user_manager">Tên người dùng :</label>
+        <input type="text" class="form-control" placeholder="Tên người dùng" id="USERNAME" onkeyup="notNull(this.value, 'USERNAME_err');">
+        <code class="text-danger small font-weight-bold float-right" id="USERNAME_err" style="display: none;"></code>
     </div>
 </div>
 
 <div class="row col col-md-12" style="flex-direction: row-reverse;">
 
 <div class="col col-md-12 form-group">
-    <label for="name_team_sys">Tên nhóm hệ thống :</label>
+    <label for="name_team_sys">Tên nhóm Người dùng :</label>
     <?php
     require "php/db_connection.php";
-    $team_sys = "";
+    $name_team_user = "";
     if ($con) {
-        $query = "SELECT * FROM team_sys_manager";
+        $query = "SELECT * FROM manager_team_user";
         $result = mysqli_query($con, $query);
 
-        echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" >';
+        echo '<select name="manager_team_user" id="manager_team_user" class=" form-control pdm chosen-select col col-md-12" >';
         while ($row = mysqli_fetch_assoc($result)) {
-            $id_team_sys = $row['id_team_sys'];
-            $name_team_sys = $row['name_team_sys'];
-            if ($id_team_sys == $id_team_sys_sys){
-                $team_sys = $name_team_sys;
-                echo "<option value= '$id_team_sys' selected='selected'>$name_team_sys</option>";
+            $id_team_user = $row['id_team_user'];
+            $name_team_user = $row['name_team_user'];
+            if ($id_team_user == $id_team_user){
+                $team_sys = $name_team_user;
+                echo "<option value= '$id_team_user' selected='selected'>$name_team_user</option>";
             }
             else
-                echo "<option value= '$id_team_sys' >$name_team_sys</option>";
+                echo "<option value= '$id_team_user' >$name_team_user</option>";
         }
         echo '</select>';
     }
@@ -72,8 +72,8 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="phone_number">Số điện thoại :</label>
-        <input type="number" class="form-control" placeholder="Số điện thoại" id="sdt" onblur="validateContactNumber(this.value, 'sdt_err');">
-        <code class="text-danger small font-weight-bold float-right" id="sdt_err" style="display: none;"></code>
+        <input type="number" class="form-control" placeholder="Số điện thoại" id="CONTACT_NUMBER" onblur="validateContactNumber(this.value, 'CONTACT_NUMBER_err');">
+        <code class="text-danger small font-weight-bold float-right" id="CONTACT_NUMBER_err" style="display: none;"></code>
     </div>
 </div>
 
@@ -81,8 +81,8 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="email">Email :</label>
-        <input type="text" class="form-control" placeholder="Email" id="gmail" onkeyup="validateAddress(this.value, 'gmail_err');">
-        <code class="text-danger small font-weight-bold float-right" id="gmail_err" style="display: none;"></code>
+        <input type="text" class="form-control" placeholder="Email" id="EMAIL" onkeyup="validateAddress(this.value, 'EMAIL_err');">
+        <code class="text-danger small font-weight-bold float-right" id="EMAIL_err" style="display: none;"></code>
     </div>
 </div>
 
@@ -106,8 +106,15 @@
 <div class="row col col-md-12">
     <div class="col col-md-12 form-group">
         <label class="font-weight-bold" for="position">Người tạo :</label>
-        <input type="text" class="form-control" placeholder="Người tạo" id="create_by" onblur="validateName(this.value, 'create_by_err');">
+        <input type="text" class="form-control" placeholder="Người tạo" id="create_by" onblur="notNull(this.value, 'create_by_err');">
         <code class="text-danger small font-weight-bold float-right" id="create_by_err" style="display: none;"></code>
+    </div>
+</div>
+<div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+        <label class="font-weight-bold" for="position">Password đăng nhập :</label>
+        <input type="text" class="form-control" placeholder="Password đăng nhập" id="PASSWORD_1" onblur="notNull(this.value, 'PASSWORD_1_err');">
+        <code class="text-danger small font-weight-bold float-right" id="PPASSWORD_1_err" style="display: none;"></code>
     </div>
 </div>
 <!-- horizontal line -->
