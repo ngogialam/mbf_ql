@@ -218,12 +218,12 @@
       createForm($mess);
       exit();
     } 
-  
+    var_dump($_POST);
     $team_sys_id = $_POST["team_sys_manager"];
     $first_number = $_POST["first_number"];
     $unit_sys = $_POST["unit_sys"];
     $manager_user = $_POST["manager_user"];
-    
+    $type_sys = $_POST['type_sys'];
     $describe_sys = $_POST["describe_sys"];
 
     $list_block_infor = $_POST["list_block_infor"];
@@ -232,23 +232,24 @@
     $list_block_infor_temp = explode('/', $list_block_infor, -1);
     foreach (array_values($list_block_infor_temp) as $idx => $val) {
       $list_block_infor_detail = array_slice(explode('|',$val, -1), -1, 1);
-      if($list_block_infor_detail != ""){
+      if($list_block_infor_detail[0] != ""){
+        var_dump($list_block_infor_detail[0]);
         $old_name = "../upload_temps/" . (string)$list_block_infor_detail[0];
         $new_name = "../uploads/" . (string)$list_block_infor_detail[0] ;
         rename($old_name, $new_name);
       }
     }
     // insert 1 system
-    createSys($team_sys_id, $unit_sys, $manager_user, $name_sys, $first_number, $describe_sys, $create_by, $list_unit_user, $list_block_infor);
+    createSys($team_sys_id, $unit_sys, $type_sys, $manager_user, $name_sys, $first_number, $describe_sys, $create_by, $list_unit_user, $list_block_infor);
   }
 
 
-  function createSys($team_sys_id, $unit_sys, $manager_user, $name_sys, $first_number, $describe_sys, $create_by, $list_unit_user, $list_block_infor){
+  function createSys($team_sys_id, $unit_sys, $type_sys, $manager_user, $name_sys, $first_number, $describe_sys, $create_by, $list_unit_user, $list_block_infor){
     require "db_connection.php";
     $list_unit_user = (string)$list_unit_user;
     $list_block_infor = (string)$list_block_infor;
-    $query = "INSERT INTO sys_ql (unit_sys_id, user_manager_id, team_sys_id, name_sys, first_number, describe_sys, create_by, list_unit_user, list_block_infor)
-              VALUE ( '$unit_sys', '$manager_user', '$team_sys_id', '$name_sys', '$first_number', '$describe_sys', '$create_by', '$list_unit_user', '$list_block_infor')";
+    $query = "INSERT INTO sys_ql (unit_sys_id, user_manager_id, team_sys_id, name_sys, type_sys, first_number, describe_sys, create_by, list_unit_user, list_block_infor)
+              VALUE ( '$unit_sys', '$manager_user', '$team_sys_id', '$name_sys', '$type_sys', '$first_number', '$describe_sys', '$create_by', '$list_unit_user', '$list_block_infor')";
     $result = mysqli_query($con, $query);
     // var_dump($result);
     if(!empty($result)){
@@ -285,6 +286,13 @@ function createForm($mess){
                             <label for="name_sys">Tên hệ thống :</label>
                             <input id="name_sys" type="text" class="form-control" placeholder="tên hệ thống" >
                         </div>
+                    </div>
+                    <div class="col col-md-12 form-group">
+                        <label for="name_sys">Loại hệ thống :</label>
+                        <select name="type_sys" id="type_sys" class=" form-control pdm chosen-select col col-md-12" >
+                            <option value= '1' selected='selected'>Đầu tư</option>
+                            <option value= '0' >Hợp tác</option>
+                        </select>
                     </div>
                     <div class="row col col-md-12" style="flex-direction: row-reverse;">
 

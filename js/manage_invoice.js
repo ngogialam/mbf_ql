@@ -165,6 +165,7 @@ function create() {
     
         var first_number = document.getElementById("first_number").value;
         var unit_sys = document.getElementById("unit_sys").value;
+        var type_sys = document.getElementById("type_sys").value;
         var manager_user = document.getElementById("manager_user").value;
         var describe_sys = document.getElementById("describe_sys").value;
         var create_by = document.getElementById("create_by").value;
@@ -182,6 +183,7 @@ function create() {
     
         var formData = new FormData();
         formData.append("team_sys_manager", team_sys_manager);
+        formData.append("type_sys", type_sys);
         formData.append("name_sys", name_sys);
         formData.append("first_number", first_number);
         formData.append("unit_sys", unit_sys);

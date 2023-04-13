@@ -49,6 +49,13 @@
                             <input id="name_sys" type="text" class="form-control" placeholder="tên hệ thống" >
                         </div>
                     </div>
+                    <div class="col col-md-12 form-group">
+                        <label for="name_sys">Loại hệ thống :</label>
+                        <select name="type_sys" id="type_sys" class=" form-control pdm chosen-select col col-md-12" >
+                            <option value= '1' selected='selected'>Đầu tư</option>
+                            <option value= '0' >Hợp tác</option>
+                        </select>
+                    </div>
                     <div class="row col col-md-12" style="flex-direction: row-reverse;">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Tên nhóm hệ thống :</label>
