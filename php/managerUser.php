@@ -27,7 +27,7 @@ if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "update") {
     $ID = $_GET["ID"];
     $id_team_user = $_GET["id_team_user"];
-    $USERNAME = ucwords($_GET["USERNAME"]);
+    $USERNAME_USER = ucwords($_GET["USERNAME_USER"]);    
     $CONTACT_NUMBER = $_GET["CONTACT_NUMBER"];
     $EMAIL = ucwords($_GET["EMAIL"]);
     $room = ucwords($_GET["room"]);
@@ -35,7 +35,7 @@ if ($con) {
     $create_by = ucwords($_GET["create_by"]);
     $created_at = $_GET["created_at"];
     $PASSWORD_1 = ucwords($_GET["PASSWORD_1"]);
-    updateUser($ID, $id_team_user, $USERNAME, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1);
+    updateUser($ID, $id_team_user, $USERNAME_USER, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1);
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -49,8 +49,7 @@ function showUser($ID)
 {
   require "db_connection.php";
   if ($con) {
-    $seq_no = 0;
-    // $query = "SELECT * FROM manager_user";
+    $seq_no = 0;    
     $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
@@ -68,7 +67,7 @@ function showUserRow($seq_no, $row)
   ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['USERNAME']; ?></td>
+    <td><?php echo $row['USERNAME_USER']; ?></td>
     <td><?php echo $row['name_team_user']; ?></td>
     <td><?php echo $row['PASSWORD_1']; ?></td>
     <td><?php echo $row['CONTACT_NUMBER'] ?></td>
@@ -95,14 +94,14 @@ function showEditUserRow($seq_no, $row)
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['USERNAME']; ?>" placeholder="Name" id="USERNAME" onkeyup="validateName(this.value, 'USERNAME_err');">
-      <code class="text-danger small font-weight-bold float-right" id="USERNAME_err" style="display: none;"></code>
+      <input type="text" class="form-control" value="<?php echo $row['USERNAME_USER']; ?>" placeholder="Tên đăng nhập" id="USERNAME_USER" onblur="notNull(this.value, 'USERNAME_USER_err');">
+      <code class="text-danger small font-weight-bold float-right" id="USERNAME_USER_err" style="display: none;"></code>
     </td>
-    <td>
-      <!-- <select id="id_team_user" class="form-control">
-        <option value="<?php echo $row['id_team_user']; ?>"><?php echo $row['name_team_user']; ?></option>
-        <option value="0">Chọn nhóm người dùng</option>
-      </select> -->
+    <!-- <td>
+      <textarea class="form-control" placeholder="USERNAME" id="USERNAME" onkeyup="notNull(this.value, 'USERNAME_err');"><?php echo $row['USERNAME']; ?></textarea>
+      <code class="text-danger small font-weight-bold float-right" id="USERNAME_err" style="display: none;"></code>
+    </td> -->
+    <td>      
       <?php
       require "db_connection.php";
       if ($con) {
@@ -145,9 +144,7 @@ function showEditUserRow($seq_no, $row)
     </td>
     <td>
       <input type="text" class="form-control" value="<?php echo $row['create_by']; ?>" placeholder="Người tạo" id="create_by" onblur="notNull(this.value, 'create_by_error');">
-      <code class="text-danger small font-weight-bold float-right" id="create_by_error" style="display: none;"></code>
-      <!-- <input type="text" class="form-control" value="<?php echo $row['create_by']; ?>" placeholder="Name" id="create_by" onkeyup="validateName(this.value, 'create_by_error');">
-      <code class="text-danger small font-weight-bold float-right" id="create_by_error" style="display: none;"></code> -->
+      <code class="text-danger small font-weight-bold float-right" id="create_by_error" style="display: none;"></code>      
     </td>
     <td>
       <input type="date" class="datepicker form-control hasDatepicker" value="<?php echo $row['created_at']; ?>" placeholder="Thời gian tạo" id="created_at" onblur="checkDate(this.value, 'created_at_err');">
@@ -165,21 +162,31 @@ function showEditUserRow($seq_no, $row)
 <?php
 }
 
-function updateUser($ID, $id_team_user, $USERNAME, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1)
+function updateUser($ID, $id_team_user, $USERNAME_USER, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1)
 {
   require "db_connection.php";
-  $query = "UPDATE admin_credentials SET id_team_user = $id_team_user, USERNAME = '$USERNAME', CONTACT_NUMBER = '$CONTACT_NUMBER', EMAIL = '$EMAIL', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at', PASSWORD_1 = '$PASSWORD_1' WHERE ID = $ID";
-  $result = mysqli_query($con, $query);
-  var_dump($query);
+  $query = "UPDATE admin_credentials SET USERNAME_USER = '$USERNAME_USER', id_team_user = '$id_team_user', CONTACT_NUMBER = '$CONTACT_NUMBER', EMAIL = '$EMAIL', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at', PASSWORD_1 = '$PASSWORD_1' WHERE ID = $ID";
+  $result = mysqli_query($con, $query);  
   if (!empty($result)) {
-    echo "thành công";
+    show_alert("Thao tác thành công!", true);
+    showUser(0);
   } else {
-    echo "Không thành công";
+    show_alert("Thao tác thất bại!", false);
   }
   // showUser(0);
-
 }
-
+function show_alert($message, $is_success) {
+  echo '<script>
+          document.getElementById("alert-message").innerHTML = "'.$message.'";
+          document.getElementById("alert-box").style.display = "block";
+          document.getElementById("alert-box").classList.add("'.($is_success ? "alert-success" : "alert-danger").'");
+          
+          setTimeout(function(){
+              document.getElementById("alert-box").style.display = "none";
+              document.getElementById("alert-box").classList.remove("alert-success", "alert-danger");
+          }, 5000);
+      </script>';
+}
 function searchUser($text)
 {
   require "db_connection.php";
