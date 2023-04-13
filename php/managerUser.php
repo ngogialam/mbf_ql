@@ -27,7 +27,7 @@ if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "update") {
     $ID = $_GET["ID"];
     $id_team_user = $_GET["id_team_user"];
-    $USERNAME = ucwords($_GET["USERNAME"]);
+    $USERNAME_USER = ucwords($_GET["USERNAME_USER"]);    
     $CONTACT_NUMBER = $_GET["CONTACT_NUMBER"];
     $EMAIL = ucwords($_GET["EMAIL"]);
     $room = ucwords($_GET["room"]);
@@ -35,7 +35,7 @@ if ($con) {
     $create_by = ucwords($_GET["create_by"]);
     $created_at = $_GET["created_at"];
     $PASSWORD_1 = ucwords($_GET["PASSWORD_1"]);
-    updateUser($ID, $id_team_user, $USERNAME, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1);
+    updateUser($ID, $id_team_user, $USERNAME_USER, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1);
   }
 
   if (isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -49,8 +49,7 @@ function showUser($ID)
 {
   require "db_connection.php";
   if ($con) {
-    $seq_no = 0;
-    // $query = "SELECT * FROM manager_user";
+    $seq_no = 0;    
     $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
@@ -68,7 +67,7 @@ function showUserRow($seq_no, $row)
   ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['USERNAME']; ?></td>
+    <td><?php echo $row['USERNAME_USER']; ?></td>
     <td><?php echo $row['name_team_user']; ?></td>
     <td><?php echo $row['PASSWORD_1']; ?></td>
     <td><?php echo $row['CONTACT_NUMBER'] ?></td>
@@ -95,9 +94,13 @@ function showEditUserRow($seq_no, $row)
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['USERNAME']; ?>" placeholder="Name" id="USERNAME" onblur="validateName(this.value, 'USERNAME_err');">
-      <code class="text-danger small font-weight-bold float-right" id="USERNAME_err" style="display: none;"></code>
+      <input type="text" class="form-control" value="<?php echo $row['USERNAME_USER']; ?>" placeholder="Tên đăng nhập" id="USERNAME_USER" onblur="notNull(this.value, 'USERNAME_USER_err');">
+      <code class="text-danger small font-weight-bold float-right" id="USERNAME_USER_err" style="display: none;"></code>
     </td>
+    <!-- <td>
+      <textarea class="form-control" placeholder="USERNAME" id="USERNAME" onkeyup="notNull(this.value, 'USERNAME_err');"><?php echo $row['USERNAME']; ?></textarea>
+      <code class="text-danger small font-weight-bold float-right" id="USERNAME_err" style="display: none;"></code>
+    </td> -->
     <td>      
       <?php
       require "db_connection.php";
@@ -159,12 +162,11 @@ function showEditUserRow($seq_no, $row)
 <?php
 }
 
-function updateUser($ID, $id_team_user, $USERNAME, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1)
+function updateUser($ID, $id_team_user, $USERNAME_USER, $CONTACT_NUMBER, $EMAIL, $room, $position_manager, $create_by, $created_at, $PASSWORD_1)
 {
   require "db_connection.php";
-  $query = "UPDATE admin_credentials SET USERNAME = '$USERNAME', id_team_user = $id_team_user, CONTACT_NUMBER = '$CONTACT_NUMBER', EMAIL = '$EMAIL', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at', PASSWORD_1 = '$PASSWORD_1' WHERE ID = $ID";
+  $query = "UPDATE admin_credentials SET USERNAME_USER = '$USERNAME_USER', id_team_user = '$id_team_user', CONTACT_NUMBER = '$CONTACT_NUMBER', EMAIL = '$EMAIL', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at', PASSWORD_1 = '$PASSWORD_1' WHERE ID = $ID";
   $result = mysqli_query($con, $query);  
-  var_dump( $query);
   if (!empty($result)) {
     show_alert("Thao tác thành công!", true);
     showUser(0);
@@ -172,7 +174,6 @@ function updateUser($ID, $id_team_user, $USERNAME, $CONTACT_NUMBER, $EMAIL, $roo
     show_alert("Thao tác thất bại!", false);
   }
   // showUser(0);
-
 }
 function show_alert($message, $is_success) {
   echo '<script>
