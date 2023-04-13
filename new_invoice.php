@@ -84,9 +84,7 @@
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="first_number">Tên đầu số :</label>
-                            <input id="first_number" type="number" class="form-control"
-                                placeholder="tên đầu số"
-                            >
+                            <input id="first_number" type="number" class="form-control" placeholder="tên đầu số">
                         </div>
                     </div>
                     <div class="row col col-md-12">

@@ -76,14 +76,16 @@
                   <th>Mô tả hệ thống</th>
                   <th>Nhóm hệ thống</th>
                   <th>
-                  <table class="table-sm" >
-                    <thead>
-                      <th>Server hệ thống</th>
-                      <th>IP hệ thống</th>
-                      <th>Cấu hình hệ thống</th>
-                      <th>File mô tả</th>
-                    </thead>
-                  </table>
+                  <div style="width:500px;">
+                    <table class="table" >
+                      <thead>
+                        <th>Server hệ thống</th>
+                        <th>IP hệ thống</th>
+                        <th>Cấu hình hệ thống</th>
+                        <th>File mô tả</th>
+                      </thead>
+                    </table>
+                  </div>
                   </th>
 
                   <th>Thời gian tạo</th>
