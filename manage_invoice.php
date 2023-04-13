@@ -67,16 +67,25 @@
               <thead>
                 <tr>
                   <th>STT</th>                 
-                  <th>Tên hệ thống </a></th>
-                  <th>Loại hệ thống </a></th>
+                  <th>Tên hệ thống </th>
+                  <th>Loại hệ thống</th>
                   <th>Đầu số </th>
                   <th>Đơn vị quản lý</th>
                   <th>Người quản lý</th>
+                  <th>Đơn vị sử dụng</th>
                   <th>Mô tả hệ thống</th>
                   <th>Nhóm hệ thống</th>
-                  <th>IP hệ thống</th>
-                  <th>Server hệ thống</th>
-                  <th>Cấu hình hệ thống</th>
+                  <th>
+                  <table class="table-sm" >
+                    <thead>
+                      <th>Server hệ thống</th>
+                      <th>IP hệ thống</th>
+                      <th>Cấu hình hệ thống</th>
+                      <th>File mô tả</th>
+                    </thead>
+                  </table>
+                  </th>
+
                   <th>Thời gian tạo</th>
                   <th>Action</th> 
                 </tr>
