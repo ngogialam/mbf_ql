@@ -171,8 +171,9 @@ function showInvoiceRow($seq_no, $row)
 
   $team_sys_id = $row['team_sys_id'];
   $unit_sys_id = $row['unit_sys_id'];
-  $unit_user_id = $row['unit_user_id'];
   $user_manager_id = $row['user_manager_id'];
+  $list_unit_user = $row['list_unit_user'];
+  $list_block_infor = $row['list_block_infor'];
 
   require "db_connection.php";
   if ($con) {
@@ -185,36 +186,56 @@ function showInvoiceRow($seq_no, $row)
     $result = mysqli_query($con, $query);
     $row2 = mysqli_fetch_assoc($result);
     $name_unit_sys = $row2['name_unit_sys'];
-
-    $query = "SELECT * FROM unit_user WHERE id_unit_user = $unit_user_id";
-    $result = mysqli_query($con, $query);
-    $row3 = mysqli_fetch_assoc($result);
-    $name_user_manager = $row3['name_unit_user'];
-
+                                          
     $query = "SELECT * FROM user_manager WHERE id_user_manager = $user_manager_id";
     $result = mysqli_query($con, $query);
     $row4 = mysqli_fetch_assoc($result);
     $name_unit_manager = $row4['name_user_manager'];
   }
-
+    $describle = $row['describe_sys'];
   ?>
-  <tr>
+  <tr >
     <td><?php echo $seq_no; ?></td>
     <td><?php echo $row['name_sys']; ?></td>
-    <!-- <td><?php echo $row['type_sys']; ?></td>  -->
     <td><?php if ($row['type_sys'] == "1") {
           echo "Đầu tư";
         } else {
           echo "Hợp tác";
         } ?></td>
     <td><?php echo $row['first_number']; ?></td>
+    <td><?php echo $name_unit_sys; ?></td>
     <td><?php echo $name_unit_manager; ?></td>
-    <td><?php echo $name_user_manager; ?></td>
+    <td>
+      <table class="table">
+        <tbody><?php 
+        $list_unit_user = explode('/',$list_unit_user, -1);   
+        foreach (array_values($list_unit_user) as $idx => $val) {
+          $query = "SELECT * FROM unit_user WHERE id_unit_user = $val";
+          $result = mysqli_query($con, $query);
+          if($row = mysqli_fetch_assoc($result)){
+              $name = $row['name_unit_user'];
+              echo "<tr class='table'><td>$name</td></tr>";
+          }
+        }
+    ?></tbody></table></td>
+    <td><?php echo $describle; ?></td>
     <td><?php echo $name_team_sys; ?></td>
-    <td><?php echo $row['describe_sys']; ?></td>
-    <td><?php echo $row['ip_sys']; ?></td>
-    <td><?php echo $row['server_sys']; ?></td>
-    <td><?php echo $row['config_sys']; ?></td>
+    <td><table class="table-sm" >
+    <tbody>
+      <?php
+        $list_block_infor = explode('/',$list_block_infor, -1); 
+        foreach (array_values($list_block_infor) as $idx => $val) {
+            $list_block_infor_detail = explode('|',$val, -1);
+            ?><tr style="width:300px"><?php
+            foreach($list_block_infor_detail as $detail){
+              ?>
+              <td style="width: 75px;"><?php echo $detail; ?></td>
+              <?php
+            }
+            ?></tr><?php
+        }
+    ?>
+    </tbody></table></td>
     <td><?php echo $row['created_at']; ?></td>
     <td class="button-container" style="height:100%">
       <button class="btn btn-warning btn-sm" onclick="viewItem(<?php echo $row['id_sys']; ?>);">
