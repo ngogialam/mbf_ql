@@ -164,11 +164,13 @@ function updateMedicineStock($id_unit_user, $name_unit_user, $name_room_unit, $c
   require "db_connection.php";
   $query = "UPDATE unit_user SET name_unit_user = '$name_unit_user', name_room_unit = '$name_room_unit', create_by = '$create_by', created_at= '$created_at' WHERE id_unit_user = $id_unit_user";
   $result = mysqli_query($con, $query);
-  if (!empty($result))
-    // showMedicinesStock("0");
-    echo "thành công";
-  else
-    echo "thất bại";
+  if (!empty($result)){
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Đã chỉnh sửa $name_unit_user thành công !</div></td>";
+    showMedicinesStock("0"); 
+  }
+  else{
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Tài khoản $name_unit_user không cập nhật được !</div></td>";
+  }
 }
 
 function searchMedicineStock($text)

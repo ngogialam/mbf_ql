@@ -27,7 +27,7 @@ if ($con) {
   if (isset($_GET["action"]) && $_GET["action"] == "update") {
     $ID = $_GET["ID"];
     $id_team_user = $_GET["id_team_user"];
-    $USERNAME_USER = ucwords($_GET["USERNAME_USER"]);    
+    $USERNAME_USER = ucwords($_GET["USERNAME_USER"]);
     $CONTACT_NUMBER = $_GET["CONTACT_NUMBER"];
     $EMAIL = ucwords($_GET["EMAIL"]);
     $room = ucwords($_GET["room"]);
@@ -43,13 +43,29 @@ if ($con) {
 
   if (isset($_GET["action"]) && $_GET["action"] == "search")
     searchUser(strtoupper($_GET["text"]));
+  ///////
+  // if (isset($_GET["action"]) && $_GET["action"] == "popup"){
+  //   $ID = $_GET["ID"];
+  // showUserPopup($ID);}
 }
+// function showUserPopup($ID)
+// {  
+//   require "db_connection.php";
+//   if ($con) {   
+//     $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user";
+//     $result_user = mysqli_query($con, $query);
+//     while ($row_user = mysqli_fetch_array($result_user)) {     
+//       if ($row_user['ID'] == $ID)
+//        showPopup();      
+//     }
+//   }
+// }
 
 function showUser($ID)
 {
   require "db_connection.php";
   if ($con) {
-    $seq_no = 0;    
+    $seq_no = 0;
     $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_array($result)) {
@@ -68,7 +84,13 @@ function showUserRow($seq_no, $row)
   <tr>
     <td><?php echo $seq_no; ?></td>
     <td><?php echo $row['USERNAME_USER']; ?></td>
-    <td><?php echo $row['name_team_user']; ?></td>
+    <!-- <td><?php echo $row['name_team_user']; ?></td> -->
+    <td>
+      <button type="button" class="button_popup" data-toggle="modal" data-target="#exampleModal"   onclick="viewPopup(<?php echo $row['ID']; ?>);" value="<?php echo $row['ID']; ?>">
+        <?php echo $row['name_team_user']; ?>
+      </button>
+    </td>
+    <!-- //onclick="popup(this.value);" -->
     <td><?php echo $row['PASSWORD_1']; ?></td>
     <td><?php echo $row['CONTACT_NUMBER'] ?></td>
     <td><?php echo $row['EMAIL']; ?></td>
@@ -96,12 +118,8 @@ function showEditUserRow($seq_no, $row)
     <td>
       <input type="text" class="form-control" value="<?php echo $row['USERNAME_USER']; ?>" placeholder="Tên đăng nhập" id="USERNAME_USER" onblur="notNull(this.value, 'USERNAME_USER_err');">
       <code class="text-danger small font-weight-bold float-right" id="USERNAME_USER_err" style="display: none;"></code>
-    </td>
-    <!-- <td>
-      <textarea class="form-control" placeholder="USERNAME" id="USERNAME" onkeyup="notNull(this.value, 'USERNAME_err');"><?php echo $row['USERNAME']; ?></textarea>
-      <code class="text-danger small font-weight-bold float-right" id="USERNAME_err" style="display: none;"></code>
-    </td> -->
-    <td>      
+    </td>   
+    <td>
       <?php
       require "db_connection.php";
       if ($con) {
@@ -144,7 +162,7 @@ function showEditUserRow($seq_no, $row)
     </td>
     <td>
       <input type="text" class="form-control" value="<?php echo $row['create_by']; ?>" placeholder="Người tạo" id="create_by" onblur="notNull(this.value, 'create_by_error');">
-      <code class="text-danger small font-weight-bold float-right" id="create_by_error" style="display: none;"></code>      
+      <code class="text-danger small font-weight-bold float-right" id="create_by_error" style="display: none;"></code>
     </td>
     <td>
       <input type="date" class="datepicker form-control hasDatepicker" value="<?php echo $row['created_at']; ?>" placeholder="Thời gian tạo" id="created_at" onblur="checkDate(this.value, 'created_at_err');">
@@ -166,20 +184,20 @@ function updateUser($ID, $id_team_user, $USERNAME_USER, $CONTACT_NUMBER, $EMAIL,
 {
   require "db_connection.php";
   $query = "UPDATE admin_credentials SET USERNAME_USER = '$USERNAME_USER', id_team_user = '$id_team_user', CONTACT_NUMBER = '$CONTACT_NUMBER', EMAIL = '$EMAIL', room = '$room', position_manager = '$position_manager', create_by = '$create_by', created_at = '$created_at', PASSWORD_1 = '$PASSWORD_1' WHERE ID = $ID";
-  $result = mysqli_query($con, $query);  
+  $result = mysqli_query($con, $query);
   if (!empty($result)) {
-    show_alert("Thao tác thành công!", true);
-    showUser(0);
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật thành  người sử dụng :$USERNAME_USER </div></td>";
   } else {
-    show_alert("Thao tác thất bại!", false);
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật không thành  người sử dụng :$USERNAME_USER </div></td>";
   }
-  // showUser(0);
+  showUser(0);
 }
-function show_alert($message, $is_success) {
+function show_alert($message, $is_success)
+{
   echo '<script>
-          document.getElementById("alert-message").innerHTML = "'.$message.'";
+          document.getElementById("alert-message").innerHTML = "' . $message . '";
           document.getElementById("alert-box").style.display = "block";
-          document.getElementById("alert-box").classList.add("'.($is_success ? "alert-success" : "alert-danger").'");
+          document.getElementById("alert-box").classList.add("' . ($is_success ? "alert-success" : "alert-danger") . '");
           
           setTimeout(function(){
               document.getElementById("alert-box").style.display = "none";

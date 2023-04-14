@@ -11,6 +11,7 @@ function deleteUser(ID) {
     }
 }
 
+
 function editUser(ID) {
     console.log("55555555");
     var xhttp = new XMLHttpRequest();
@@ -21,6 +22,28 @@ function editUser(ID) {
     xhttp.open("GET", "php/managerUser.php?action=edit&ID=" + ID, true);
     xhttp.send();
 }
+
+function viewPopup(id) {
+    // Gán giá trị id vào popup
+    document.getElementById("popup_id").innerHTML = id;
+    $('#exampleModal').modal('show');
+}
+
+// function popup(ID) {
+//     $.ajax({
+//         url: "purchase_report.php",
+//         type: "GET",
+//         data: {
+//             ID: ID
+//         },
+//         success: function(response) {
+//             $("#exampleModal .modal-body").html(response);
+//         },
+//         error: function(jqXHR, textStatus, errorThrown) {
+//             console.log(textStatus, errorThrown);
+//         }
+//     });
+// }
 
 function updateUser(ID) {
     var id_team_user = document.getElementById("id_team_user");
