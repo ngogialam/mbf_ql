@@ -58,9 +58,12 @@ function showMedicines($id_unit_sys)
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;
       if ($row['id_unit_sys'] == $id_unit_sys)
+        // showMedicineRow($seq_no, $row);
         showEditOptionsRow($seq_no, $row);
       else
-        showMedicineRow($seq_no, $row);
+        
+      showMedicineRow($seq_no, $row);
+        
     }
   }
 }

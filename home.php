@@ -110,7 +110,7 @@
           }
           createSection2('clipboard', 'new_invoice.php', 'Khai báo hệ thống mới');
           createSection2('handshake', 'add_customer.php', 'Thêm mới người quản trị');
-          createSection2('shopping-bag', 'add_medicine.php', 'Thêm mới đơn vị quản lý');
+          createSection2('shopping-bag', 'add_unit_manager.php', 'Thêm mới đơn vị quản lý');
           createSection2('group', 'add_supplier.php', 'Thêm mới nhóm hệ thống');
           createSection2('bar-chart', 'add_new_user_unit.php', 'Thêm mới đơn vị sử dụng');
           createSection2('address-card', 'add_purchase.php', 'Thêm mới nhóm người sử dụng');
