@@ -97,23 +97,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- <p>ID: <span id="popup_id"></span></p> -->
-          <!-- ID: <span id="popup_id"></span> -->
-          <?php
-          require "php/db_connection.php";
-          if ($con) {
-            $ID = "<span id='popup_id'></span>";
-            var_dump($ID);
-            $query = "SELECT admin_credentials.ID,admin_credentials.USERNAME_USER, manager_team_user.name_team_user,manager_team_user.user_status,manager_team_user.create_by,manager_team_user.created_at FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user WHERE ID = '$ID'";
-            $result = mysqli_query($con, $query);
-            $row_1 = mysqli_fetch_assoc($result);
-            $name_team_user = $row_1['name_team_user'];
-            $user_status = $row_1['user_status'];
-            $create_by = $row_1['create_by'];
-            $created_at = $row_1['created_at'];
-          }
-          ?>
-
+          <p><strong>ID:</strong> <span id="popup_id"></span></p>
+          <p><strong>Id nhóm:</strong> <span id="popup_id_team_user"></span></p>
+          <p><strong>Tên nhóm người dùng:</strong> <span id="popup_name_team_user"></span></p>
+          <p><strong>Trạng thái:</strong> <span id="popup_user_status"></span></p>
+          <p>0: Không hoạt động, 1: Hoạt động</p>
+          <p><strong>Người tạo:</strong> <span id="popup_create_by"></span></p>
+          <p><strong>Thời gian tạo:</strong> <span id="popup_created_at"></span></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
