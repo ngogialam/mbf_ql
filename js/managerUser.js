@@ -11,6 +11,7 @@ function deleteUser(ID) {
     }
 }
 
+
 function editUser(ID) {
     console.log("55555555");
     var xhttp = new XMLHttpRequest();
@@ -21,6 +22,54 @@ function editUser(ID) {
     xhttp.open("GET", "php/managerUser.php?action=edit&ID=" + ID, true);
     xhttp.send();
 }
+
+// function viewPopup(id) {
+//     // Gán giá trị id vào popup
+//     document.getElementById("popup_id").innerHTML = id;
+//     $('#exampleModal').modal('show');
+// }
+
+function viewPopup(ID) {
+    // Make an AJAX request to the server to fetch data using the ID value
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Parse the response as JSON
+            var data = JSON.parse(this.responseText);
+            // Update the popup with the fetched data
+            document.getElementById("popup_id").textContent = data.ID;
+            document.getElementById("popup_id_team_user").textContent = data.id_team_user;
+            document.getElementById("popup_name_team_user").textContent = data.name_team_user;
+            document.getElementById("popup_user_status").textContent = data.user_status;
+            document.getElementById("popup_create_by").textContent = data.create_by;
+            document.getElementById("popup_created_at").textContent = data.created_at;
+        }
+    };
+    xhr.open("GET", "get_popup_data.php?ID=" + ID, true);
+    xhr.send();
+}
+// function viewPopup(ID) {
+//     $.ajax({
+//         type: 'GET',
+//         url: 'php/get_popup_data.php',
+//         data: {
+//             'ID': ID
+//         },
+//         dataType: 'json',
+//         success: function(data) {
+//             $('#popup_id').html(data.ID);
+//             $('#popup_username').html(data.USERNAME_USER);
+//             $('#popup_name').html(data.name_team_user);
+//             if (data.user_status == 1) {
+//                 $('#popup_status').html('hoạt động');
+//             } else {
+//                 $('#popup_status').html('không hoạt động');
+//             }
+//             $('#popup_create_by').html(data.create_by);
+//             $('#popup_created_at').html(data.created_at);
+//         }
+//     });
+// }
 
 function updateUser(ID) {
     var id_team_user = document.getElementById("id_team_user");
