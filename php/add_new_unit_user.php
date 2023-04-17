@@ -9,14 +9,14 @@
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_array($result);
     if($row)
-      echo "Đơn vị quản lý $name_unit_user với phòng ban $name_room_unit đã tồn tại!";
+      echo "Đơn vị sử dụng $name_unit_user với phòng ban $name_room_unit đã tồn tại!";
     else {
       $query = "INSERT INTO unit_user (name_unit_user, name_room_unit, create_by) VALUES('$name_unit_user', '$name_room_unit', '$create_by')";
       $result = mysqli_query($con, $query);
       if(!empty($result))
-  			echo "Đơn vị quản lý $name_unit_user đã được thêm vào...";
+  			echo "Đơn vị sử dụng $name_unit_user đã được thêm vào...";
   		else
-  			echo "Thêm đơn vị quản lý không thành công!";
+  			echo "Thêm đơn vị sử dụng không thành công!";
     }
   }
 ?>

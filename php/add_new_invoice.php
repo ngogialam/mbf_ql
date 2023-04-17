@@ -218,7 +218,6 @@
       createForm($mess);
       exit();
     } 
-    var_dump($_POST);
     $team_sys_id = $_POST["team_sys_manager"];
     $first_number = $_POST["first_number"];
     $unit_sys = $_POST["unit_sys"];
@@ -233,7 +232,6 @@
     foreach (array_values($list_block_infor_temp) as $idx => $val) {
       $list_block_infor_detail = array_slice(explode('|',$val, -1), -1, 1);
       if($list_block_infor_detail[0] != ""){
-        var_dump($list_block_infor_detail[0]);
         $old_name = "../upload_temps/" . (string)$list_block_infor_detail[0];
         $new_name = "../uploads/" . (string)$list_block_infor_detail[0] ;
         rename($old_name, $new_name);

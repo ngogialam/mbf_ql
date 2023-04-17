@@ -49,12 +49,14 @@
                             <input id="name_sys" type="text" class="form-control" placeholder="tên hệ thống" >
                         </div>
                     </div>
-                    <div class="col col-md-12 form-group">
-                        <label for="name_sys">Loại hệ thống :</label>
-                        <select name="type_sys" id="type_sys" class=" form-control pdm chosen-select col col-md-12" >
-                            <option value= '1' selected='selected'>Đầu tư</option>
-                            <option value= '0' >Hợp tác</option>
-                        </select>
+                    <div class="row col col-md-12">
+                        <div class="col col-md-12 form-group">
+                            <label for="name_sys">Loại hệ thống :</label>
+                            <select name="type_sys" id="type_sys" class=" form-control pdm chosen-select col col-md-12" >
+                                <option value= '1' selected='selected'>Đầu tư</option>
+                                <option value= '0' >Hợp tác</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="row col col-md-12" style="flex-direction: row-reverse;">
                         <div class="col col-md-12 form-group">
@@ -65,7 +67,7 @@
                             if ($con) {
                                 $query = "SELECT * FROM team_sys_manager";
                                 $result = mysqli_query($con, $query);
-                                echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" multiple>';
+                                echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" >';
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $id_team_sys = $row['id_team_sys'];
                                     $name_team_sys = $row['name_team_sys'];
@@ -143,7 +145,7 @@
                                                         $name = $row['name_unit_user'];
                                                         echo "<tr><td>$name</td>";
                                                         ?>
-                                                        <td><button href='' class='btn btn-info btn-sm' onclick='deleteUnitInSYS(<?php echo $idx; ?>)'><i class='fa fa-trash'></i></button></td></tr>
+                                                        <td><button href='' class='btn btn-info btn-sm' onclick='deleteUnitInSYS(<?php echo $idx; ?>, "list_unit_user")'><i class='fa fa-trash'></i></button></td></tr>
                                                         <?php
                                                     }
                                                 }
@@ -189,7 +191,7 @@
                                 <div class="row col col-md-12 m-auto"  >
                                         <div id="ubutton" class="col col-md-5 form-group float-right">
                                         <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="addUnitInSYS()">Thêm</button>
+                                        onclick="addUnitInSYS('list_unit_user')">Thêm</button>
                                         </div>
                                         <div id="ubutton" class="col col-md-5 form-group float-right">
                                         <button class="btn btn-success form-control font-weight-bold"
@@ -244,7 +246,13 @@
                         <div class="row col col-md-6">
                             <div class="col col-md-12 table-responsive">
                                 <div class="table-responsive">
-                                    <input type="hidden" id="list_block_infor" name="list_block_infor" value='<?php echo $_COOKIE["list_block_infor"];?>'/>
+                                    <input type="hidden" id="list_block_infor" name="list_block_infor" 
+                                    value='<?php 
+                                        if(isset($_COOKIE["list_block_infor"]))
+                                            echo $_COOKIE["list_block_infor"];
+                                        else
+                                            echo ""; ?>'
+                                            />
                                     <table class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -272,7 +280,7 @@
                                                         echo "<td>$detail</td>";
                                                     }
                                                     ?>
-                                                    <td><button href='' class='btn btn-info btn-sm' onclick='deleteBlockInfor(<?php echo $idx; ?>)'><i class='fa fa-trash'></i></button></td></tr>
+                                                    <td><button href='' class='btn btn-info btn-sm' onclick='deleteBlockInfor(<?php echo $idx; ?>, "list_block_infor")'><i class='fa fa-trash'></i></button></td></tr>
                                                     <?php
                                                 }
                                             }
@@ -317,7 +325,7 @@
                             <div class="row col col-md-12 m-auto"  >
                                 <div id="ubutton" class="col col-md-5 form-group float-right">
                                 <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="addBlockInfor()">Thêm</button>
+                                        onclick="addBlockInfor('list_block_infor')">Thêm</button>
                                 </div>
                                 <div id="ubutton" class="col col-md-5 form-group float-right">
                                 <button class="btn btn-success form-control font-weight-bold"

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="shortcut icon" href="" type="image/x-icon">
@@ -24,6 +25,8 @@
     <div class="container-fluid">
         <div class="container" id="sys_div">
             <!-- header section -->
+
+
             <?php
             require "php/header.php";
             createHeader('user', 'Chỉnh sửa thông tin hệ thống', 'Thay đổi thông tin');
@@ -52,11 +55,27 @@
                 $list_unit_user = $row['list_unit_user'];
                 $list_block_infor = $row['list_block_infor'];
             }
-
+            
             ?>
+            <input type="hidden" id="list_unit_user_tmp" name="list_unit_user_tmp" value='<?php echo $list_unit_user; ?>'/>
+            <input type="hidden" id="list_block_infor_tmp" name="list_block_infor_tmp" value='<?php echo $list_block_infor; ?>'/>
+            <script >
+                function createCookieEdit(){
+
+                    $(document).ready(function () {
+                        createCookie("list_unit_user_edit", document.getElementById("list_unit_user_tmp").value, "0.1");
+                    });
+
+                    $(document).ready(function () {
+                        createCookie("list_block_infor_edit", document.getElementById("list_block_infor_tmp").value, "0.1");
+                    });
+                }
+                window.onload = createCookieEdit;
+                window.onload = createCookieEdit;
+            </script>
             <div class="row">
                 <div class="row col col-md-12">
-                    
+                    <input id="id_sys" type="hidden" class="form-control" placeholder="tên hệ thống" value='<?php echo $id_sys; ?>'>
                     <div id="admin_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center"
                         style="font-family: sans-serif;">
                             <?php
@@ -89,7 +108,7 @@
                             if ($con) {
                                 $query = "SELECT * FROM team_sys_manager";
                                 $result = mysqli_query($con, $query);
-                                echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12" multiple>';
+                                echo '<select name="team_sys_manager" id="team_sys_manager" class=" form-control pdm chosen-select col col-md-12">';
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $id_team_sys = $row['id_team_sys'];
                                     $name_team_sys = $row['name_team_sys'];
@@ -147,7 +166,13 @@
                         <div class="col col-md-6 form-group">
                             <div class="col col-md-12 table-responsive" id="unit_div">
                                 <div class="table-responsive">
-                                    <input type="hidden" id="list_unit_user" name="list_unit_user" />
+                                    <input type="hidden" id="list_unit_user_edit" name="list_unit_user_edit"                                    
+                                    value='<?php 
+                                        if(isset($_COOKIE["list_unit_user_edit"]))
+                                            echo $_COOKIE["list_unit_user_edit"];
+                                        else
+                                            echo ""; ?>'
+                                            />
                                     <table class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -157,7 +182,11 @@
                                     </thead>
                                     <tbody >
                                         <?php 
-                                            $list_unit_user = explode('/',$list_unit_user, -1); 
+                                            if(isset($_COOKIE["list_unit_user_edit"]))
+                                            $list_unit_user = explode('/',$_COOKIE["list_unit_user_edit"], -1);
+                                        else
+                                            $list_unit_user = array();
+                                            
                                             if($list_unit_user){     
                                                 foreach (array_values($list_unit_user) as $idx => $val) {
                                                     $query = "SELECT * FROM unit_user WHERE id_unit_user = $val";
@@ -167,8 +196,7 @@
                                                         echo "<tr><td>$name</td>";
                                                         ?>
                                                         <td>
-                                                            <button href='' class='btn btn-info btn-sm' onclick='deleteUnitInSYS(<?php echo $idx; ?>)'><i class='fa fa-trash'></i></button>
-                                                            <button href='' class='btn btn-info btn-sm' onclick='editUnitInSys(<?php echo $idx; ?>)'><i class='fa fa-trash'></i></button>
+                                                            <button href='' class='btn btn-danger btn-sm' onclick='deleteUnitInSYS(<?php echo $idx; ?>, "list_unit_user_edit")'><i class='fa fa-trash'></i></button>
                                                         </td></tr>
                                                         <?php
                                                     }
@@ -215,11 +243,11 @@
                                 <div class="row col col-md-12 m-auto"  >
                                         <div id="ubutton" class="col col-md-5 form-group float-right">
                                         <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="addUnitInSYS()">Thêm</button>
+                                        onclick="addUnitInSYS('list_unit_user_edit')">Thêm</button>
                                         </div>
                                         <div id="ubutton" class="col col-md-5 form-group float-right">
                                         <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="deleteCookie('list_unit_user', 'unit_div')">Xoá toàn bộ</button>   
+                                        onclick="deleteCookie('list_unit_user_edit', 'unit_div')">Xoá toàn bộ</button>   
                                         </div>
                                     </div>
                             </div>
@@ -257,7 +285,7 @@
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="name_team_sys">Mô tả hệ thống :</label>
-                            <input id="describe_sys" type="text" class="form-control" placeholder="mô tả hệ thống" value='<?php echo $name_team_sys; ?>'
+                            <input id="describe_sys" type="text" class="form-control" placeholder="mô tả hệ thống" value='<?php echo $describe_sys; ?>'
                                  >
                         </div>
                     </div>
@@ -270,7 +298,13 @@
                         <div class="row col col-md-6">
                             <div class="col col-md-12 table-responsive">
                                 <div class="table-responsive">
-                                    <input type="hidden" id="list_block_infor" name="list_block_infor" value='<?php echo $list_block_infor;?>'/>
+                                    <input type="hidden" id="list_block_infor_edit" name="list_block_infor"                                    
+                                        value='<?php 
+                                            if(isset($_COOKIE["list_block_infor_edit"]))
+                                                echo $_COOKIE["list_block_infor_edit"];
+                                            else
+                                                echo ""; ?>'
+                                            />
                                     <table class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -284,7 +318,11 @@
                                     </thead>
                                     <tbody id="sys_div">
                                         <?php 
-                                            $list_block_infor = explode('/',$list_block_infor, -1);
+                                            if(isset($_COOKIE["list_block_infor_edit"]))
+                                                $list_block_infor = explode('/',$_COOKIE["list_block_infor_edit"], -1);
+                                            else
+                                                $list_block_infor = array();
+                                                
                                             if($list_block_infor){    
                                                 foreach (array_values($list_block_infor) as $idx => $val) {
                                                     $list_block_infor_detail = explode('|',$val, -1);
@@ -294,7 +332,9 @@
                                                         echo "<td>$detail</td>";
                                                     }
                                                     ?>
-                                                    <td><button href='' class='btn btn-info btn-sm' onclick='deleteBlockInfor(<?php echo $idx; ?>)'><i class='fa fa-trash'></i></button></td></tr>
+                                                    <td>
+                                                        <button href='' class='btn btn-info btn-sm' onclick='editUnitInSys(<?php echo $idx; ?>, "list_block_infor_edit")'><i class='fa fa-pencil'></i></button>
+                                                        <button href='' class='btn btn-danger btn-sm' onclick='deleteBlockInfor(<?php echo $idx; ?>, "list_block_infor_edit")'><i class='fa fa-trash'></i></button></td></tr>
                                                     <?php
                                                 }
                                             }
@@ -304,7 +344,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row col col-md-6">
+                        <div class="row col col-md-6" id="form_block">
+                        <div class="row col col-md-12">
                             <div class="row col col-md-12" id="file_des_div" >
                                 <div class="col col-md-12 form-group">
                                     <label for="file">File mô tả :</label>
@@ -337,17 +378,22 @@
                                 </div>
                             </div>
                             <div class="row col col-md-12 m-auto"  >
-                                <div id="ubutton" class="col col-md-5 form-group float-right">
+                                <div id="ubutton" class="col col-md-4 form-group float-right" style="display: none" >
                                 <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="addBlockInfor()">Thêm</button>
+                                        onclick="updateBlockinfor('list_block_infor_edit', )">Chỉnh sửa</button>
                                 </div>
-                                <div id="ubutton" class="col col-md-5 form-group float-right">
+                                <div id="ubutton" class="col col-md-4 form-group float-right">
                                 <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="deleteCookie('list_block_infor', 'block_info_div')">Xoá toàn bộ</button>   
+                                        onclick="addBlockInfor('list_block_infor_edit')">Thêm</button>
+                                </div>
+                                <div id="ubutton" class="col col-md-4 form-group float-right">
+                                <button class="btn btn-success form-control font-weight-bold"
+                                        onclick="deleteCookie('list_block_infor_edit', 'block_info_div')">Xoá toàn bộ</button>   
                                 </div>
                             </div>
                         </div>
                         </div>
+                    </div>
                     </div>
                     <div class="row col col-md-12" id="" >
                         <div class="col col-md-12 form-group">
@@ -357,7 +403,7 @@
                     <div class="row col col-md-12">
                         <div class="col col-md-12 form-group">
                             <label for="create_by">Người tạo:</label>
-                            <input id="create_by" type="number" class="form-control"
+                            <input id="create_by" type="number" class="form-control" value='<?php echo $create_by; ?>'
                                 placeholder="Người tạo">
                         </div>
                     </div>
@@ -371,8 +417,8 @@
                         <div class="col col-md-2 form-group float-right"></div>
                         <div id="update_button" class="col col-md-3 form-group float-right">
                             <button class="btn btn-success form-control font-weight-bold"
-                                onclick="create();">Tạo mới</button>
- 
+                                onclick="update();">Chỉnh sửa</button>
+
                         </div>
                     </div>
                     <!-- result message -->
