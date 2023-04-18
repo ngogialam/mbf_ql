@@ -1,9 +1,9 @@
 <?php
   require "db_connection.php";
   if($con) {
-    $name_unit_sys = strtoupper($_GET["name_unit_sys"]);
+    $name_unit_sys = ucwords($_GET["name_unit_sys"]);
     $name_room = ucwords($_GET["name_room"]);
-    $create_by = $_GET["create_by"];
+    $create_by = ucwords($_GET["create_by"]);
 
     $query = "SELECT * FROM unit_sys WHERE UPPER(name_unit_sys) = '".strtoupper($name_unit_sys)."' AND UPPER(name_room) = '".strtoupper($name_room)."'";
     $result = mysqli_query($con, $query);

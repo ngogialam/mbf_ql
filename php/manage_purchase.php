@@ -128,12 +128,11 @@ function updatePurchase($id_team_user, $name_team_user, $user_status, $create_by
 {
   require "db_connection.php";
   $query = "UPDATE manager_team_user SET name_team_user = '$name_team_user', user_status = '$user_status', create_by = '$create_by', created_at = '$created_at' WHERE id_team_user = $id_team_user";
-  $result = mysqli_query($con, $query);
-  var_dump($query);
+  $result = mysqli_query($con, $query);  
   if (!empty($result)) {
-    echo "thành công";
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật thành công nhóm người sử dụng :$name_team_user </div></td>";
   } else {
-    echo "thất bại";
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Nhóm : $name_team_user cập nhật không thành công </div></td>";
   }
 
   showPurchases(0);
