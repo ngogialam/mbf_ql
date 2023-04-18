@@ -2,7 +2,7 @@
 $SERVER = 'localhost';
 $USERNAME = 'root';
 $PASSWORD = '';
-$DB = 'htql';
+$DB = 'mds_soft';
 $charset = 'utf8';
 
 @$con = mysqli_connect($SERVER, $USERNAME, $PASSWORD, $DB)

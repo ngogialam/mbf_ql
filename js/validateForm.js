@@ -141,17 +141,17 @@ function addSupplier() {
 }
 
 function addUnitManager() {
-    document.getElementById("medicine_acknowledgement").innerHTML = "";
-    var name = document.getElementById("name_unit_sys");
-    var packing = document.getElementById("name_room");
-    var generic_name = document.getElementById("create_by");
+    // document.getElementById("unit_manager").innerHTML = "";
+    var name_unit_sys = document.getElementById("name_unit_sys");
+    var name_room = document.getElementById("name_room");
+    var create_by = document.getElementById("create_by_unit_manager");
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_unit_manager.php?name_unit_sys=" + name.value + "&name_room=" + packing.value + "&create_by=" + generic_name.value, true);
+    xhttp.open("GET", "php/add_new_unit_manager.php?name_unit_sys=" + name_unit_sys.value + "&name_room=" + name_room.value + "&create_by=" + create_by.value, true);
     xhttp.send();
 }
 
@@ -159,7 +159,7 @@ function addUnitUser() {
     document.getElementById("medicine_acknowledgement").innerHTML = "";
     var name_unit_user = document.getElementById("name_unit_user");
     var name_room_unit = document.getElementById("name_room_unit");
-    var create_by = document.getElementById("create_by");
+    var create_by = document.getElementById("create_by_unit_user");
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

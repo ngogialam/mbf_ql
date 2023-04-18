@@ -59,80 +59,43 @@
             <!-- invoice strat -->
             <div id="first" class="main-menu-item" onclick="showhide(this.id);">
                 <a href="#">
-                    <i class="fa fa-balance-scale"></i><span>Hệ Thống</span>
+                    <i class="fa fa-balance-scale"></i><span>Quản lý hệ Thống</span>
                     <span class="pull-right-container">
       			<i class="fa fa-angle-left pull-right"></i>
       		</span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li class="treeview"><a href="new_invoice.php">Khai báo hệ thống</a></li>
-                    <li class="treeview"><a href="manage_invoice.php">Quản lý hệ thống </a></li>
+                    <li class="treeview" style="color:white;">Hệ thống</li>
+                    <ul class="">
+                        <li class="treeview"><a href="new_invoice.php">Khai báo hệ thống</a></li>
+                        <li class="treeview"><a href="manage_invoice.php">Quản lý hệ thống </a></li>
+                    </ul>
+                    <li class="treeview" style="color:white;">Người quản trị</li>
+                    <ul>
+                        <li class="treeview"><a href="add_customer.php">Thêm mới </a></li>
+                        <li class="treeview"><a href="manage_customer.php">Danh sách người quản trị</a></li>
+                    </ul>
+                    <li class="treeview" style="color:white;">Đơn vị</li>
+                    <ul>
+                        <li class="treeview"><a href="add_unit_manager.php">Thêm đơn vị quản lý</a></li>
+                        <li class="treeview"><a href="manage_medicine.php">Danh sách đơn vị quản lý</a></li>
+                        <li class="treeview"><a href="add_new_user_unit.php">Thêm đơn vị sử dụng</a></li>
+                        <li class="treeview"><a href="manage_medicine_stock.php">Danh sách đơn vị sử dụng</a></li>
+                    </ul>
+
+                    <li class="treeview" style="color:white;">Nhóm hệ thống</li>
+                    <ul>
+                        <li class="treeview"><a href="add_supplier.php">Khai báo nhóm hệ thống </a></li>
+                        <li class="treeview"><a href="manage_supplier.php">Danh sách nhóm hệ thống</a></li>
+                    </ul>
+
+                    <li class="treeview" style="color:white;">Nhóm người sử dụng</li>
+                    <ul>
+                        <li class="treeview"><a href="add_purchase.php">Thêm nhóm người sử dụng</a></li>
+                        <li class="treeview"><a href="manage_purchase.php">Danh sách nhóm người sử dụng</a></li>
+                    </ul>
                 </ul>
             </div>
-            <!-- invoice end -->
-
-            <!-- customer end -->
-            <div id="second" class="main-menu-item" onclick="showhide(this.id);">
-                <a href="#">
-                    <i class="fa fa-handshake"></i><span>Người quản trị</span>
-                    <span class="pull-right-container">
-      			<i class="fa fa-angle-left pull-right"></i>
-      		</span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li class="treeview"><a href="add_customer.php">Thêm mới </a></li>
-                    <li class="treeview"><a href="manage_customer.php">Danh sách người quản trị</a></li>
-                </ul>
-            </div>
-            <!-- customer end -->
-
-            <!-- medicine strat -->
-            <div id="third" class="main-menu-item" onclick="showhide(this.id);">
-                <a href="#">
-                    <i class="fa fa-shopping-bag"></i><span>Đơn vị</span>
-                    <span class="pull-right-container">
-      			<i class="fa fa-angle-left pull-right"></i>
-      		</span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li class="treeview"><a href="add_medicine.php">Thêm đơn vị quản lý</a></li>
-                    <li class="treeview"><a href="manage_medicine.php">Danh sách đơn vị quản lý</a></li>
-                    <li class="treeview"><a href="add_new_user_unit.php">Thêm đơn vị sử dụng</a></li>
-                    <li class="treeview"><a href="manage_medicine_stock.php">Danh sách đơn vị sử dụng</a></li>
-                </ul>
-            </div>
-            <!-- medicine end -->
-
-            <!-- manufacturer start -->
-            <div id="fourth" class="main-menu-item" onclick="showhide(this.id);">
-                <a href="#">
-                    <i class="fa fa-group"></i><span>Nhóm hệ thống</span>
-                    <span class="pull-right-container">
-      			<i class="fa fa-angle-left pull-right"></i>
-      		</span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li class="treeview"><a href="add_supplier.php">Khai báo nhóm hệ thống </a></li>
-                    <li class="treeview"><a href="manage_supplier.php">Danh sách nhóm hệ thống</a></li>
-                </ul>
-            </div>
-            <!-- manufacturer end -->
-
-            <!-- purchase start -->
-            <div id="fifth" class="main-menu-item" onclick="showhide(this.id);">
-                <a href="#">
-                    <i class="fa fa-bar-chart"></i><span>Quản lý nhóm người sử dụng</span>
-                    <span class="pull-right-container">
-      			<i class="fa fa-angle-left pull-right"></i>
-      		</span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li class="treeview"><a href="add_purchase.php">Thêm nhóm mới </a></li>
-                    <li class="treeview"><a href="manage_purchase.php">Danh sách nhóm</a></li>
-                </ul>
-            </div>
-            <!-- purchase end -->
-
             <!-- report start -->
             <div id="sixth" class="main-menu-item" onclick="showhide(this.id);">
                 <a href="#">
@@ -147,7 +110,21 @@
                 </ul>
             </div>
             <!-- report end -->
-
+            <div id="eighth" class="main-menu-item" onclick="showhide(this.id);">
+                <a href="#">
+                    <i class="fa fa-book"></i><span>Quản lý tài sản</span>
+                    <span class="pull-right-container">
+      			<i class="fa fa-angle-left pull-right"></i>
+      		</span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li class="treeview"><a href="">Thêm mới tài sản </a></li>
+                    <li class="treeview"><a href="">Danh sách tài sản</a></li>
+                    <li class="treeview"><a href="">Phân phối tài sản</a></li>
+                    <li class="treeview"><a href="">Điều chuyển tài sản</a></li>
+                    <li class="treeview"><a href="">Kiểm kê tài sản</a></li>
+                </ul>
+            </div>
             <!-- search start -->
             <div id="seventh" class="main-menu-item" onclick="showhide(this.id);">
                 <a href="#">
@@ -166,7 +143,7 @@
                 </ul>
             </div>
             <!-- search end -->
-            <div id="eight" class="main-menu-item" onclick="showhide(this.id);">
+            <div id="nineth" class="main-menu-item" onclick="showhide(this.id);">
                 <a href="test.php">Test </a>
             </div>
         </div>
