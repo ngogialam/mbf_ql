@@ -46,7 +46,7 @@
                 <div class="col col-md-12">
                     <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">
                 </div>
-                <h3> tetstststtststststyayukasfjladgcfioaslđsdgyucfíadgfcáyidgfcsiayđgtáidu</h3>
+                <h3></h3>
 
 
 
