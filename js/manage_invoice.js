@@ -349,6 +349,105 @@ function deleteCookie(cookie, block_div){
 
 }
 
-function editUnitInSys(){
-    var
+function editUnitInSys(cookie,idx){
+    var cookie_value = getCookie(cookie);
+    cookie_value = cookie_value.split('/');
+    infor_block = String(cookie_value[idx]).split("|");
+
+    document.getElementById('updateBlockInforButton'+String(idx)).style.display = "block";
+
+    document.getElementById("server_sys").value = String(infor_block[0]);
+
+    document.getElementById("ip_sys").value = String(infor_block[1]);
+
+    document.getElementById("config_sys").value = String(infor_block[2]);
+
+    document.getElementById('editBlockInforButton'+String(idx)).style.display = "none";
+    document.getElementById('abutton').style.display = "none";
+    document.getElementById('dbutton').style.display = "none";
+}
+
+function updateBlockinfor(cookie, idx){
+
+    var list_block_infor = document.getElementById(cookie);
+    console.log(list_block_infor.value);
+    var server_sys = document.querySelector("#server_sys");
+    var ip_sys = document.getElementById("ip_sys");
+    var config_sys = document.getElementById("config_sys");
+    var file_des = document.querySelector('#file_des').files[0];
+
+    // var list_block_infor_value = getCookie('list_block_infor');
+    if(server_sys.value === "" && ip_sys.value === "" && config_sys.value === ""){
+        alert("Vui lòng điền thống tin trước khi thêm!");
+    }else{
+        if(!file_des){
+            file_name = '';
+            // list_block_infor.value = list_block_infor.value;
+            var value_tmp = list_block_infor.value.split('/');
+            var value = "";
+            for(let i =0; i<value_tmp.length -1 ;i++){
+                if(i === idx){
+                    value += String(server_sys.value) + "|" + String(ip_sys.value) + "|" +String(config_sys.value) + "|" +String(file_name) + "|" +'/';
+                }
+                else {
+                    value+=value_tmp[i] + "/";
+                }    
+            }
+
+            $(document).ready(function () {
+                createCookie(cookie, value, "0.1");
+                });
+
+            document.getElementById('updateBlockInforButton'+String(idx)).style.display = "none";
+            document.getElementById('editBlockInforButton'+String(idx)).style.display = "block";
+            document.getElementById('abutton').style.display = "block";
+            document.getElementById('dbutton').style.display = "block";
+            $("#block_info_div").load(location.href + " #block_info_div");
+        }
+        else{
+            file_name = file_des.name;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                if (xhttp.readyState = 4 && xhttp.status == 200){
+                    
+                    console.log(xhttp.responseText);
+                    if(xhttp.responseText != "ERORR"){
+
+                        var value_tmp = list_block_infor.value.split('/');
+                        var value = "";
+                        for(let i =0; i<value_tmp.length - 1;i++){
+                            if(i === idx){
+                                value += String(server_sys.value) + "|" + String(ip_sys.value) + "|" +String(config_sys.value) + "|" +String(file_name) + "|" +'/';
+                            }
+                            else {
+                                value+=value_tmp[i] + "/";
+                            }    
+                        }
+                        
+                        $(document).ready(function () {
+                            createCookie(cookie, value, "0.1");
+                            });
+
+
+                        document.getElementById('updateBlockInforButton'+String(idx)).style.display = "none";
+                        document.getElementById('editBlockInforButton'+String(idx)).style.display = "block";
+                        document.getElementById('abutton').style.display = "block";
+                        document.getElementById('dbutton').style.display = "block";
+                        $("#block_info_div").load(location.href + " #block_info_div");
+                        // list_block_infor.value = list_block_infor_value
+                    }
+                    else{
+                        document.getElementById('file_des_error').style.display = "block";
+                        document.getElementById('file_des_error').innerHTML = "File đã tồn tại";
+                    }
+                }
+            };
+            xhttp.open('POST', 'php/uploadFileTemp.php');
+            var formData = new FormData();
+            formData.append("file_des", file_des);
+    
+            xhttp.send(formData);
+        }
+    }
+
 }
