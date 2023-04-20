@@ -59,7 +59,7 @@
                     </select>
                     &emsp;
                     <button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
-                    &emsp; <a class="btn btn-success" href="php/export.php">Xuất Excel</a>
+                    &emsp; <a class="btn btn-success" href="php/exportDeviceRoom.php">Xuất Excel</a>
                 </div>
                 <div class="col col-md-12">
                     <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">
