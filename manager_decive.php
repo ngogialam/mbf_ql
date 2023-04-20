@@ -45,15 +45,20 @@
             <option value="2">Chuyển giao</option>
           </select>
           &emsp;
-          <select id="status_device" class="form-control" onchange="searchRoom(this.value)" ;>
+          <select id="id_room_1" class="form-control" onchange="searchRoom(this.value)" ;>
             <option value="">Phòng ban</option>
-            <option value="1">Đang sử dụng</option>
-            <option value="0">Không dùng</option>
-            <option value="2">Chuyển giao</option>
+            <option value="1">PTDV</option>
+            <option value="2">KTKT</option>
+            <option value="3">P.DVNDS</option>
+            <option value="4">P.QC&GPDĐ</option>
+            <option value="5">P.Tổng Hợp</option>
+            <option value="6">P.Kế Toán</option>
+            <option value="7">Chi nhánh HCM </option>
+            <option value="8">P.DVTC&TTDĐ</option>            
           </select>
           &emsp;
           <button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
-          &emsp; <a class="btn btn-success" href="php/export.php">Xuất Excel</a>
+          &emsp; <a class="btn btn-success" href="php/exportDevice.php">Xuất Excel</a>
         </div>
         <div class="col col-md-12">
           <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">

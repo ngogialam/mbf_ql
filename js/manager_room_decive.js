@@ -1,33 +1,27 @@
-function deleteUser(id_device) {
+function deleteUser(id_device_room) {
     var confirmation = confirm("Are you sure?");
     if (confirmation) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById('decive_div').innerHTML = xhttp.responseText;
+                document.getElementById('device_room_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manager_decive.php?action=delete&id_device=" + id_device, true);
+        xhttp.open("GET", "php/manager_room_device.php?action=delete&id_device_room=" + id_device_room, true);
         xhttp.send();
     }
 }
 
 
-function editDecive(id_device) {
+function editDeciveRoom(id_device_room) {
     console.log("55555555");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('decive_div').innerHTML = xhttp.responseText;
+            document.getElementById('device_room_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manager_decive.php?action=edit&id_device=" + id_device, true);
+    xhttp.open("GET", "php/manager_room_device.php?action=edit&id_device_room=" + id_device_room, true);
     xhttp.send();
 }
-
-// function viewPopup(id) {
-//     // Gán giá trị id vào popup
-//     document.getElementById("popup_id").innerHTML = id;
-//     $('#exampleModal').modal('show');
-// }
 
 function viewPopup(ID) {
     // Make an AJAX request to the server to fetch data using the ID value
@@ -47,6 +41,17 @@ function viewPopup(ID) {
     };
     xhr.open("GET", "get_popup_data.php?ID=" + ID, true);
     xhr.send();
+}
+
+function refresh() {
+    console.log('5');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById('device_room_div').innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/manager_room_device.php?action=refresh", true);
+    xhttp.send();
 }
 // function viewPopup(ID) {
 //     $.ajax({
@@ -70,19 +75,15 @@ function viewPopup(ID) {
 //         }
 //     });
 // }
-function updateDevice(id_device) {
+function updateDeviceRoom(id_device_room) {
 
     var id_room = document.getElementById("id_room");
-    console.log(id_room);
-    var name_owner = document.getElementById("name_owner");
-    var name_tran = document.getElementById("name_tran");
+    var name_room_tran = document.getElementById("name_room_tran");
     var name_device = document.getElementById("name_device");
     var code_device = document.getElementById("code_device");
-    var status_device = document.getElementById("status_device");
+    var status = document.getElementById("status");
     var created_at = document.getElementById("created_at");
-    if (!notNull(name_owner.value, "name_owner_err"))
-        name_owner.focus();
-    else if (!notNull(name_device.value, 'name_device_err'))
+    if (!notNull(name_device.value, 'name_device_err'))
         name_device.focus();
     else if (!notNull(code_device.value, 'code_device_err'))
         code_device.focus();
@@ -92,9 +93,9 @@ function updateDevice(id_device) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState = 4 && xhttp.status == 200)
-                document.getElementById('decive_div').innerHTML = xhttp.responseText;
+                document.getElementById('device_room_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manager_decive.php?action=update&id_device=" + id_device + "&id_room=" + id_room.value + "&name_owner=" + name_owner.value + "&name_tran=" + name_tran.value + "&name_device=" + name_device.value + "&code_device=" + code_device.value + "&status_device=" + status_device.value + "&created_at=" + created_at.value, true);
+        xhttp.open("GET", "php/manager_room_device.php?action=update&id_device_room=" + id_device_room + "&id_room=" + id_room.value + "&name_room_tran=" + name_room_tran.value + "&name_device=" + name_device.value + "&code_device=" + code_device.value + "&status=" + status.value + "&created_at=" + created_at.value, true);
         xhttp.send();
     }
 }
@@ -120,19 +121,19 @@ function cancel() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('decive_div').innerHTML = xhttp.responseText;
+            document.getElementById('device_room_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manager_decive.php?action=cancel", true);
+    xhttp.open("GET", "php/manager_room_device.php?action=cancel", true);
     xhttp.send();
 }
 
-function searchUser(text) {
+function searchDeviceRoom(text) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('decive_div').innerHTML = xhttp.responseText;
+            document.getElementById('device_room_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manager_decive.php?action=search&text=" + text, true);
+    xhttp.open("GET", "php/manager_room_device.php?action=search&text=" + text, true);
     xhttp.send();
 }
 
@@ -140,9 +141,9 @@ function searchStatus(number1) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('decive_div').innerHTML = xhttp.responseText;
+            document.getElementById('device_room_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manager_decive.php?action=search1&number1=" + number1, true);
+    xhttp.open("GET", "php/manager_room_device.php?action=search1&number1=" + number1, true);
     xhttp.send();
 
 }
@@ -152,41 +153,9 @@ function searchRoom(number2) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('decive_div').innerHTML = xhttp.responseText;
+            document.getElementById('device_room_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manager_decive.php?action=search2&number2=" + number2, true);
+    xhttp.open("GET", "php/manager_room_device.php?action=search2&number2=" + number2, true);
     xhttp.send();
 
-}
-
-function addNewDeviceIndividual() {
-    var id_room = document.getElementById("id_room").value;
-    var name_device = document.getElementById("name_device").value;
-    var code_device = document.getElementById("code_device").value;
-    var status_device = document.getElementById("status_device").value;
-    var name_owner = document.getElementById("name_owner").value;
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('decive_div').innerHTML = xhttp.responseText;
-    };
-    xhttp.open("GET", "php/add_new_device.php?action=individual&id_room="+ id_room +"&name_device="+ name_device +"&code_device="+code_device+"&status_device="+status_device+"&name_owner="+name_owner, true);
-    xhttp.send();
-}
-
-function addNewDeviceDepartment(){
-
-    var id_room = document.getElementById("id_room").value;
-    var name_device = document.getElementById("name_device").value;
-    var code_device = document.getElementById("code_device").value;
-    var status_device = document.getElementById("status_device").value;
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState = 4 && xhttp.status == 200)
-            document.getElementById('decive_div').innerHTML = xhttp.responseText;
-    };
-    xhttp.open("GET", "php/add_new_device.php?action=department&id_room="+ id_room +"&name_device="+ name_device +"&code_device="+code_device+"&status_device="+status_device, true);
-    xhttp.send();
 }
