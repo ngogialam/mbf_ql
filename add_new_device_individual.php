@@ -94,7 +94,56 @@
             <div id="medicine_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;"></div>
           </div>
         </div>
+        
         <hr style="border-top: 2px solid #ff5252;">
+        <div class="row">
+                <div class="col-md-12">
+                    <h6>Nhập trang danh sách thiết bị : </h6>
+                </div>
+                <div class="col-md-4">
+                    <a href="uploads/Danh_sach_thiet_bi.xlsx" class="btn btn-primary"> Tải mẫu file về</a>
+                </div>
+                </hr>
+                <div class="col-md-8">
+                    <?php
+                    require "php/db_connection.php";
+                    require "php/PHPExcel.php";
+                    if (isset($_POST['submit'])) {
+                        $file = $_FILES['file']['tmp_name'];
+                        $objReader = PHPExcel_IOFactory::createReaderForFile($file);
+                        $objReader->setLoadSheetsOnly('Danh_sach_thiet_bi');
+                        $objExcel = $objReader->load($file);
+                        $sheetData = $objExcel->getActiveSheet()->toArray('null', true, true, true);
+                        // print_r($sheetData);
+                        $highestRow = $objExcel->setActiveSheetIndex()->getHighestRow();
+                        // echo $highestRow;
+                        for ($row = 2; $row <= $highestRow; $row++) {
+                            $name_owner = $sheetData[$row]['A'];
+                            $name_tran = $sheetData[$row]['B'];
+                            $name_device = $sheetData[$row]['C'];
+                            $code_device = $sheetData[$row]['D'];
+                            $status_device = $sheetData[$row]['E'];
+                            $id_room = $sheetData[$row]['F'];
+                            $query_device = "INSERT INTO device(name_owner,name_tran,name_device,code_device,status_device,id_room) VALUES ('$name_owner','$name_tran','$name_device','$code_device','$status_device','$id_room')";
+                            $result_device = mysqli_query($con, $query_device);
+                        }
+                        var_dump($query_device);
+                        if (!empty($result_device))
+                            echo "Nhập dữ liệu thành công";
+                        else
+                            echo "Không thành công, xem lại định dạng giá trị trên cột!";
+                    }
+
+
+                    // }
+                    ?>
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file"><br><br>
+                        <input type="submit" value="Submit" name="submit">
+                    </form>
+                </div>
+
+            </div>
       </div>
     </div>
   </body>
