@@ -70,16 +70,16 @@
             }
 
             echo '
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" style="padding: 10px">
-                    <div class="dashboard-stats" onclick="location.href=\'' . $location . '\'">
-                      <a class="text-dark text-decoration-none" href="' . $location . '">
-                        <span class="h4">' . $count . '</span>
-                        <span class="h6"><i class="fa fa-play fa-rotate-270 text-warning"></i></span>
-                        <div class="small font-weight-bold">' . $title . '</div>
-                      </a>
-                    </div>
-                  </div>
-                ';
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" style="padding: 10px">
+                <div class="dashboard-stats" onclick="location.href=\'' . $location . '\'">
+                  <a class="text-dark text-decoration-none" href="' . $location . '">
+                    <span class="h4">' . $count . '</span>
+                    <span class="h6"><i class="fa fa-play fa-rotate-270 text-warning"></i></span>
+                    <div class="small font-weight-bold">' . $title . '</div>
+                  </a>
+                </div>
+              </div>
+            ';
           }
           createSection1('manage_invoice.php', 'Tổng số hệ thống ', 'sys_ql');
           createSection1('manage_supplier.php', 'Tổng số nhóm hệ thống', 'team_sys_manager');
