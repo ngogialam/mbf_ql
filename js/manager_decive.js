@@ -126,7 +126,7 @@ function cancel() {
     xhttp.send();
 }
 
-function searchUser(text) {
+function searchName(text) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
@@ -171,11 +171,11 @@ function addNewDeviceIndividual() {
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById('decive_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_device.php?action=individual&id_room="+ id_room +"&name_device="+ name_device +"&code_device="+code_device+"&status_device="+status_device+"&name_owner="+name_owner, true);
+    xhttp.open("GET", "php/add_new_device.php?action=individual&id_room=" + id_room + "&name_device=" + name_device + "&code_device=" + code_device + "&status_device=" + status_device + "&name_owner=" + name_owner, true);
     xhttp.send();
 }
 
-function addNewDeviceDepartment(){
+function addNewDeviceDepartment() {
 
     var id_room = document.getElementById("id_room").value;
     var name_device = document.getElementById("name_device").value;
@@ -187,6 +187,6 @@ function addNewDeviceDepartment(){
         if (xhttp.readyState = 4 && xhttp.status == 200)
             document.getElementById('decive_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/add_new_device.php?action=department&id_room="+ id_room +"&name_device="+ name_device +"&code_device="+code_device+"&status_device="+status_device, true);
+    xhttp.open("GET", "php/add_new_device.php?action=department&id_room=" + id_room + "&name_device=" + name_device + "&code_device=" + code_device + "&status_device=" + status_device, true);
     xhttp.send();
 }

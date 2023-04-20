@@ -40,7 +40,7 @@ if ($con) {
         showDevice(0);
 
     if (isset($_GET["action"]) && $_GET["action"] == "search")
-        searchUser(strtoupper($_GET["text"]));
+        searchName(strtoupper($_GET["text"]));
 
     if (isset($_GET["action"]) && $_GET["action"] == "search1") {
         searchStatus(strtoupper($_GET["number1"]));
@@ -56,29 +56,29 @@ if ($con) {
 
 function searchStatus($number1)
 {
-  require "db_connection.php";
-  if ($con) {
-    $seq_no = 0;
-    $query = "SELECT device.*, sys_room.name_room FROM device JOIN sys_room ON sys_room.id_room = device.id_room WHERE status_device = '$number1'";    
-    $result = mysqli_query($con, $query);
-    while ($row = mysqli_fetch_array($result)) {
-      $seq_no++;
-      showDeviceRow($seq_no, $row);
+    require "db_connection.php";
+    if ($con) {
+        $seq_no = 0;
+        $query = "SELECT device.*, sys_room.name_room FROM device JOIN sys_room ON sys_room.id_room = device.id_room WHERE status_device = '$number1'";
+        $result = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_array($result)) {
+            $seq_no++;
+            showDeviceRow($seq_no, $row);
+        }
     }
-  }
 }
 function searchRoom($number2)
 {
-  require "db_connection.php";
-  if ($con) {
-    $seq_no = 0;
-    $query = "SELECT device.*, sys_room.name_room FROM device JOIN sys_room ON sys_room.id_room = device.id_room WHERE device.id_room = '$number2'";    
-    $result = mysqli_query($con, $query);
-    while ($row = mysqli_fetch_array($result)) {
-        $seq_no++;
-        showDeviceRow($seq_no, $row);
-      }
-  }
+    require "db_connection.php";
+    if ($con) {
+        $seq_no = 0;
+        $query = "SELECT device.*, sys_room.name_room FROM device JOIN sys_room ON sys_room.id_room = device.id_room WHERE device.id_room = '$number2'";
+        $result = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_array($result)) {
+            $seq_no++;
+            showDeviceRow($seq_no, $row);
+        }
+    }
 }
 function showDevice($id_device)
 {
@@ -139,7 +139,7 @@ function showEditDevice($seq_no, $row)
     <tr>
         <td><?php echo $seq_no; ?></td>
 
-        
+
         <td>
             <input type="text" class="form-control" value="<?php echo $row['name_owner']; ?>" placeholder="Tên chủ sở hữu" id="name_owner" onblur="notNull(this.value, 'name_owner_err');">
             <code class="text-danger small font-weight-bold float-right" id=name_owner_err style="display: none;"></code>
@@ -205,7 +205,7 @@ function  updateDevice($id_device, $id_room, $name_owner, $name_tran, $name_devi
     require "db_connection.php";
     $query = "UPDATE device SET id_room = '$id_room', name_owner = '$name_owner', name_tran = '$name_tran', name_device = '$name_device', code_device = '$code_device', status_device = '$status_device', created_at = '$created_at' WHERE id_device = $id_device";
     $result = mysqli_query($con, $query);
-    
+
     if (!empty($result)) {
         echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật thành  người sử dụng :$name_owner </div></td>";
     } else {
@@ -226,16 +226,17 @@ function show_alert($message, $is_success)
           }, 5000);
       </script>';
 }
-function searchUser($text)
+function searchName($text)
 {
     require "db_connection.php";
     if ($con) {
         $seq_no = 0;
-        $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user WHERE USERNAME LIKE '%$text%' OR name_team_user LIKE '%$text%' OR CONTACT_NUMBER LIKE '%$text%'";
+        $query = "SELECT device.*, sys_room.name_room FROM device JOIN sys_room ON sys_room.id_room = device.id_room WHERE name_owner LIKE '%$text%' OR name_tran LIKE '%$text%'";
+        var_dump($query);
         $result = mysqli_query($con, $query);
         while ($row = mysqli_fetch_array($result)) {
             $seq_no++;
-            showUserRow($seq_no, $row);
+            showDeviceRow($seq_no, $row);
         }
     }
 }

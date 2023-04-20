@@ -86,12 +86,16 @@ function showUserRow($seq_no, $row)
     <td><?php echo $row['USERNAME_USER']; ?></td>
     <!-- <td><?php echo $row['name_team_user']; ?></td> -->
     <td>
-      <button type="button" class="button_popup" data-toggle="modal" data-target="#exampleModal"   onclick="viewPopup(<?php echo $row['ID']; ?>);" value="<?php echo $row['ID']; ?>">
+      <button type="button" class="button_popup" data-toggle="modal" data-target="#exampleModal" onclick="viewPopup(<?php echo $row['ID']; ?>);" value="<?php echo $row['ID']; ?>">
         <?php echo $row['name_team_user']; ?>
       </button>
     </td>
     <!-- //onclick="popup(this.value);" -->
-    <td><?php echo $row['PASSWORD_1']; ?></td>
+    <!-- <td> <?php echo $row['PASSWORD_1']; ?></td> -->
+    <td>
+      <span style="display:none;"><?php echo $row['PASSWORD_1']; ?></span>
+      <a href="#" onclick="showPassword(this);">*****</a>
+    </td>
     <td><?php echo $row['CONTACT_NUMBER'] ?></td>
     <td><?php echo $row['EMAIL']; ?></td>
     <td><?php echo $row['room']; ?></td>
@@ -118,7 +122,7 @@ function showEditUserRow($seq_no, $row)
     <td>
       <input type="text" class="form-control" value="<?php echo $row['USERNAME_USER']; ?>" placeholder="Tên đăng nhập" id="USERNAME_USER" onblur="notNull(this.value, 'USERNAME_USER_err');">
       <code class="text-danger small font-weight-bold float-right" id="USERNAME_USER_err" style="display: none;"></code>
-    </td>   
+    </td>
     <td>
       <?php
       require "db_connection.php";

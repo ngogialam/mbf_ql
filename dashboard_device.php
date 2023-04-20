@@ -111,7 +111,6 @@
   </div>
   <?php
   require "php/footer.php";
-
   
   ?>
 </body>
