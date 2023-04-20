@@ -158,3 +158,35 @@ function searchRoom(number2) {
     xhttp.send();
 
 }
+
+function addNewDeviceIndividual() {
+    var id_room = document.getElementById("id_room").value;
+    var name_device = document.getElementById("name_device").value;
+    var code_device = document.getElementById("code_device").value;
+    var status_device = document.getElementById("status_device").value;
+    var name_owner = document.getElementById("name_owner").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById('decive_div').innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/add_new_device.php?action=individual&id_room="+ id_room +"&name_device="+ name_device +"&code_device="+code_device+"&status_device="+status_device+"&name_owner="+name_owner, true);
+    xhttp.send();
+}
+
+function addNewDeviceDepartment(){
+
+    var id_room = document.getElementById("id_room").value;
+    var name_device = document.getElementById("name_device").value;
+    var code_device = document.getElementById("code_device").value;
+    var status_device = document.getElementById("status_device").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState = 4 && xhttp.status == 200)
+            document.getElementById('decive_div').innerHTML = xhttp.responseText;
+    };
+    xhttp.open("GET", "php/add_new_device.php?action=department&id_room="+ id_room +"&name_device="+ name_device +"&code_device="+code_device+"&status_device="+status_device, true);
+    xhttp.send();
+}
