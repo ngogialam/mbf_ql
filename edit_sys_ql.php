@@ -25,16 +25,14 @@
     <div class="container-fluid">
         <div class="container" id="sys_div">
             <!-- header section -->
-
-
             <?php
             require "php/header.php";
             createHeader('user', 'Chỉnh sửa thông tin hệ thống', 'Thay đổi thông tin');
             // header section end
-            // if(isset($_GET["mess"]) && $_GET['mess']){
-            //     $mess = $_GET['mess'];
-            //     echo "<div class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>$mess</div>";
-            // }
+            if(isset($_GET["mess"]) && $_GET['mess']){
+                $mess = $_GET['mess'];
+                echo "<div class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>$mess</div>";
+            }
             $id_sys = $_GET['id_sys'];
             require "php/db_connection.php";
             if ($con) {
@@ -332,8 +330,9 @@
                                                         echo "<td>$detail</td>";
                                                     }
                                                     ?>
-                                                    <td>
-                                                        <button href='' class='btn btn-info btn-sm' onclick='editUnitInSys(<?php echo $idx; ?>, "list_block_infor_edit")'><i class='fa fa-pencil'></i></button>
+                                                    <td> 
+                                                        <button id="updateBlockInforButton<?php echo $idx; ?>" href='' style="display: none" class="btn btn-success btn-sm" onclick="updateBlockinfor('list_block_infor_edit', <?php echo $idx;?>)"><i class="fa fa-check"></i></button>
+                                                        <button id="editBlockInforButton<?php echo $idx; ?>" href='' class='btn btn-info btn-sm' onclick='editUnitInSys("list_block_infor_edit", <?php echo $idx; ?>)'><i class='fa fa-pencil'></i></button>
                                                         <button href='' class='btn btn-danger btn-sm' onclick='deleteBlockInfor(<?php echo $idx; ?>, "list_block_infor_edit")'><i class='fa fa-trash'></i></button></td></tr>
                                                     <?php
                                                 }
@@ -378,16 +377,13 @@
                                 </div>
                             </div>
                             <div class="row col col-md-12 m-auto"  >
-                                <div id="ubutton" class="col col-md-4 form-group float-right" style="display: none" >
-                                <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="updateBlockinfor('list_block_infor_edit', )">Chỉnh sửa</button>
+
+                                <div  class="col col-md-4 form-group float-right" >
+                                <button id="abutton" class="btn btn-success form-control font-weight-bold" style="display: block"
+                                        onclick="addBlockInfor('list_block_infor_edit')" >Thêm</button>
                                 </div>
-                                <div id="ubutton" class="col col-md-4 form-group float-right">
-                                <button class="btn btn-success form-control font-weight-bold"
-                                        onclick="addBlockInfor('list_block_infor_edit')">Thêm</button>
-                                </div>
-                                <div id="ubutton" class="col col-md-4 form-group float-right">
-                                <button class="btn btn-success form-control font-weight-bold"
+                                <div  class="col col-md-4 form-group float-right">
+                                <button id="dbutton" class="btn btn-success form-control font-weight-bold" style="display: block"
                                         onclick="deleteCookie('list_block_infor_edit', 'block_info_div')">Xoá toàn bộ</button>   
                                 </div>
                             </div>
