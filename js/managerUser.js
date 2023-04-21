@@ -145,3 +145,9 @@ function searchUser(text) {
     xhttp.open("GET", "php/managerUser.php?action=search&text=" + text, true);
     xhttp.send();
 }
+
+function showPassword(link) {
+    console.log("gggggggggggggggggggg");
+    link.previousElementSibling.style.display = "inline";
+    link.style.display = "none";
+}

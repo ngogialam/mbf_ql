@@ -46,7 +46,7 @@ foreach ($data as $row) {
     // $status = $item[2] == 1 ? 'hoạt động' : 'không hoạt động'; // Điều kiện để thay đổi giá trị trường trạng thái
     // $status = $item[2] == 1 ? 'hoạt động' : 'không hoạt động'; // Điều kiện để thay đổi giá trị trường trạng thái
     // $sheet->setCellValue('C' . $row, $status);
-    switch ($row['status']) {
+    switch ($row['status_device']) {
         case 0:
             $status = 'Không dùng';
             break;

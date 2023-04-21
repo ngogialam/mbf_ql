@@ -30,9 +30,9 @@ if ($con) {
         $name_room_tran = ucwords($_GET["name_room_tran"]);
         $name_device = ucwords($_GET["name_device"]);
         $code_device = ucwords($_GET["code_device"]);
-        $status_device_room = $_GET["status_device_room"];
+        $status_device = $_GET["status_device"];
         $created_at = $_GET["created_at"];
-        updateDeviceRoom($id_device_room, $id_room, $name_room_tran, $name_device, $code_device, $status_device_room, $created_at);
+        updateDeviceRoom($id_device_room, $id_room, $name_room_tran, $name_device, $code_device, $status_device, $created_at);
     }
 
     if (isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -60,7 +60,7 @@ function searchStatus($number1)
     require "db_connection.php";
     if ($con) {
         $seq_no = 0;
-        $query = "SELECT device_room.*, sys_room.name_room FROM device_room  JOIN sys_room ON sys_room.id_room = device_room.id_room WHERE device_room.status_device_room = '$number1'";
+        $query = "SELECT device_room.*, sys_room.name_room FROM device_room  JOIN sys_room ON sys_room.id_room = device_room.id_room WHERE device_room.status_device = '$number1'";
         $result = mysqli_query($con, $query);
         while ($row = mysqli_fetch_array($result)) {
             $seq_no++;
@@ -108,9 +108,9 @@ function showDeviceRoomRow($seq_no, $row)
         <td><?php echo $row['code_device']; ?></td>
 
         <!-- <td><?php echo $row['status']; ?></td> -->
-        <td><?php if ($row['status_device_room'] == "0") {
+        <td><?php if ($row['status_device'] == "0") {
                 echo "Không dùng";
-            } elseif ($row['status_device_room'] == "1") {
+            } elseif ($row['status_device'] == "1") {
                 echo "Đang sử dụng";
             } else {
                 echo "Chuyển tiếp";
@@ -144,10 +144,10 @@ function showEditDeviceRoom($seq_no, $row)
             <code class="text-danger small font-weight-bold float-right" id=code_device_err style="display: none;"></code>
         </td>
         <td>
-            <select id="status_device_room" class="form-control">
-                <option value="1" <?php if ($row['status_device_room'] == "1") echo "selected" ?>>Đang sử dụng</option>
-                <option value="0" <?php if ($row['status_device_room'] == "0") echo "selected" ?>>Không dùng</option>
-                <option value="2" <?php if ($row['status_device_room'] == "2") echo "selected" ?>>Chuyển tiếp</option>
+            <select id="status_device" class="form-control">
+                <option value="1" <?php if ($row['status_device'] == "1") echo "selected" ?>>Đang sử dụng</option>
+                <option value="0" <?php if ($row['status_device'] == "0") echo "selected" ?>>Không dùng</option>
+                <option value="2" <?php if ($row['status_device'] == "2") echo "selected" ?>>Chuyển tiếp</option>
             </select>
         </td>
 
@@ -213,10 +213,10 @@ function showEditDeviceRoom($seq_no, $row)
 <?php
 }
 
-function updateDeviceRoom($id_device_room, $id_room, $name_room_tran, $name_device, $code_device, $status_device_room, $created_at)
+function updateDeviceRoom($id_device_room, $id_room, $name_room_tran, $name_device, $code_device, $status_device, $created_at)
 {
     require "db_connection.php";
-    $query = "UPDATE device_room SET id_room = '$id_room', name_room_tran = '$name_room_tran', name_device = '$name_device', code_device = '$code_device', status_device_room = '$status_device_room', created_at = '$created_at' WHERE id_device_room = $id_device_room";
+    $query = "UPDATE device_room SET id_room = '$id_room', name_room_tran = '$name_room_tran', name_device = '$name_device', code_device = '$code_device', status_device = '$status_device', created_at = '$created_at' WHERE id_device_room = $id_device_room";
     $result = mysqli_query($con, $query);
     if (!empty($result)) {
         echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật thành công $name_room_tran,$name_device</div></td>";

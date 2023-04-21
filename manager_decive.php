@@ -36,7 +36,7 @@
 
         <div class="col-md-12 form-group form-inline">
           <label class="font-weight-bold" for="">Tìm kiếm :&emsp;</label>
-          <input type="text" style="width:20%" class="form-control" id="" placeholder="Nhập tên nhóm hệ thống" onkeyup="searchSupplier(this.value); ">
+          <input type="text" style="width:20%; text-transform: lowercase;" class="form-control" id="" placeholder="Nhập tên nhóm hệ thống" onkeyup="searchName(this.value); ">
           &emsp;
           <select id="status_device" class="form-control" onchange="searchStatus(this.value)" ;>
             <option value="">Chọn trạng thái</option>

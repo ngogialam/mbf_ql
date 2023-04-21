@@ -86,12 +86,16 @@ function showUserRow($seq_no, $row)
     <td><?php echo $row['USERNAME_USER']; ?></td>
     <!-- <td><?php echo $row['name_team_user']; ?></td> -->
     <td>
-      <button type="button" class="button_popup" data-toggle="modal" data-target="#exampleModal"   onclick="viewPopup(<?php echo $row['ID']; ?>);" value="<?php echo $row['ID']; ?>">
+      <button type="button" class="button_popup" data-toggle="modal" data-target="#exampleModal" onclick="viewPopup(<?php echo $row['ID']; ?>);" value="<?php echo $row['ID']; ?>">
         <?php echo $row['name_team_user']; ?>
       </button>
     </td>
     <!-- //onclick="popup(this.value);" -->
-    <td><?php echo $row['PASSWORD_1']; ?></td>
+    <!-- <td> <?php echo $row['PASSWORD_1']; ?></td> -->
+    <td>
+      <span style="display:none;"><?php echo $row['PASSWORD_1']; ?></span>
+      <a href="#" onclick="showPassword(this);">*****</a>
+    </td>
     <td><?php echo $row['CONTACT_NUMBER'] ?></td>
     <td><?php echo $row['EMAIL']; ?></td>
     <td><?php echo $row['room']; ?></td>
@@ -118,7 +122,7 @@ function showEditUserRow($seq_no, $row)
     <td>
       <input type="text" class="form-control" value="<?php echo $row['USERNAME_USER']; ?>" placeholder="Tên đăng nhập" id="USERNAME_USER" onblur="notNull(this.value, 'USERNAME_USER_err');">
       <code class="text-danger small font-weight-bold float-right" id="USERNAME_USER_err" style="display: none;"></code>
-    </td>   
+    </td>
     <td>
       <?php
       require "db_connection.php";
@@ -210,8 +214,9 @@ function searchUser($text)
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user WHERE USERNAME LIKE '%$text%' OR name_team_user LIKE '%$text%' OR CONTACT_NUMBER LIKE '%$text%'";
+    $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user WHERE USERNAME_USER LIKE '%$text%' OR name_team_user LIKE '%$text%' OR CONTACT_NUMBER LIKE '%$text%'";
     $result = mysqli_query($con, $query);
+    // var_dump($query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;
       showUserRow($seq_no, $row);

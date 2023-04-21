@@ -81,7 +81,7 @@ function updateDeviceRoom(id_device_room) {
     var name_room_tran = document.getElementById("name_room_tran");
     var name_device = document.getElementById("name_device");
     var code_device = document.getElementById("code_device");
-    var status_device_room = document.getElementById("status_device_room");
+    var status_device = document.getElementById("status_device");
     var created_at = document.getElementById("created_at");
     if (!notNull(name_device.value, 'name_device_err'))
         name_device.focus();
@@ -95,7 +95,7 @@ function updateDeviceRoom(id_device_room) {
             if (xhttp.readyState = 4 && xhttp.status == 200)
                 document.getElementById('device_room_div').innerHTML = xhttp.responseText;
         };
-        xhttp.open("GET", "php/manager_room_device.php?action=update&id_device_room=" + id_device_room + "&id_room=" + id_room.value + "&name_room_tran=" + name_room_tran.value + "&name_device=" + name_device.value + "&code_device=" + code_device.value + "&status_device_room=" + status_device_room.value + "&created_at=" + created_at.value, true);
+        xhttp.open("GET", "php/manager_room_device.php?action=update&id_device_room=" + id_device_room + "&id_room=" + id_room.value + "&name_room_tran=" + name_room_tran.value + "&name_device=" + name_device.value + "&code_device=" + code_device.value + "&status_device=" + status_device.value + "&created_at=" + created_at.value, true);
         xhttp.send();
     }
 }
