@@ -27,7 +27,7 @@
             <?php
             require "php/header.php";
             $target_dir = "../uploads/";
-            createHeader('user', 'Chỉnh sửa thông tin hệ thống', 'Thay đổi thông tin');
+            createHeader('user', 'Chỉnh sửa nhóm hệ thống', 'Thay đổi thông tin nhóm hệ thống');
             // header section end
             $id_team_sys = $_GET['id_team_sys'];
             require "php/db_connection.php";

@@ -72,38 +72,12 @@ if ($con) {
 
       // Check if file already exists
       if (file_exists($target_file)) {
-      ?>
-        <div class="row col col-md-12">
-          <div class="row col col-md-12">
-            <div class="col col-md-12 form-group">
-              <label for="id_team_sys">
-                <?php
-                echo "Sorry, file already exists";
-                ?>
-                <label>
-            </div>
-          </div>
-        </div>
-      <?php
         $uploadOk = 0;
       } else {
       }
 
       // Check file file_des
       if ($_FILES["file_des"]["size"] > 5000000) {
-      ?>
-        <div class="row col col-md-12">
-          <div class="row col col-md-12">
-            <div class="col col-md-12 form-group">
-              <label for="id_team_sys">
-                <?php
-                echo "Sorry, your file is too large.";
-                ?>
-                <label>
-            </div>
-          </div>
-        </div>
-      <?php
         $uploadOk = 0;
       }
 
@@ -112,44 +86,18 @@ if ($con) {
         $imageFileType != "pdf" && $imageFileType != "doc" && $imageFileType != "ppt"
         && $imageFileType != "xlsx" && $imageFileType != "docx"
       ) {
-      ?>
-        <div class="row col col-md-12">
-          <div class="row col col-md-12">
-            <div class="col col-md-12 form-group">
-              <label for="id_team_sys">
-                <?php
-                echo "Sorry, only pdf, ppt, doc & xlsx files are allowed.";
-                ?>
-                <label>
-            </div>
-          </div>
-        </div>
-        <?php
         $uploadOk = 0;
       }
 
       // Check if $uploadOk is set to 0 by an error
       if ($uploadOk == 0) {
-        showDetailSuppliers($id_team_sys);
+        showDetailSuppliers($id_team_sys, "Chỉnh sửa không thành công, vui lòng xem lại file upload");
         // if everything is ok, try to upload file
       } else {
         if (move_uploaded_file($_FILES["file_des"]["tmp_name"], $target_file)) {
-        ?>
-          <div class="row col col-md-12">
-            <div class="row col col-md-12">
-              <div class="col col-md-12 form-group">
-                <label for="id_team_sys">
-                  <?php
-                  echo "The file " . htmlspecialchars(basename($_FILES["file_des"]["name"])) . " has been uploaded.";
-                  ?>
-                  <label>
-              </div>
-            </div>
-          </div>
-    <?php
           updateSupplier($id_team_sys, $name_team_sys, $type_sys, $describe_sys, $create_by, $file_des);
         } else {
-          showDetailSuppliers($id_team_sys);
+          showDetailSuppliers($id_team_sys, "Chỉnh sửa không thành công");
         }
       }
     } else {
@@ -158,7 +106,7 @@ if ($con) {
   }
 }
 
-function showSuppliers($id)
+function showSuppliers($id, $mess)
 {
   require "db_connection.php";
   if ($con) {
@@ -175,7 +123,7 @@ function showSuppliers($id)
   }
 }
 
-function showDetailSuppliers($id)
+function showDetailSuppliers($id, $mess)
 {
   require "db_connection.php";
   $target_dir = "../uploads/";
@@ -198,24 +146,27 @@ function showDetailSuppliers($id)
       <div class="row" id='suppliers_div'>
         <div class="row col col-md-12">
           <div class="row col col-md-12">
+            <div class="col-md-12 h5 text-success font-weight-bold text-center"
+                        style="font-family: sans-serif;"><?php echo $mess ?></div>
+            
+          </div>
+          <div class="row col col-md-12">
             <div class="col col-md-12 form-group">
               <label for="id_team_sys">Id nhóm hệ thống :</label>
-              <input id="id_team_sys" type="text" class="form-control" value="<?php echo $id_team_sys; ?>" placeholder="id_team_sys" onkeyup="validateName(this.value, 'id_error');" disabled>
-              <code class="text-danger small font-weight-bold float-right mb-2" id="id_error" style="display: none;"></code>
+              <input id="id_team_sys" type="text" class="form-control" value="<?php echo $id_team_sys; ?>" placeholder="id_team_sys" disabled>
             </div>
           </div>
           <div class="row col col-md-12">
             <div class="col col-md-12 form-group">
               <label for="name_team_sys">Tên nhóm hệ thống :</label>
-              <input id="name_team_sys" type="text" class="form-control" value="<?php echo $name_team_sys; ?>" placeholder="name_team_sys" onkeyup="validateName(this.value, 'name_team_sys_error');">
-              <code class="text-danger small font-weight-bold float-right mb-2" id="name_team_sys_error" style="display: none;"></code>
+              <input id="name_team_sys" type="text" class="form-control" value="<?php echo $name_team_sys; ?>" placeholder="name_team_sys" >
+
             </div>
           </div>
           <div class="row col col-md-12">
             <div class="col col-md-12 form-group">
               <label for="type_sys">Loại:</label>
-              <input id="type_sys" type="number" class="form-control" value="<?php echo $type_sys; ?>" placeholder="type_sys" onkeyup="validateName(this.value, 'type_sys');">
-              <code class="text-danger small font-weight-bold float-right mb-2" id="type_sys" style="display: none;"></code>
+              <input id="type_sys" type="number" class="form-control" value="<?php echo $type_sys; ?>" placeholder="type_sys">
             </div>
           </div>
           <div class="row col col-md-12">
@@ -227,15 +178,13 @@ function showDetailSuppliers($id)
           <div class="row col col-md-12">
             <div class="col col-md-12 form-group">
               <label for="create_by">Người tạo :</label>
-              <input id="create_by" type="text" class="form-control" value="<?php echo $create_by; ?>" placeholder="create by" onkeyup="validateName(this.value, 'create_by');">
-              <code class="text-danger small font-weight-bold float-right mb-2" id="create_by" style="display: none;"></code>
+              <input id="create_by" type="text" class="form-control" value="<?php echo $create_by; ?>" placeholder="create by">
             </div>
           </div>
           <div class="row col col-md-12">
             <div class="col col-md-12 form-group">
               <label for="created_at">Ngày tạo :</label>
-              <input id="created_at" type="text" class="form-control" value="<?php echo $created_at; ?>" placeholder="created_at" onkeyup="validateName(this.value, 'created_at');" disabled>
-              <code class="text-danger small font-weight-bold float-right mb-2" id="created_at" style="display: none;"></code>
+              <input id="created_at" type="text" class="form-control" value="<?php echo $created_at; ?>" placeholder="created_at" disabled>
             </div>
           </div>
           <div class="row col col-md-12">
@@ -341,11 +290,11 @@ function showDetailSuppliers($id)
       if ($file_des) {
         $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', create_by = '$create_by' , file_des = '$file_des' WHERE id_team_sys = $id_team_sys";
       } else {
-        $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', create_by = '$create_by' , file_des = '$file_des' WHERE id_team_sys = $id_team_sys";
+        $query = "UPDATE team_sys_manager SET name_team_sys = '$name_team_sys', type_sys = '$type_sys', describe_sys = '$describe_sys', create_by = '$create_by' WHERE id_team_sys = $id_team_sys";
       }
       $result = mysqli_query($con, $query);
       if (!empty($result))
-        showDetailSuppliers($id_team_sys, True);
+        showDetailSuppliers($id_team_sys, "Chỉnh sửa nhóm hệ thống thành công");
     }
 
     function searchSupplier($text)
