@@ -214,8 +214,9 @@ function searchUser($text)
   require "db_connection.php";
   if ($con) {
     $seq_no = 0;
-    $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user WHERE USERNAME LIKE '%$text%' OR name_team_user LIKE '%$text%' OR CONTACT_NUMBER LIKE '%$text%'";
+    $query = "SELECT admin_credentials.*, manager_team_user.name_team_user FROM admin_credentials JOIN manager_team_user ON admin_credentials.id_team_user = manager_team_user.id_team_user WHERE USERNAME_USER LIKE '%$text%' OR name_team_user LIKE '%$text%' OR CONTACT_NUMBER LIKE '%$text%'";
     $result = mysqli_query($con, $query);
+    // var_dump($query);
     while ($row = mysqli_fetch_array($result)) {
       $seq_no++;
       showUserRow($seq_no, $row);

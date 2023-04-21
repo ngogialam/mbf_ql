@@ -116,8 +116,8 @@
               $name_room_tran = $sheetData[$row]['B'];
               $name_device = $sheetData[$row]['C'];
               $code_device = $sheetData[$row]['D'];
-              $status_device_room = $sheetData[$row]['E'];             
-              $query_device = "INSERT INTO device_room(id_room,name_room_tran,name_device,code_device,status_device_room) VALUES ('$id_room','$name_room_tran','$name_device','$code_device','$status_device_room')";
+              $status_device = $sheetData[$row]['E'];             
+              $query_device = "INSERT INTO device_room(id_room,name_room_tran,name_device,code_device,status_device) VALUES ('$id_room','$name_room_tran','$name_device','$code_device','$status_device')";
               $result_device = mysqli_query($con, $query_device);
             }            
             if (!empty($result_device))
