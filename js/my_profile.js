@@ -1,8 +1,7 @@
 function edit(action) {
-    document.getElementById('username').disabled = action;
-    document.getElementById('contact').disabled = action;
-    document.getElementById('email').disabled = action;
-    document.getElementById('email').disabled = action;
+    document.getElementById('USERNAME_USER').disabled = action;
+    document.getElementById('CONTACT_NUMBER').disabled = action;
+    document.getElementById('EMAIL').disabled = action;
     document.getElementById('created_at').disabled = action;
 
     if (action) {
@@ -13,52 +12,38 @@ function edit(action) {
         document.getElementById('update_cancel').style.display = "block";
     }
 
-    document.getElementById('pharmacy_name_error').style.display = "none";
-    document.getElementById('address_error').style.display = "none";
-    document.getElementById('email_error').style.display = "none";
-    document.getElementById('contact_number_error').style.display = "none";
-    document.getElementById('username_error').style.display = "none";
+    document.getElementById('USERNAME_USER_error').style.display = "none";
+    document.getElementById('CONTACT_NUMBER_error').style.display = "none";
+    document.getElementById('EMAIL_error').style.display = "none";
+    document.getElementById('created_at_error').style.display = "none";
 
     if (!action)
         document.getElementById('admin_acknowledgement').innerHTML = "";
 }
 
-function updateAdminDetails() {
-    var pharmacy_name = document.getElementById('pharmacy_name');
-    var address = document.getElementById('address');
-    var email = ocument.getElementById('email');
-    var contact_number = document.getElementById('contact_number');
-    var username = document.getElementById('username');
+function updateAdminDetails(ID) {
+    console.log("fdhjfhsdfvasfbcash");
+    var USERNAME_USER = document.getElementById("USERNAME_USER");
+    var CONTACT_NUMBER = document.getElementById("CONTACT_NUMBER");
+    var EMAIL = document.getElementById("EMAIL");
+    var created_at = document.getElementById("created_at");
 
-    if (!validateName(pharmacy_name.value, 'pharmacy_name_error'))
-        pharmacy_name.focus();
-    else if (!validateAddress(address.value, 'address_error'))
-        address.focus();
-    else if (!notNull(email.value, 'email_error'))
-        email.focus();
-    else if (!validateContactNumber(contact_number.value, 'contact_number_error'))
-        contact_number.focus();
-    else if (!notNull(username.value, 'username_error'))
-        username.focus();
-    else if (username.value.indexOf(' ') >= 0) {
-        document.getElementById('username_error').style.display = "block";
-        document.getElementById('username_error').innerHTML = "mustn't contain spaces!";
-        username.focus();
-    } else {
-        var password = prompt("Please enter password below to update details!");
-        if (validatePassword(password)) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (xhttp.readyState = 4 && xhttp.status == 200)
-                    document.getElementById('admin_acknowledgement').innerHTML = xhttp.responseText;
-            };
-            xhttp.open("GET", "php/validateCredentials.php?action=update_admin_info&pharmacy_name=" + pharmacy_name.value + "&address=" + address.value + "&email=" + email.value + "&contact_number=" + contact_number.value + "&username=" + username.value, true);
-            xhttp.send();
-            edit(true);
-            return true;
-        } else
-            document.getElementById('admin_acknowledgement').innerHTML = "<span class='text-danger'>Invalid Password!</span>";
-        return false;
+    if (!notNull(USERNAME_USER.value, "USERNAME_USER_error"))
+        USERNAME_USER.focus();
+    else if (!notNull(CONTACT_NUMBER.value, "CONTACT_NUMBER_error"))
+        CONTACT_NUMBER.focus();
+    else if (!notNull(EMAIL.value, "EMAIL_error"))
+        EMAIL.focus();
+    else if (!notNull(created_at.value, "created_at_error"))
+        created_at.focus();
+    else {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState = 4 && xhttp.status == 200)
+                document.getElementById('admin_acknowledgement').innerHTML = xhttp.responseText;
+        };
+        xhttp.open("GET", "php/validateCredentials.php?action=update_admin_info&ID=" + ID + "&USERNAME_USER=" + USERNAME_USER.value + "&CONTACT_NUMBER=" + CONTACT_NUMBER.value + "&EMAIL=" + EMAIL.value + "&created_at=" + created_at.value, true);
+        xhttp.send();
     }
 }
 
