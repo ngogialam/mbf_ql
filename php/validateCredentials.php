@@ -129,22 +129,23 @@
     }
   }
 
-  if(isset($_GET['action']) && $_GET['action'] == 'update_admin_info')
-    updateAdminInfo();
-
-  function updateAdminInfo() {
+  if(isset($_GET['action']) && $_GET['action'] == 'update_admin_info'){
+  $ID = $_GET["ID"]; 
+  $USERNAME_USER = ucwords($_GET["USERNAME_USER"]);
+  $CONTACT_NUMBER = $_GET["CONTACT_NUMBER"];
+  $EMAIL = ucwords($_GET["EMAIL"]);  
+  $created_at = $_GET["created_at"]; 
+  updateAdminInfo($ID, $USERNAME_USER, $CONTACT_NUMBER, $EMAIL,$created_at);
+  }
+  function updateAdminInfo($ID, $USERNAME_USER, $CONTACT_NUMBER, $EMAIL,$created_at) {
     require "db_connection.php";
-    if($con) {
-      $pharmacy_name = $_GET["pharmacy_name"];
-      $address = $_GET["address"];
-      $email = $_GET["email"];
-      $contact_number = $_GET["contact_number"];
-      $username = $_GET["username"];
-
-      $query = "UPDATE admin_credentials SET PHARMACY_NAME = '$pharmacy_name', ADDRESS = '$address', EMAIL = '$email', CONTACT_NUMBER = '$contact_number', USERNAME = '$username'";
-      $result = mysqli_query($con, $query);
-      echo ($result) ? "Details updated..." : "Oops! Somthing wrong happend...";
-    }
+  $query = "UPDATE admin_credentials SET USERNAME_USER = '$USERNAME_USER', CONTACT_NUMBER = '$CONTACT_NUMBER', EMAIL = '$EMAIL', created_at = '$created_at' WHERE ID = $ID";
+  $result = mysqli_query($con, $query);
+  if (!empty($result)) {
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật thành  người sử dụng :$USERNAME_USER </div></td>";
+  } else {
+    echo "<td colspan='10'><div id='medicine_acknowledgement' class='col-md-12 h5 text-success font-weight-bold text-center' style='font-family: sans-serif;'>Cập nhật không thành  người sử dụng :$USERNAME_USER </div></td>";
+  }
   }
 
   if(isset($_GET['action']) && $_GET['action'] == 'change_password')

@@ -31,7 +31,7 @@
             $result = mysqli_query($con, $query);
             $row = mysqli_fetch_array($result);
             $id_admin = $row['ID'];
-            $username = $row['USERNAME'];
+            $username = $row['USERNAME_USER'];
             $contact = $row['CONTACT_NUMBER'];
             $email = $row['EMAIL'];
             $created_at= $row['created_at'];
@@ -45,22 +45,22 @@
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
                 <label class="font-weight-bold" for="username">Tên tài khoản :</label>
-                <input id="username" type="text" class="form-control" value="<?php echo $username; ?>" placeholder="username" onkeyup="notNull(this.value, 'username_error');" disabled>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="username_error" style="display: none;"></code>
+                <input id="USERNAME_USER" type="text" class="form-control" value="<?php echo $row['USERNAME_USER'] ?>" placeholder="username" onkeyup="notNull(this.value, 'USERNAME_USER_error');" disabled>
+                <code class="text-danger small font-weight-bold float-right mb-2" id="USERNAME_USER_error" style="display: none;"></code>
               </div>
             </div>
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
                 <label class="font-weight-bold" for="contact">Số điện thoại liên hệ :</label>
-                <input id="contact" type="text" class="form-control" value="<?php echo $contact; ?>" placeholder="contact" onkeyup="notNull(this.value, 'contact_error');" disabled>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="contact_error" style="display: none;"></code>
+                <input id="CONTACT_NUMBER" type="text" class="form-control" value="<?php echo $contact; ?>" placeholder="contact" onkeyup="notNull(this.value, 'CONTACT_NUMBER_error');" disabled>
+                <code class="text-danger small font-weight-bold float-right mb-2" id="CONTACT_NUMBER_error" style="display: none;"></code>
               </div>
             </div>
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
                 <label class="font-weight-bold" for="email">Email liên hệ :</label>
-                <input id="email" type="text" class="form-control" value="<?php echo $email; ?>" placeholder="email" onkeyup="notNull(this.value, 'email_error');" disabled>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="email_error" style="display: none;"></code>
+                <input id="EMAIL" type="text" class="form-control" value="<?php echo $email; ?>" placeholder="email" onkeyup="notNull(this.value, 'EMAIL_error');" disabled>
+                <code class="text-danger small font-weight-bold float-right mb-2" id="EMAIL_error" style="display: none;"></code>
               </div>
             </div>
             <div class="row col col-md-12">
@@ -93,7 +93,7 @@
                 <button class="btn btn-danger form-control font-weight-bold" onclick="edit(true);">CANCEL</button>
               </div>
               <div id="update_button" class="col col-md-4 form-group float-right">
-                <button class="btn btn-success form-control font-weight-bold" onclick="updateAdminDetails();">UPDATE</button>
+                <button class="btn btn-success form-control font-weight-bold" onclick="updateAdminDetails(<?php echo $row['ID']; ?>);">UPDATE</button>
               </div>
             </div>
             <!-- result message -->
